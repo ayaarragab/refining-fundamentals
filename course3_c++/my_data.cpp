@@ -4,7 +4,7 @@ using namespace std;
 enum Gender { F, M };
 enum Marital_status { Single, Married };
 
-int main() {
+struct Person {
     string name;
     string country;
     int age;    
@@ -13,50 +13,58 @@ int main() {
     int monthly_salary;
     int yearly_salary;
     Marital_status married;
-    
+};
+
+int main() {
+    Person p;
+    bool marital_status;
 
     cout << "Enter your name\n";
-    cin >> name;
+    cin >> p.name;
     cout << "\n";
 
     cout << "Enter your age\n";
-    cin >> age;
+    cin >> p.age;
     cout << "\n";
 
 
     cout << "Enter your country\n";
-    cin >> country;
+    cin >> p.country;
     cout << "\n";
 
     cout << "Enter your city\n";
-    cin >> city;
+    cin >> p.city;
     cout << "\n";
 
     cout << "Enter your gender\n";
-    cin >> gender;
+    cin >> p.gender;
     cout << "\n";
 
     cout << "Enter your monthly salary\n";
-    cin >> monthly_salary;
+    cin >> p.monthly_salary;
     cout << "\n";
 
-    yearly_salary = monthly_salary * 12;
+    p.yearly_salary = p.monthly_salary * 12;
 
 
-    cout << "Name: " << name << "\n";
-    cout << "Age: " << age << "\n";
-    cout << "Country: " << country << "\n";
-    cout << "City: " << city << "\n";
-    cout << "Monthly Salary: " << monthly_salary << "\n";
-    cout << "Yearly Salary: " << yearly_salary << "\n";
-    cout << "Gender: " << gender << "\n";
-    if (married) {
+    cout << "Enter your marital status (choose 0 for single, 1 for married)\n";
+    cin >> marital_status;
+    cout << "\n";
+
+
+    cout << "Name: " << p.name << "\n";
+    cout << "Age: " << p.age << "\n";
+    cout << "Country: " << p.country << "\n";
+    cout << "City: " << p.city << "\n";
+    cout << "Monthly Salary: " << p.monthly_salary << "\n";
+    cout << "Yearly Salary: " << p.yearly_salary << "\n";
+    cout << "Gender: " << p.gender << "\n";
+    if (marital_status) {
         cout << "Married: Yes \n";
-        married = Single;
+        p.married = Single;
     }
     else {
        cout << "Married: No \n";
-       married = Married;
+       p.married = Married;
     }
-    
 }
