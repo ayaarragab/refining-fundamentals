@@ -15,37 +15,33 @@ struct Person {
     Marital_status married;
 };
 
-void fillPerson(Person p[2]) {
+void ReadPerson(Person p) {
     bool marital_status;
-    for (short i = 0; i < 2; i++)
-    {   
         cout << "Enter your name\n";
-        if (i > 0)
-            cin.ignore(1, '\n');
-        getline(cin, p[i].name);
+        getline(cin, p.name);
         cout << "\n";
 
         cout << "Enter your age\n";
-        cin >> p[i].age;
+        cin >> p.age;
         cout << "\n";
 
         cout << "Enter your country\n";
-        cin >> p[i].country;
+        cin >> p.country;
         cout << "\n";
 
         cout << "Enter your city\n";
-        cin >> p[i].city;
+        cin >> p.city;
         cout << "\n";
 
         cout << "Enter your gender\n";
-        cin >> p[i].gender;
+        cin >> p.gender;
         cout << "\n";
 
         cout << "Enter your monthly salary\n";
-        cin >> p[i].monthly_salary;
+        cin >> p.monthly_salary;
         cout << "\n";
 
-        p[i].yearly_salary = p[i].monthly_salary * 12;
+        p.yearly_salary = p.monthly_salary * 12;
 
 
         cout << "Enter your marital status (choose 0 for single, 1 for married)\n";
@@ -53,9 +49,17 @@ void fillPerson(Person p[2]) {
         cout << "\n";
 
         if (marital_status)
-            p[i].married = Marital_status::Married;
+            p.married = Marital_status::Married;
         else
-            p[i].married = Marital_status::Single;
+            p.married = Marital_status::Single;    
+}
+
+void fillPerson(Person p[2]) {
+    for (short i = 0; i < 2; i++)
+    {
+        if (i > 0)
+            cin.ignore(1, '\n');
+        ReadPerson(p[i]);
     }
     
 }
@@ -63,6 +67,8 @@ void fillPerson(Person p[2]) {
 void printPerson(Person p[2]) {
     for (int i = 0; i < 2; i++)
     {
+        cout << "\n";
+        cout << "**********************************\n";
         cout << "Name: " << p[i].name << "\n";
         cout << "Age: " << p[i].age << "\n";
         cout << "Country: " << p[i].country << "\n";
@@ -74,6 +80,8 @@ void printPerson(Person p[2]) {
             cout << "Married: Yes \n";
         else
         cout << "Married: No \n";
+        cout << "**********************************\n";
+        cout << "\n";
     }
     
 }
