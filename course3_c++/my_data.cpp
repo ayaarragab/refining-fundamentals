@@ -2,15 +2,44 @@
 using namespace std;
 
 int main() {
-    string name = "Aya Ragab";
-    string country = "Egypt";
-    int age = 22;    
-    string city = "Giza";
-    char gender = 'F';
-    int monthly_salary = 3000;
-    int yearly_salary = monthly_salary * 12;
+    string name;
+    string country;
+    int age;    
+    string city;
+    char gender;
+    int monthly_salary;
+    int yearly_salary;
     bool married = false;
     
+
+    cout << "Enter your name\n";
+    cin >> name;
+    cout << "\n";
+
+    cout << "Enter your age\n";
+    cin >> age;
+    cout << "\n";
+
+
+    cout << "Enter your country\n";
+    cin >> country;
+    cout << "\n";
+
+    cout << "Enter your city\n";
+    cin >> city;
+    cout << "\n";
+
+    cout << "Enter your gender\n";
+    cin >> gender;
+    cout << "\n";
+
+    cout << "Enter your monthly salary\n";
+    cin >> monthly_salary;
+    cout << "\n";
+
+    yearly_salary = monthly_salary * 12;
+
+
     cout << "Name: " << name << "\n";
     cout << "Age: " << age << "\n";
     cout << "Country: " << country << "\n";

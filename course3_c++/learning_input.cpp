@@ -2,7 +2,9 @@
 using namespace std;
 
 int main() {
-
-  int n;
+  char mychar;
+  cout << "Enter a character\n";
+  cin >> mychar; 
+  cout << "You entered character: " + mychar << "\n";
   return 0;
 }
