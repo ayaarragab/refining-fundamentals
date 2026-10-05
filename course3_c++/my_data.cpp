@@ -15,12 +15,11 @@ struct Person {
     Marital_status married;
 };
 
-int main() {
-    Person p;
+void fillPerson(Person &p) {
     bool marital_status;
-
+    
     cout << "Enter your name\n";
-    cin >> p.name;
+    getline(cin, p.name);
     cout << "\n";
 
     cout << "Enter your age\n";
@@ -51,7 +50,13 @@ int main() {
     cin >> marital_status;
     cout << "\n";
 
+    if (marital_status)
+        p.married = Marital_status::Married;
+    else
+        p.married = Marital_status::Single;
+}
 
+void printPerson(Person p) {
     cout << "Name: " << p.name << "\n";
     cout << "Age: " << p.age << "\n";
     cout << "Country: " << p.country << "\n";
@@ -59,12 +64,14 @@ int main() {
     cout << "Monthly Salary: " << p.monthly_salary << "\n";
     cout << "Yearly Salary: " << p.yearly_salary << "\n";
     cout << "Gender: " << p.gender << "\n";
-    if (marital_status) {
+    if (p.married)
         cout << "Married: Yes \n";
-        p.married = Single;
-    }
-    else {
+    else
        cout << "Married: No \n";
-       p.married = Married;
-    }
+}
+
+int main() {
+    Person p;
+    fillPerson(p);
+    printPerson(p);
 }
