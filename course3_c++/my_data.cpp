@@ -1,6 +1,9 @@
 #include <iostream>
 using namespace std;
 
+enum Gender { F, M };
+enum Marital_status { Single, Married };
+
 int main() {
     string name;
     string country;
@@ -9,7 +12,7 @@ int main() {
     char gender;
     int monthly_salary;
     int yearly_salary;
-    bool married = false;
+    Marital_status married;
     
 
     cout << "Enter your name\n";
@@ -47,9 +50,13 @@ int main() {
     cout << "Monthly Salary: " << monthly_salary << "\n";
     cout << "Yearly Salary: " << yearly_salary << "\n";
     cout << "Gender: " << gender << "\n";
-    if (married)
+    if (married) {
         cout << "Married: Yes \n";
-    else
-        cout << "Married: No \n";
+        married = Single;
+    }
+    else {
+       cout << "Married: No \n";
+       married = Married;
+    }
     
 }
