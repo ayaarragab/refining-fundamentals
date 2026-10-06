@@ -4,60 +4,61 @@
 using namespace std;
 
 struct stDate {
-  string days;
-  string hours;
-  string minutes;
-  string seconds;
+  int days;
+  int hours;
+  int minutes;
+  int seconds;
 };
 
-double readSeconds() {
-  double num;
-  cout << "Enter a number \n";
-  cin >> num;
+int readSeconds() {
+  int num;
+  do
+  {
+    cout << "Enter a number \n";
+    cin >> num;
+  } while (num < 0);
+  
   return num;
 }
 
-double get_days(double seconds) {
-  return double(seconds) / (24 * 60 * 60);
+stDate calculate_date(int seconds) {
+  float remainder = 0;
+  stDate date;
+
+  float days = float(seconds) / (24 * 60 * 60);
+  
+  remainder = days - floor(days);
+
+  float hours = remainder * 24;
+
+  remainder = hours - floor(hours);
+  float minutes = remainder * 60;
+
+  remainder = minutes - floor(minutes);
+
+  float remaining_seconds = floor(remainder * 60);
+
+  date.days = int(days);
+  date.hours = int(hours);
+  date.minutes = int(minutes);
+  date.seconds = int(remaining_seconds);
+  
+  return date;
 }
 
-double get_hours(double seconds) {
-  double days = get_days(seconds);
-  double hours_fraction = days - floor(days);
-  return hours_fraction * 24;
-}
+void printDate(stDate date)
+{
+    cout << "\n";
 
-double get_minutes(double seconds) {
- double hours = get_hours(seconds);
- double minutes_fraction = hours - floor(hours);
- return minutes_fraction * 60;
-}
-
-double get_seconds(double seconds) {
- double minutes = get_minutes(seconds);
- double seconds_fraction = minutes - floor(minutes);
- return seconds_fraction * 60;
-}
-
-stDate initStruct(double seconds) {
-  stDate d;
-  string days = to_string(floor(get_days(seconds)));
-  string hours = to_string(floor(get_hours(seconds)));
-  string minutes = to_string(floor(get_minutes(seconds)));
-  string remaining_seconds = to_string(floor(get_seconds(seconds)));
-  d.days = days;
-  d.hours = hours;
-  d.minutes = minutes;
-  d.seconds = remaining_seconds;
-  return d;
-}
-
-string format_duration(stDate date) {
-  return date.days + ":" + date.hours + ":" + date.minutes + ":" + date.seconds + "\n";
+    cout << date.days << ":"
+         << date.hours << ":"
+         << date.minutes << ":"
+         << date.seconds << "\n";
 }
 
 int main() {
-  double seconds = readSeconds();
-  stDate date = initStruct(seconds);
-  cout << format_duration(date); 
+  int seconds = readSeconds();
+  stDate date = calculate_date(seconds);
+  printDate(date);
+  return 0;
 }
