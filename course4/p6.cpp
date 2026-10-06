@@ -14,14 +14,17 @@ void readInfo (stInfo &s) {
   cin >> s.lastName;
 }
 
-void concatenateName(stInfo s) {
-  cout << s.firstName + " " + s.lastName << "\n";
+void concatenateName(stInfo s, bool isRev) {
+  if (isRev)
+    cout << s.lastName + " " + s.firstName << "\n";
+  else
+    cout << s.firstName + " " + s.lastName << "\n";
 }
 
 int main()
 {
   stInfo s;
   readInfo(s);
-  concatenateName(s);
+  concatenateName(s, true);
   return 0;
 }
