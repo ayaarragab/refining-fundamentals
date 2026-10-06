@@ -37,9 +37,13 @@ void readStudent(stInfo &student)
   readHasRec(student);
 }
 
+bool isAccepted(stInfo &student){
+  return (student.age >= 18 || student.hasLiscence) || student.hasRec;
+}
+
 void printDecision(stInfo &student)
 {
-  if ((student.age >= 18 || student.hasLiscence) || student.hasRec)
+  if (isAccepted(student))
     cout << "Hired\n";
   else
     cout << "Rejected\n";
