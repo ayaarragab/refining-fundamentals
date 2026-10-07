@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 
-int readNum() {
+int readNum(string message) {
     int n;
-    cout << "Enter a number\n";
+    cout << message;
     cin >> n;
     return n;
 }
@@ -30,8 +30,8 @@ void print_result(int num, int freq_n) {
 }
 
 int main() {
-    int num = readNum();
-    int freq = readNum();
+    int num = readNum("Enter a postitve number:\n");
+    int freq = readNum("Enter a number to count:\n");
     print_result(num, freq);
     return 0;
 }
