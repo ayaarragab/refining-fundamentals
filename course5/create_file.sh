@@ -3,9 +3,9 @@ cat > "p$1.cpp" << EOF
 #include <iostream>
 using namespace std;
 
-int readNum() {
+int readNum(string message) {
     int n;
-    cout << "Enter a number\n";
+    cout << message;
     cin >> n;
     return n;
 }
