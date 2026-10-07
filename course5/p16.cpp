@@ -8,7 +8,7 @@ void print_seq_of_chars() {
         for (short j = 65; j < 91; j++)
         {     
             for (short k = 65; k < 91; k++)
-                cout << char(i) << char(j) << char(j) << "\n";
+                cout << char(i) << char(j) << char(k) << "\n";
             
         }
         
