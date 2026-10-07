@@ -15,13 +15,13 @@ short get_last_digit_and_trancuate(int &num) {
 }
 
 void print_result(int num) {
-  string rev_num = "";
+  int rev_num = 0;
   while (num != 0)
     {
         short d = get_last_digit_and_trancuate(num);
-        rev_num += to_string(d);
+        rev_num = ((rev_num * 10) + d);
     }
-    cout << stoi(rev_num) << "\n";
+    cout << rev_num << "\n";
 }
 
 int main() {
