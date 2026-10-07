@@ -1,10 +1,10 @@
 #include <iostream>
 using namespace std;
 
-const string PASSWORD = "ZZZ";
+const string PASSWORD = "AAA";
 
 void find_password() {
-    int trails = 0;
+    int trails = 1;
     for (short i = 65; i < 91; i++)
     {
         for (short j = 65; j < 91; j++)
