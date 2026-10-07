@@ -1,9 +1,10 @@
 #include <iostream>
 using namespace std;
 
-const string PASSWORD = "AAF";
+const string PASSWORD = "ZZZ";
 
 void find_password() {
+    int trails = 0;
     for (short i = 65; i < 91; i++)
     {
         for (short j = 65; j < 91; j++)
@@ -15,10 +16,10 @@ void find_password() {
                 word.append(1, char(k));
                 if (PASSWORD == word) {
                     cout << "Password is " << word << "\n";
-                    cout << "Found after " << k - 65 + 1 << " Trail(s)\n";
+                    cout << "Found after " << trails << " Trail(s)\n";
                     break;
                 }
-                
+                ++trails;
             }
             
         }
