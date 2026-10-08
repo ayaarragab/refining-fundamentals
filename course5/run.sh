@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ "$1" -o execute/md && ./execute/md
+g++ p"$1".cpp -o execute/md && ./execute/md
