@@ -33,33 +33,31 @@ char get_random_type(enRandomType type) {
   return ' ';
 }
 
-string generate_4_char_string() {
+string generate_4_char_string(short length) {
     string word = "";
-    word.append(1, get_random_type(enRandomType::CapitalLetter));
-    word.append(1, get_random_type(enRandomType::CapitalLetter));
-    word.append(1, get_random_type(enRandomType::CapitalLetter));
-    word.append(1, get_random_type(enRandomType::CapitalLetter));
+    for (short i = 0; i < length; i++)
+        word.append(1, get_random_type(enRandomType::CapitalLetter));
     return word;
 }
 
-string generate_key() {
+string generate_key(short word_length, short key_length) {
     string key = "";
-    key.append(generate_4_char_string());
-    key.append(1, '-');
-    key.append(generate_4_char_string());
-    key.append(1, '-');
-    key.append(generate_4_char_string());
-    key.append(1, '-');
-    key.append(generate_4_char_string());
+    for (short i = 0; i < key_length; i++)
+    {
+        key.append(generate_4_char_string(word_length));
+        if (i != key_length - 1)
+            key.append(1, '-');
+    }
+    
     return key;
 }
 
-void generate_keys(short n) {
+void generate_keys(short n, short word_length, short key_length) {
     for (short i = 1; i <= n; i++)
-        cout << "Key [" << i << "]: " << generate_key() << endl;
+        cout << "Key [" << i << "]: " << generate_key(word_length, key_length) << endl;
 }
 
 int main() {
-    generate_keys(readNum("Enter number of keys do you want:\n"));
+    generate_keys(readNum("Enter number of keys do you want:\n"), 4, 4);
     return 0;
 }
