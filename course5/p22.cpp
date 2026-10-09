@@ -9,29 +9,33 @@ short readNum(string message) {
 }
 
 void print_array(short array[], short length) {
+    cout << "Array elements are: ";
     for (short i = 0; i < length; i++)
         cout << array[i];
     cout << "\n";
 }
 
+void fill_array(short array[], short length) {
+    for (short i = 0; i < length; i++)
+        array[i] = readNum("Array[" + to_string(i) + "]: ");
+}
 
-void create_and_fill_array_and_get_occurances(short length, short num) {
-    short array[length];
+short get_num_frequency(short array[], short length, short num) {
     short freq = 0;
     for (short i = 0; i < length; i++)
     {
-        array[i] = readNum("Enter number " + to_string(i + 1) + ":\n");
         if (array[i] == num)
             ++freq;
     }
-    print_array(array, length);
-    cout << "Number (" << num << ") Repeated (" << freq << ") Time(s)\n"; 
+    return freq;
 }
-
 
 int main() {
     short length = readNum("Enter array length: \n");
     short num = readNum("Enter number to count its occurances:\n");
-    create_and_fill_array_and_get_occurances(length, num);
+    short array[length];
+    fill_array(array, length);
+    print_array(array, length);
+    cout << "Number " << num << " repeated " << get_num_frequency(array, length, num) << " Time(s).\n"; 
     return 0;
 }
