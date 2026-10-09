@@ -60,7 +60,7 @@ short avg_array(short array[], short length) {
     {
         sum += array[i];
     }
-    return sum / length;
+    return float(sum) / length;
 }
 
 int main() {
