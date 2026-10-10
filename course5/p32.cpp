@@ -69,7 +69,7 @@ void swap(short &a, short &b) {
 
 void reverse(short arr[], short len) {
     short k = len - 1;
-    for (short i = 0; i < len; i++)
+    for (short i = 0; i < len / 2; i++)
     {
         swap(arr[k], arr[i]);
         k--;
