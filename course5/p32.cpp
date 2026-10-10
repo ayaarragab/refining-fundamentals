@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
-
 using namespace std;
 
 enum enEntryType { Input, Random };
@@ -20,6 +19,7 @@ int random(short from, short to) {
 }
 
 void print_array(short array[], short length) {
+    cout << "Array elements are: ";
     for (short i = 0; i < length; i++) {
         cout << array[i];
         if (i != length - 1)
@@ -54,6 +54,11 @@ void fill_array(short array[], short length, enEntryType type) {
     }
 }
 
+void copy_to_dest_array(short src[], short dest[], short len) {
+    for (short i = 0; i < len; i++)
+        dest[i] = src[i];
+}
+
 void swap(short &a, short &b) {
   short temp;
   temp = a;
@@ -61,25 +66,24 @@ void swap(short &a, short &b) {
   b = temp;
 }
 
-void shuffle(short arr[], short len) {
-    for (short i = 0; i < len; i++) {
-        short index1 = random(1, len) - 1;
-        short index2 = random(1, len) - 1;
-        swap(arr[index1], arr[index2]);
+
+void reverse(short arr[], short len) {
+    short k = len - 1;
+    for (short i = 0; i < len; i++)
+    {
+        swap(arr[k], arr[i]);
+        k--;
     }
 }
 
-
-
 int main() {
-    srand((unsigned)time(NULL));
-    short length = readNum("Enter array length: \n");
-    short arr1[length];
-    fill_array(arr1, length, enEntryType::Random);
-    cout << "Original Array: ";
-    print_array(arr1, length);
-    shuffle(arr1, length);
-    cout << "After shuffeling Array: ";
-    print_array(arr1, length);
+    short len = readNum("Enter array length:\n");
+    short arr[len];
+    fill_array(arr, len, enEntryType::Random);
+    cout << "Before reversing:\n";
+    print_array(arr, len);
+    cout << "After reversing:\n";
+    reverse(arr, len);
+    print_array(arr, len);
     return 0;
 }
