@@ -10,6 +10,8 @@ float readNum(string message) {
 }
 
 int my_floor(float num) {
+    if (num < 0)
+        --num;
     return int(num);
 }
 
