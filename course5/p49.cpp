@@ -10,7 +10,7 @@ float readNum(string message) {
 }
 
 int my_ceil(float num) {
-    if (num > 0 && (num - int(num) > 0))
+    if (num > 0 && abs(num - int(num) > 0))
         ++num;
     return int(num);
 }
