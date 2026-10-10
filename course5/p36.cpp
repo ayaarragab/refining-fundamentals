@@ -8,14 +8,17 @@ int readNum(string message) {
     return n;
 }
 
+void add_array_element(short arr[], short &arr_len, short num) {
+    arr[arr_len] = num;
+    ++arr_len;
+}
+
 void allocate_areas(short arr[100], short &real_length) {
     bool addmore = true;
     do
     {
-        short num = readNum("Please enter a number:\n");
-        arr[real_length] = num;
+        add_array_element(arr, real_length, ("Please enter a number:\n"));
         addmore = bool(readNum("Do you want to add more numbers? [0] -> No, [1] => Yes:\n"));
-        ++real_length;
     } while (addmore);   
 }
 
