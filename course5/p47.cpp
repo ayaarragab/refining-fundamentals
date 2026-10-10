@@ -12,8 +12,13 @@ float readNum(string message) {
 int my_round(float num) {
     float num_copy = num * 10;
     short d = int(num_copy) % 10;
-    if (d >= 5)
-        ++num;
+    if (d >= 5) {        
+        if (num < 0)
+            --num;
+        else
+            ++num;
+    }
+        
     return num;
 }
 
