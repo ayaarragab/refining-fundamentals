@@ -17,7 +17,7 @@ void allocate_areas(short arr[100], short &real_length) {
     bool addmore = true;
     do
     {
-        add_array_element(arr, real_length, ("Please enter a number:\n"));
+        add_array_element(arr, real_length, readNum("Please enter a number:\n"));
         addmore = bool(readNum("Do you want to add more numbers? [0] -> No, [1] => Yes:\n"));
     } while (addmore);   
 }
