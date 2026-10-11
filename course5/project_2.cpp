@@ -160,7 +160,7 @@ void generate_questions(stGameInfo &game) {
   
 }
 
-void start_math_game(stGameInfo game) {
+void start_math_game(stGameInfo &game) {
   generate_questions(game);
 }
 
@@ -175,7 +175,7 @@ bool wants_to_play_again()
 }
 
 string decide_game_status(stGameInfo &game) {
-  if ((game.num_of_questions - game.num_of_answered_questions) >= game.num_of_questions / 2){
+  if ((game.num_of_questions - game.num_of_answered_questions) <= (game.num_of_questions / 2)){
     game.status = Passed;
     return "Passed";
   }
