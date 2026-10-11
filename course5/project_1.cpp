@@ -18,6 +18,21 @@ enum enChoice
   Scissors = 3
 };
 
+struct stRoundInfo {
+  int number;
+  enWinner winner;
+  enChoice user_choice;
+  enChoice pc_choice;
+};
+
+struct stGameInfo {
+  int rounds;
+  int user_wins;
+  int pc_wins;
+  int draws;
+  enWinner winner;
+};
+
 int random(short from, short to)
 {
   return rand() % (to - from + 1) + from;
@@ -97,41 +112,53 @@ string choice_to_str(enChoice choice) {
   }
 }
 
-void increment_winner(enWinner winner, int &user_wins, int &pc_wins, int &draws)
+void increment_winner(enWinner winner, stGameInfo &game)
 {
   switch (winner)
   {
   case User:
-    ++user_wins;
+    ++game.user_wins;
     break;
   case PC:
-    ++pc_wins;
+    ++game.pc_wins;
     break;
   case Draw:
-    ++draws;
+    ++game.draws;
   default:
   break;
   }
 }
 
 
-void print_choices(enChoice user_choice, enChoice pc_choice, enWinner winner)
+void print_choices(stRoundInfo round)
 {
   cout << "------------------------------------------------------------\n";
-  cout << "User Choice: " << choice_to_str(user_choice) << "\n";
-  cout << "PC Choice: " << choice_to_str(pc_choice) << "\n";
-  cout << "Round Winner: " << winner_to_str(winner) << "\n";
+  cout << "User Choice: " << choice_to_str(round.user_choice) << "\n";
+  cout << "PC Choice: " << choice_to_str(round.pc_choice) << "\n";
+  cout << "Round Winner: " << winner_to_str(round.winner) << "\n";
   cout << "------------------------------------------------------------\n";
 }
 
-void round_steps(int &user_wins, int &pc_wins, int &draws, int &num_of_rounds)
+void round_steps(stGameInfo &game, int &num_of_rounds, int &round_number)
 {
+  cout << "Round Number [" << round_number << "]\n";
+
+  stRoundInfo round;
   enChoice user_choice = user_plays();
   enChoice pc_choice = pc_plays();
   enWinner winner = who_is_winner_in_round(user_choice, pc_choice);
-  increment_winner(winner, user_wins, pc_wins, draws);
-  print_choices(user_choice, pc_choice, winner);
+
+
+  round.number = round_number;
+  round.pc_choice = pc_choice;
+  round.user_choice = user_choice;
+  round.winner = winner;
+  
+  increment_winner(round.winner, game);
+  
+  print_choices(round);
   --num_of_rounds;
+  ++round_number;
 }
 
 bool wants_to_play_again()
@@ -153,40 +180,51 @@ enWinner who_is_winner_in_game(int &user_wins, int &pc_wins) {
 }
 
 void print_game_over_header() {
-  cout << "------------------------------------------------------------\n";
-  cout << "\t\t\tGame Over!\t\t\t\n";
-  cout << "------------------------------------------------------------\n";
-  cout << "\t\t\tGame Result!\t\t\t\n";
+  cout << "\t\t\t------------------------------------------------------------\t\t\t\n";
+  cout << "\t\t\t\t\t\tGame Over!\t\t\t\t\t\t\n";
+  cout << "\t\t\t------------------------------------------------------------\t\t\t\n";
+  cout << "\t\t\t\t\t\tGame Result!\t\t\t\t\t\t\n";
 }
 
 
-void game_over(int user_wins, int pc_wins, int draws, int rounds) {
-  enWinner winner = who_is_winner_in_game(user_wins, pc_wins);
+void game_over(stGameInfo &game) {
+  enWinner winner = who_is_winner_in_game(game.user_wins, game.pc_wins);
+  game.winner = winner;
   print_game_over_header();
-  cout << "Game Rounds: " << rounds << "\n";
-  cout << "Player won " << user_wins << " number of times " << "\n";
-  cout << "PC won " << pc_wins << " number of times " << "\n";
-  cout << "Draw Times: " << draws << "\n";
-  cout << "Winner: " << winner_to_str(winner) << "\n";
+  cout << "Game Rounds: " << game.rounds << "\n";
+  cout << "Player won " << game.user_wins << " number of times " << "\n";
+  cout << "PC won " << game.pc_wins << " number of times " << "\n";
+  cout << "Draw Times: " << game.draws << "\n";
+  cout << "Winner: " << winner_to_str(game.winner) << "\n";
   cout << "------------------------------------------------------------\n";
 }
 
-void start_game(int rounds, int &user_wins, int &pc_wins, int &draws)
+void start_game(stGameInfo &game)
 {
-  int copy_rounds = rounds;
+  int copy_rounds = game.rounds;
+  int round_number = 1;
   while (copy_rounds)
-    round_steps(user_wins, pc_wins, draws, copy_rounds);
+    round_steps(game, copy_rounds, round_number);
+}
+
+void initialize_game(stGameInfo &game) {
+  game.rounds = readNum("Enter number of rounds:\n");
+  game.draws = 0;
+  game.pc_wins = 0;
+  game.user_wins = 0;
 }
 
 void run_game() {
-  int rounds = readNum("Enter number of rounds:\n");
-  int user_wins = 0, pc_wins = 0, draws= 0;
+  stGameInfo game;
+  
+  initialize_game(game);
+
   srand((unsigned)time(NULL));
   bool play_again;
   do
   {
-    start_game(rounds, user_wins, pc_wins, draws);
-    game_over(user_wins, pc_wins, draws, rounds);
+    start_game(game);
+    game_over(game);
     play_again = wants_to_play_again();
   } while (play_again);
 }
