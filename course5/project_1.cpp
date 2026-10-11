@@ -3,14 +3,12 @@
 #include <cstdlib>
 using namespace std;
 
-const string color_prefix = "\033[";
-const string color_suffix = "m";
 
 enum enWinner
 {
-  User = 32,
-  PC = 31,
-  Draw = 33
+  User,
+  PC,
+  Draw
 };
 
 enum enChoice
