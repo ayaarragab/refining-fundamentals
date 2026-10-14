@@ -1,8 +1,8 @@
 #include "input_funcs.h"
 
 int n_power_m(int n, int m) {
-  if (m == 0)
-    return 1;
+  if (m == 1)
+    return n;
   return n * n_power_m(n, m - 1);
 }
 
