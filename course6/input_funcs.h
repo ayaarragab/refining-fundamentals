@@ -1,13 +1,24 @@
 #include <iostream>
+#include <limits>
+
+using namespace std;
 
 namespace input_funcs {
-  void print_input_message(std::string message) {
-    std::cout << message << std::endl;
+  void print_input_message(string message) {
+    cout << message << endl;
   }
-  int readNum(std::string message) {
+  int readNum(string message) {
     print_input_message(message);
     int num;
-    std::cin >> num;
+    cin >> num;
+    while (cin.fail())
+    {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      print_input_message(message);
+      cin >> num;
+    }
+    
     return num;
   }
 }
