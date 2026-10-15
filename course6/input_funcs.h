@@ -21,4 +21,16 @@ namespace input_funcs {
     
     return num;
   }
+bool wants_to_enter() {
+  char c;
+  cout << "Enter y\\n\n";
+  cin >> c;
+  while (cin.fail())
+  {
+    cin.clear();
+    cout << "Please enter a valid character!\n";
+    cin >> c;
+  }
+  return ((c == 'y') || (c == 'Y'));
+}
 }
