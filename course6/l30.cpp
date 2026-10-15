@@ -27,7 +27,7 @@ void read_employee_data(stEmployee &employee) {
   employee.code = readString("Enter your code!");
 }
 
-void loop_untill_finish(vector <stEmployee> &vEmployees) {
+void read_employees(vector <stEmployee> &vEmployees) {
   bool enter_again = true;
   
   while (enter_again)
@@ -42,7 +42,7 @@ void loop_untill_finish(vector <stEmployee> &vEmployees) {
 int main() {
   vector <stEmployee> vEmployees;
  
-  loop_untill_finish(vEmployees);
+  read_employees(vEmployees);
  
   for (stEmployee &e : vEmployees)
     print_employee(e);
