@@ -11,9 +11,11 @@ struct stEmployee {
 };
 
 void print_employee(stEmployee &emp) {
+  cout << "------------------------------------------------\n";
   cout << "First Name: " << emp.first_name << "\n";
   cout << "Last Name: " << emp.last_name << "\n";
   cout << "Code: " << emp.code << "\n";
+  cout << "------------------------------------------------\n";
 }
 
 void print_vector_int(vector <stEmployee> &employees) {
@@ -39,13 +41,17 @@ void read_employees(vector <stEmployee> &vEmployees) {
   }
 }
 
+void print_employees(vector <stEmployee> &vEmployees) {
+  for (stEmployee &e : vEmployees)
+    print_employee(e);
+}
+
 int main() {
   vector <stEmployee> vEmployees;
  
   read_employees(vEmployees);
  
-  for (stEmployee &e : vEmployees)
-    print_employee(e);
-  
+  print_employees(vEmployees);
+
   return 0;
 }
