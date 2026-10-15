@@ -2,6 +2,6 @@
 using namespace std;
 
 int main() {
-    printf("Welcome to C syntax!!%0*d\n", 3, 4);
+    printf("Welcome to C syntax!!%0*d\n", 2, 4);
     return 0;
 }
