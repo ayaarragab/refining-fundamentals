@@ -33,4 +33,10 @@ bool wants_to_enter() {
   }
   return ((c == 'y') || (c == 'Y'));
 }
+  string readString(string message) {
+    print_input_message(message);
+    string str;
+    cin >> str;
+    return str;
+  }
 }
