@@ -66,6 +66,7 @@ void print_array(int* arr, short size) {
 
 int main() {
     srand((unsigned)time(NULL));
+    
     int *matrix = new int;
     fill_matrix_with_random_numbers(matrix, 3, 3);
     print_matrix(matrix, 3, 3);
