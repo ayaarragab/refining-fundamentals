@@ -3,20 +3,12 @@
 #include <vector>
 using namespace std;
 
-void add_vec_content_to_file(string filename, vector<string> &vec) {
-  fstream file;
-  file.open(filename, ios::out);
-  for (string &str: vec)
-    file << str + "\n";
-  file.close();
-}
-
-void add_vec_content_to_file_except_record(string filename, vector<string> &vec, string record) {
+void add_vec_content_to_file(string filename, vector<string> &vec, string record="") {
   fstream file;
   file.open(filename, ios::out);
   for (string &str: vec)
   {
-    if (str != record)
+    if (record != "" && str != record)
       file << str + "\n";
   }
   file.close();
@@ -56,7 +48,7 @@ void print_vec_content(vector<string> &vec) {
 void delete_record(string filename, string record) {
   vector<string> vec;
   read_and_add_to_vec(filename, vec);
-  add_vec_content_to_file_except_record(filename, vec, record);
+  add_vec_content_to_file(filename, vec, record);
 }
 
 int main() {
