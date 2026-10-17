@@ -1,11 +1,11 @@
 #include "input_funcs.h"
 #include <vector>
 
-void words_to_vec(string s, vector<string> &str_vec) {
+void words_to_vec(string s, vector<string> &str_vec, char delim) {
   short from = 0;
   for (short i = 0; i < s.length(); i++)
   {
-    if (s[i] == ' ')
+    if (s[i] == delim)
     {
       str_vec.push_back(s.substr(from, i));
       from = i + 1;
@@ -22,7 +22,7 @@ void print_vec(vector<string> &str_vec) {
 int main() {
     vector<string> str_vec;
     string str = input_funcs::readString("Enter a string");   
-    words_to_vec(str, str_vec);
+    words_to_vec(str, str_vec, ' ');
     print_vec(str_vec);
     return 0;
 }
