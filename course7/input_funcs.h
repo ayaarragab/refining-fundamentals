@@ -21,7 +21,7 @@ namespace input_funcs {
     
     return num;
   }
-bool wants_to_enter() {
+  bool wants_to_enter() {
   char c;
   cout << "Enter y\\n\n";
   cin >> c;
@@ -36,7 +36,7 @@ bool wants_to_enter() {
   string readString(string message) {
     print_input_message(message);
     string str;
-    cin >> str;
+    getline(cin, str);
     return str;
   }
 }
