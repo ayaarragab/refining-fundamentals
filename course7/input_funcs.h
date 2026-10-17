@@ -39,4 +39,10 @@ namespace input_funcs {
     getline(cin, str);
     return str;
   }
+  char readCharacter(string message) {
+    print_input_message(message);
+    char c;
+    cin >> c;
+    return c;
+  }
 }
