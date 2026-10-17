@@ -15,7 +15,6 @@ namespace my_string_funcs
     return new_s;
 }
 
-
   void words_to_vec(string s, vector<string> &str_vec, string delim) {
     short pos = s.find(delim);
 
@@ -51,4 +50,27 @@ namespace my_string_funcs
 
     return new_str.substr(0, new_str.length() - 1);
   }
+
+  string join(vector<string> &vec, string delim) {
+  string str = "";
+  for (string &s : vec)
+  {
+    str.append(s);
+    str.append(delim);
+  }
+  
+  return str.substr(0, str.length() - 1 - delim.length()); 
+  }
+
+  string join(string arr[], short size, string delim) {
+    string str = "";
+    for (short i = 0; i < size; i++)
+    {
+      str.append(arr[i]);
+      str.append(delim);
+    }
+    
+    return str.substr(0, str.length() - 1);  
+  }
+
 } // namespace my_string_funcs
