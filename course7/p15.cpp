@@ -44,7 +44,7 @@ void print_matrix(int* matrix, int rows, int cols) {
     }
 }
 
-void cout_in_matrix(int *m, int num, int rows, int cols) {
+void count_in_matrix(int *m, int num, int rows, int cols) {
     int count = 0;
     for (short i = 0; i < rows; i++)
     {
@@ -64,7 +64,7 @@ int main() {
     fill_matrix_with_ordered_numbers(matrix, 3, 3);
     cout << "-----------------------------\n";
     print_matrix(matrix, 3, 3);
-    cout_in_matrix(matrix, 11, 3, 3);
+    count_in_matrix(matrix, 11, 3, 3);
     delete[] matrix;
     return 0;
 }
