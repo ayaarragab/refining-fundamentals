@@ -6,7 +6,7 @@ void fill_matrix_with_random_numbers(int* matrix, int rows, int cols) {
     for (short i = 0; i < rows; i++)
     {
         for (short j = 0; j < cols; j++)
-           *(matrix + i + j) = utils::random(1, 5);
+           *(matrix + (i * cols) + j) = utils::random(1, 5);
     }
 }
 
@@ -20,13 +20,13 @@ void print_matrix(int* matrix, int rows, int cols) {
     for (short i = 0; i < rows; i++)
     {
         for (short j = 0; j < cols; j++)
-            cout << *(matrix + i + j) << with_comma_seperator(j, cols);
+            cout << *(matrix + (i * cols) + j) << with_comma_seperator(j, cols);
         cout << endl;
     }
 }
 
 int sum_row(int* matrix, int row_num, int cols) {
-    matrix = matrix + row_num;
+    matrix = matrix + (row_num * cols);
     int sum = 0;
     for (short i = 0; i < cols; i++)
         sum += *(matrix + i);
@@ -34,7 +34,7 @@ int sum_row(int* matrix, int row_num, int cols) {
 }
 
 int* print_sum_rows(int* matrix, int rows, int cols) {
-    int *new_arr = new int;
+    int *new_arr = new int[rows];
     for (short i = 0; i < rows; i++) {
         *(new_arr + i) = sum_row(matrix, i, cols);
     }
@@ -46,13 +46,13 @@ int sum_col(int* matrix, int col_num, int rows) {
     matrix = matrix + col_num;
     int sum = 0;
     for (short i = 0; i < rows; i++)
-        sum += *(matrix + i);
+        sum += *(matrix + rows);
     return sum;
 }
 
 
 int* print_sum_cols(int* matrix, int rows, int cols) {
-    int *new_arr = new int;
+    int *new_arr = new int[cols];
     for (short i = 0; i < cols; i++) {
         *(new_arr + i) = sum_col(matrix, i, rows);
     }
@@ -67,10 +67,10 @@ void print_array(int* arr, short size) {
 int main() {
     srand((unsigned)time(NULL));
     
-    int *matrix = new int;
+    int *matrix = new int[3 * 3];
     fill_matrix_with_random_numbers(matrix, 3, 3);
     print_matrix(matrix, 3, 3);
-    int* new_arr = print_sum_cols(matrix, 3, 3);
+    int* new_arr = print_sum_rows(matrix, 3, 3);
     print_array(new_arr, 3);
     delete[] matrix;
     return 0;
