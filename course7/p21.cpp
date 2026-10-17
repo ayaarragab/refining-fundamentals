@@ -1,27 +1,22 @@
 #include <iostream>
 using namespace std;
 
-void print_arr(int *arr, int size) {
-    for (short i = 0; i < size; i++)
-        cout << arr[i] << " ";
+
+void fib(short n) {
+    int prev1 = 0, prev2 = 1;
+    int result;
+    cout << "1  ";
+    for (short i = 0; i < n - 1; i++)
+    {
+        result = prev1 + prev2;
+        cout << result << "  ";
+        prev1 = prev2;
+        prev2 = result;
+    }
     cout << endl;
 }
 
-int* fib(short n) {
-    int *seq = new int[n];
-    seq[0] = 1;
-    seq[1] = 1;
-    for (short next_empty_pos = 2; next_empty_pos <= n; next_empty_pos++)
-    {
-        for (short j = next_empty_pos - 2; j < next_empty_pos; j++)
-            seq[next_empty_pos] += seq[j];
-    }
-    return seq;   
-}
-
 int main() {
-    int *fib_seq = fib(10);
-    print_arr(fib_seq, 10);
-    delete[] fib_seq;
+    fib(10);
     return 0;
 }
