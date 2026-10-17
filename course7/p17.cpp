@@ -44,25 +44,23 @@ void print_matrix(int* matrix, int rows, int cols) {
     }
 }
 
-int count_in_matrix(int *m, int num, int rows, int cols) {
+bool is_num_exist(int *m, int num, int rows, int cols) {
     int count = 0;
     for (short i = 0; i < rows; i++)
     {
         for (short j = 0; j < cols; j++)
         {
             if (*(m + (i * cols) + j) == num)
-                ++count;
+            {
+                cout << "Exist" << endl;
+                return true;
+            }
         }   
     }
-    return count;
+    cout << "Not Exist" << endl;
+    return false;
 }
 
-void is_num_exist(int *m, int num, int rows, int cols) {
-    if (count_in_matrix(m, num, rows, cols) > 0)
-        cout << "Exist" << endl;
-    else
-        cout << "Not Exist" << endl;
-}
 
 int main() {
     srand((unsigned)time(NULL));
