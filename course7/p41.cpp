@@ -23,13 +23,14 @@ string reverse_string(string s, char delim) {
   vector<string> str_vec;
   words_to_vec(s, str_vec, delim);
   string new_str = "";
-  int last = str_vec.size();
-  for (int i = last; i >= 0; i--)
+  vector<string>::iterator iter_ = str_vec.end();
+  while (iter_ != str_vec.begin())
   {
-    new_str.append(str_vec[i]);
-    if (i != 0)
-      new_str.append(1, delim);
+    new_str.append(*(iter_));
+    new_str.append(1, delim);
+    iter_--;
   }
+  new_str.append(*(iter_));
   return new_str;
 }
 
