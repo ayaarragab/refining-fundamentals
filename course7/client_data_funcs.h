@@ -113,4 +113,14 @@ namespace client_data_funcs
     print_footer();
   }
  
+
+  void find_with_acc_num(string account_num) {
+    vector<stClientData> vec = read_clients_file_and_convert_to_struct("clients.txt");
+    for (stClientData &c : vec)
+    {
+     if (c.account_number == account_num)
+      print_client_data(c);
+      break;
+    }
+  }
 } // namespace client_data_funcs
