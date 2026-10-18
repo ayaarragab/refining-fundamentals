@@ -169,8 +169,10 @@ namespace client_data_funcs
     }
     return false;
   }
-  bool sure_to_delete() {
-    char c = input_funcs::readCharacter("Are you sure you want to delete it? (y/n)");
+
+  bool sure_to(bool update=false) {
+    string delete_or_update = update ? "update" : "delete";
+    char c = input_funcs::readCharacter("Are you sure you want to " + delete_or_update + " it? (y/n)");
     return c == 'y' || c == 'Y';
   }
 
@@ -179,14 +181,15 @@ namespace client_data_funcs
     save_records_to_file("clients.txt", vec_records, 'w');
   }
 
-  void delete_with_acc_num(string account_num) {
+  void delete_with_acc_num(string account_num, bool display_sure=true) {
     vector<stClientData> vec;
     vector<stClientData>::iterator iter;
     bool found = find_with_acc_num(account_num, vec, iter);
-    bool sure;
+    bool sure = true;
     if (found)
     {
-      sure = sure_to_delete();
+      if (display_sure)
+        sure = sure_to();
       if (sure)
       {
         vec.erase(iter);
@@ -194,5 +197,12 @@ namespace client_data_funcs
         write_vector_to_file(vec);
       }
     }
+  }
+
+  void update_with_acc_num(string account_num) {
+    delete_with_acc_num(account_num, false);
+    bool sure_to_update = sure_to(true);
+    if (sure_to_update)
+      save_clients_data_to_file();
   }
 } // namespace client_data_funcs
