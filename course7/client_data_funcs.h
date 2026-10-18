@@ -129,16 +129,26 @@ namespace client_data_funcs
     return vec;
   }
 
-  void print_header(short vec_length) {
-    cout << "\t\t\t  Client List (" << vec_length << ")" << " Client(s).\t\t\t\n";
+  void print_dashs() {
     cout << "-------------------------------------------------------------------------\n";
-    cout << "  Account Number |  Pin Code | Client Name " << setw(7) << "| " << "Phone  | " << "   Balance \n";
-    cout << "-------------------------------------------------------------------------\n";
+  }
 
+  string tabs_(int num) {
+    string t = "";
+    for (short i = 0; i < num; i++)
+      t.append("\t");
+    return t;
+  }
+
+  void print_header(short vec_length) {
+    cout << tabs_(3) <<"  Client List (" << vec_length << ")" << " Client(s)."<< tabs_(3) << "\n";
+    print_dashs();
+    cout << "  Account Number |  Pin Code | Client Name " << setw(7) << "| " << "Phone  | " << "   Balance \n";
+    print_dashs();
   }
 
   void print_footer() {
-    cout << "-------------------------------------------------------------------------\n";
+    print_dashs();
   }
 
   void print_clients(vector<stClientData> &vec) {
@@ -152,6 +162,21 @@ namespace client_data_funcs
   bool find_with_acc_num(string account_num, vector<stClientData> &vec, vector<stClientData>::iterator &iter) {
     vec = read_clients_file_and_convert_to_struct("clients.txt");
     iter = vec.begin();
+    while (iter != vec.end())
+    {
+     if (iter->account_number == account_num)
+     {
+      print_client_data(*(iter));
+      return true;
+     }
+     ++iter;
+    }
+    return false;
+  }
+
+  bool find_with_acc_num(string account_num) {
+    vector<stClientData> vec = read_clients_file_and_convert_to_struct("clients.txt");
+    vector<stClientData>::iterator iter = vec.begin();
     while (iter != vec.end())
     {
      if (iter->account_number == account_num)
@@ -227,6 +252,12 @@ namespace client_data_funcs
         print_clients(vec);
         write_vector_to_file(vec);
       }
-    }
+    } else
+      cout << "No clients exists with this acc number \n";
+  }
+
+  void display_clients() {
+    vector<stClientData> vec = read_clients_file_and_convert_to_struct("clients.txt");
+    print_clients(vec);
   }
 } // namespace client_data_funcs
