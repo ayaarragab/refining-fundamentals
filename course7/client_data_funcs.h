@@ -36,6 +36,13 @@ namespace client_data_funcs
     return my_string_funcs::join(vec, "//#");
   }
 
+  vector<string> generate_records(vector<stClientData> &vec) {
+    vector<string> vec_records;
+    for (stClientData &c : vec)
+      vec_records.push_back(generate_record(c));
+    return vec_records;
+  }
+
   void vec_to_client_data(vector<string> &vec, stClientData &client) {
     client.account_number = vec[0];
     client.balance = stoi(vec[1]);
@@ -67,6 +74,34 @@ namespace client_data_funcs
       file << record << "\n";
     file.close();
   }
+
+  void open_file(fstream &f, string filename, char mode='r') {
+    switch (mode)
+    {
+    case 'a':
+      f.open(filename, ios::out | ios::app);
+      break;
+    case 'w':
+      f.open(filename, ios::out);
+      break;
+    case 'r':
+      f.open(filename, ios::in);
+      break;
+    default:
+      break;
+    }
+  }
+
+  void save_records_to_file(string filename, vector<string> records, char mode='a') {
+    fstream file;
+    open_file(file, filename, 'w');
+    if (file.is_open()) {
+      for (string &s : records)
+        file << s << "\n";
+    }
+    file.close();
+  }
+
 
   void save_clients_data_to_file() {
     stClientData client;
@@ -112,16 +147,52 @@ namespace client_data_funcs
       cout << setw(11)<< c.account_number << setw(7) << "|" << setw(8) << c.pin_code << setw(4) << "|" << setw(10) << c.name << setw(10) << "| " << c.phone << setw(6) << "| " << c.balance << endl;
     print_footer();
   }
- 
 
-  void find_with_acc_num(string account_num) {
-    vector<stClientData> vec = read_clients_file_and_convert_to_struct("clients.txt");
-    for (stClientData &c : vec)
+
+  bool find_with_acc_num(string account_num, vector<stClientData> &vec, vector<stClientData>::iterator &iter) {
+    vec = read_clients_file_and_convert_to_struct("clients.txt");
+    iter = vec.begin();
+    while (iter != vec.end())
     {
-     if (c.account_number == account_num)
-      print_client_data(c);
-      break;
+     if (iter->account_number == account_num)
+     {
+      print_client_data(*(iter));
+      return true;
+     }
+     ++iter;
     }
-    cout << "No Clients found with this account number\n";
+    if (iter->account_number != account_num)
+      cout << "No Clients found with this account number\n";
+    else {
+      print_client_data(*(iter));
+      return true;
+    }
+    return false;
+  }
+  bool sure_to_delete() {
+    char c = input_funcs::readCharacter("Are you sure you want to delete it? (y/n)");
+    return c == 'y' || c == 'Y';
+  }
+
+  void write_vector_to_file(vector<stClientData> vec) {
+    vector<string> vec_records = generate_records(vec);
+    save_records_to_file("clients.txt", vec_records, 'w');
+  }
+
+  void delete_with_acc_num(string account_num) {
+    vector<stClientData> vec;
+    vector<stClientData>::iterator iter;
+    bool found = find_with_acc_num(account_num, vec, iter);
+    bool sure;
+    if (found)
+    {
+      sure = sure_to_delete();
+      if (sure)
+      {
+        vec.erase(iter);
+        print_clients(vec);
+        write_vector_to_file(vec);
+      }
+    }
   }
 } // namespace client_data_funcs
