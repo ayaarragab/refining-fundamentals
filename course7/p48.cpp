@@ -86,6 +86,7 @@ vector<stClientData> read_clients_file_and_convert_to_struct(string filename) {
     string line;
     while (getline(file, line))
       vec.push_back(record_to_client(line));
+    file.close();
   }
   return vec;
 }
