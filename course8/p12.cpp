@@ -185,10 +185,10 @@ string convert_arr_to_date(int* &curr_day_and_month, int year) {
     return date;
 }
 
-string days_to_date(int days, int year) {
-    int d = 0;
+string days_to_date(int days, int year, int month=1, int day=0) {
+    int d = day;
     short i;
-    for(i = 1; (d + num_of_days_in_month(i, year)) < days; i++)
+    for(i = month; (d + num_of_days_in_month(i, year)) < days; i++)
         days += (num_of_days_in_month(i, year));
     
     int days_of_current_month = num_of_days(i, year);
@@ -204,6 +204,6 @@ int main()
     int year, day, month;
     read_date(day, month, year);
     cout << "it's been " << how_many_days_since(day, month, year) << " day(s) since " << day << "-" << month << "-" << year << endl;
-    cout << "back to date " << days_to_date(how_many_days_since(day, month, year), year);
+    cout << "back to date " << days_to_date(15, year, month, day);
     return 0;
 }
