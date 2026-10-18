@@ -36,7 +36,7 @@ namespace input_funcs {
   string readString(string message) {
     print_input_message(message);
     string str;
-    getline(cin, str);
+    getline(cin >> ws, str);
     return str;
   }
   char readCharacter(string message) {

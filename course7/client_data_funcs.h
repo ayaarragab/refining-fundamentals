@@ -161,12 +161,6 @@ namespace client_data_funcs
      }
      ++iter;
     }
-    if (iter->account_number != account_num)
-      cout << "No Clients found with this account number\n";
-    else {
-      print_client_data(*(iter));
-      return true;
-    }
     return false;
   }
 
@@ -179,6 +173,25 @@ namespace client_data_funcs
   void write_vector_to_file(vector<stClientData> vec) {
     vector<string> vec_records = generate_records(vec);
     save_records_to_file("clients.txt", vec_records, 'w');
+  }
+
+  stClientData update_client(stClientData &c) {
+    string account_number = input_funcs::readString("Enter account number:");
+    string pin_code = input_funcs::readString("Enter pin code:");
+    string name = input_funcs::readString("Enter your name:");
+    string phone = input_funcs::readString("Enter account phone:");
+    int balance = input_funcs::readNum("Enter your balance:");
+    if (account_number != "")
+      c.account_number =  account_number;
+    if (pin_code != "")
+      c.pin_code =  pin_code;
+    if (name != "")
+      c.name =  name;
+    if (phone != "")
+      c.phone =  phone;
+    if (balance)
+      c.balance = balance;
+    return c;
   }
 
   void delete_with_acc_num(string account_num, bool display_sure=true) {
@@ -200,9 +213,20 @@ namespace client_data_funcs
   }
 
   void update_with_acc_num(string account_num) {
-    delete_with_acc_num(account_num, false);
-    bool sure_to_update = sure_to(true);
-    if (sure_to_update)
-      save_clients_data_to_file();
+    vector<stClientData> vec;
+    vector<stClientData>::iterator iter;
+    stClientData c_new;
+    bool found = find_with_acc_num(account_num, vec, iter);
+    bool sure = true;
+    if (found)
+    {
+      sure = sure_to(true);
+      if (sure)
+      {
+        update_client(*(iter));
+        print_clients(vec);
+        write_vector_to_file(vec);
+      }
+    }
   }
 } // namespace client_data_funcs
