@@ -122,5 +122,6 @@ namespace client_data_funcs
       print_client_data(c);
       break;
     }
+    cout << "No Clients found with this account number\n";
   }
 } // namespace client_data_funcs
