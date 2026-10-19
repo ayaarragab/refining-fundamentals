@@ -2,6 +2,12 @@
 #include <cmath>
 using namespace std;
 
+struct stDate {
+    int day;
+    int month;
+    int year;
+};
+
 int readNum(string message)
 {
     int n;
@@ -100,10 +106,10 @@ string name_of_month(int month) {
     return months[month];
 }
 
-void read_date(int &day, int &month, int &year) {
-    year = readNum("Enter the year:\n");
-    month = readNum("Enter the month:\n");
-    day = readNum("Enter the day:\n");
+void read_date(stDate &date) {
+    date.year = readNum("Enter the year:\n");
+    date.month = readNum("Enter the month:\n");
+    date.day = readNum("Enter the day:\n");
 }
 
 int calculate_day_number(int day, int month, int year) {
@@ -159,51 +165,43 @@ int how_many_days_since(int day, int month, int year) {
     return days;
 }
 
-int* decide_day_month(int days_minus_, int days_of_curr_month, int current_month) {
-    int day_in_date, month_in_date = current_month;
-    int* ptr = new int[2];
-    if (days_minus_ <= days_of_curr_month)
-        day_in_date = days_minus_;
-    else {
-        day_in_date = days_minus_ - days_of_curr_month;
-        month_in_date = current_month + 1;
-    }
-    *(ptr) = day_in_date;
-    *(ptr + 1) = month_in_date;
-    return ptr;
-}
-
-string convert_arr_to_date(int* &curr_day_and_month, int year) {
+string convert_arr_to_date(stDate date_struct) {
     string date = "";
-    date.append(to_string(*(curr_day_and_month)));
+    date.append(to_string(date_struct.day));
     date.append(1, '-');
-    date.append(to_string(*(curr_day_and_month + 1)));
+    date.append(to_string(date_struct.month));
     date.append(1, '-');
-    date.append(to_string(year));
+    date.append(to_string(date_struct.year));
     date.append(1, '\n');
-    delete[] curr_day_and_month;
     return date;
 }
 
-string days_to_date(int days, int year, int month=1, int day=0) {
-    int d = day;
-    short i;
-    for(i = month; (d + num_of_days_in_month(i, year)) < days; i++)
-        days += (num_of_days_in_month(i, year));
-    
-    int days_of_current_month = num_of_days(i, year);
-    
-    int* curr_day_and_month = decide_day_month(days - d, days_of_current_month, i);
-    
-    return convert_arr_to_date(curr_day_and_month, year);
+string add_days_to_date(int days, stDate date) {
+    int days_to_decrement = days + how_many_days_since(date.day, date.month, date.year);
+    date.month = 1;
+    while (true)
+    {
+        if (days_to_decrement > num_of_days_in_month(date.month, date.year))
+        {
+            days_to_decrement -= num_of_days_in_month(date.month, date.year);
+            ++date.month;
+            if (date.month > 12)
+            {
+                date.month = 1;
+                ++date.year;
+            }
+        } else {
+            date.day = days_to_decrement;
+            break;
+        }
+    }
+    return convert_arr_to_date(date);
 }
-
 
 int main()
 {
-    int year, day, month;
-    read_date(day, month, year);
-    cout << "it's been " << how_many_days_since(day, month, year) << " day(s) since " << day << "-" << month << "-" << year << endl;
-    cout << "back to date " << days_to_date(15, year, month, day);
+    stDate date;
+    read_date(date);
+    cout << "Date after 2500 days is" << add_days_to_date(2500, date) << endl;
     return 0;
 }
