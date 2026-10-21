@@ -378,4 +378,8 @@ namespace my_date
     int period_in_Days(stPeriod &p, bool include_current_day=false) {
         return diff_between_dates_positive(p.from, p.to, include_current_day);
     }
+
+    bool is_date_within_period(stPeriod p, stDate d) {
+        return !((date1_before_date2(p.from, d) && date1_before_date2(p.to, d)) || (date1_after_date2(p.from, d) && date1_after_date2(p.to, d)));
+    }
 } // namespace name
