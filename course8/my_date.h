@@ -449,4 +449,23 @@ namespace my_date
     string date_to_str(stDate date) {
         return to_string(date.day) + "/" + to_string(date.month) + "/" + to_string(date.year);
     }
+
+    string replace_word(string str, string word, string new_word) {
+        int pos = str.find(word);
+        while (pos != string::npos)
+        {
+            str.replace(pos, word.length(), new_word);
+            pos = str.find(word);
+        }
+        
+        return str;    
+    }
+
+    string formatDate(stDate date, string format="dd/mm/yyyy") {
+        string new_date;
+        new_date = replace_word(format, "dd", to_string(date.day));
+        new_date = replace_word(new_date, "mm", to_string(date.month));
+        new_date = replace_word(new_date, "yyyy", to_string(date.year));
+        return new_date;
+    }
 } // namespace name
