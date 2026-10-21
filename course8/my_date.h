@@ -447,6 +447,6 @@ namespace my_date
     }
 
     string date_to_str(stDate date) {
-        return to_string(date.day) + to_string(date.month) + to_string(date.year);
+        return to_string(date.day) + "/" + to_string(date.month) + "/" + to_string(date.year);
     }
 } // namespace name
