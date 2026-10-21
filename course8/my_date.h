@@ -411,4 +411,8 @@ namespace my_date
         }
         return days;
     }
+
+    bool is_valid_date(stDate date) {
+        return (date.month >= 1 && date.month <= 12) && (date.day >= 1 && date.day <= num_of_days_in_month(date.month, date.year));
+    }
 } // namespace name
