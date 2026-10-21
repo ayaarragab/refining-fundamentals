@@ -372,7 +372,7 @@ namespace my_date
     };
 
     bool is_overlap(stPeriod p1, stPeriod p2) {
-        return !((date1_before_date2(p1.from, p2.from) && date1_before_date2(p1.to, p2.to)) || (date1_before_date2(p2.from, p1.from) && date1_before_date2(p2.to, p1.to)));
+        return !(date1_before_date2(p1.to, p2.from) || date1_before_date2(p2.to, p1.from));
     }
     
     int period_in_Days(stPeriod &p, bool include_current_day=false) {
@@ -381,5 +381,34 @@ namespace my_date
 
     bool is_date_within_period(stPeriod p, stDate d) {
         return !((date1_before_date2(p.from, d) && date1_before_date2(p.to, d)) || (date1_after_date2(p.from, d) && date1_after_date2(p.to, d)));
+    }
+
+    int count_overlap_days(stPeriod p1, stPeriod p2) {
+        if (!is_overlap(p1, p2))
+            return 0;
+
+        int p1_len = period_in_Days(p1);
+        int p2_len = period_in_Days(p2);
+        int days = 0;
+
+        if (p1_len < p2_len)
+        {
+            while (date1_before_date2(p1.from, p1.to))
+            {
+               if (is_date_within_period(p2, p1.from))
+                    ++days;
+               increase_date(p1.from);
+            }
+        }
+        if (p2_len < p1_len)
+        {
+            while (date1_before_date2(p2.from, p2.to))
+            {
+               if (is_date_within_period(p1, p2.from))
+                    ++days;
+               increase_date(p2.from);
+            }
+        }
+        return days;
     }
 } // namespace name
