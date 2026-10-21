@@ -207,6 +207,8 @@ bool last_day_in_month(stDate date) {
     return date.day == num_of_days_in_month(date.month, date.year);
 }
 
+void handle_leap_year(stDate &date);
+
 void increase_date(stDate &date) {
     if (last_day_in_year(date))
     {
@@ -221,6 +223,7 @@ void increase_date(stDate &date) {
     }
     else
         ++date.day;
+    handle_leap_year(date);
 }
 
 void print_date(stDate date) {
@@ -261,6 +264,11 @@ int get_diff_between_dates(stDate d1, stDate d2) {
     return diff_between_dates_positive(d1, d2);
 }
 
+void handle_leap_year(stDate &date) {
+    if (!is_leap_year(date.year) && date.month == 2 && date.day == 29)
+        date.day = 28;
+}
+
 void increaseDateByXDays(stDate &date, int days) {
     for (int i = 0; i < days; i++)
         increase_date(date);
@@ -299,21 +307,26 @@ void increaseDateByXYears(stDate &date, int numOfYears) {
 void increaseDateByXYearsFaster(stDate &date, int numOfYears) {
     for (int i = 0; i < numOfYears; i++)
         ++date.year;
+    handle_leap_year(date);
 }
 
 void increaseDateByOneDecade(stDate &date) {
     increaseDateByXYears(date, 10);
+    handle_leap_year(date);
 }
 
 void increaseDateByOneDecadeFaster(stDate &date) {
     increaseDateByXYearsFaster(date, 10);
+    handle_leap_year(date);
 }
 
 void increaseDateByOneCentury(stDate &date) {
     date.year += 100;
+    handle_leap_year(date);
 }
 void increaseDateByOneMillennium(stDate &date) {
     date.year += 1000;
+    handle_leap_year(date);
 }
 
 void callAllFuncs(stDate &date) {
