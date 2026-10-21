@@ -247,7 +247,7 @@ bool is_business_day(stDate date) {
 }
 
 int days_untill_end_of_week(stDate date) {
-    return 7 - DayOfWeekOrder(date);
+    return 6 - DayOfWeekOrder(date);
 }
 
 int days_untill_end_of_month(stDate date) {
