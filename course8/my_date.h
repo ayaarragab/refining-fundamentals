@@ -374,4 +374,15 @@ namespace my_date
     bool is_overlap(stPeriod p1, stPeriod p2) {
         return !((date1_before_date2(p1.from, p2.from) && date1_before_date2(p1.to, p2.to)) || (date1_before_date2(p2.from, p1.from) && date1_before_date2(p2.to, p1.to)));
     }
+    
+    int period_in_Days(stPeriod &p, bool include_current_day=false) {
+        int days = 0;
+        stDate d = p.from;
+        while (compareDates(d, p.to) == -1)
+        {
+            increase_date(d);
+            ++days;
+        }
+        return days + (include_current_day ? 1 : 0);
+    }
 } // namespace name
