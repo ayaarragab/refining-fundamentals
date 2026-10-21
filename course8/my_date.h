@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <ctime>
+#include <vector>
 using namespace std;
 
 namespace my_date
@@ -414,5 +415,38 @@ namespace my_date
 
     bool is_valid_date(stDate date) {
         return (date.month >= 1 && date.month <= 12) && (date.day >= 1 && date.day <= num_of_days_in_month(date.month, date.year));
+    }
+
+    string read_date_string() {
+        string date;
+        cout << "Enter the date:\n";
+        getline(cin >> ws, date);
+        return date;
+    }
+
+    stDate str_to_date(string date) {
+        vector<string> vec;
+        stDate d;
+        short i;
+        for (i = 0; i < date.length(); i++)
+        {
+            if (date[i] == '/')
+            {
+                vec.push_back(date.substr(0, i));
+                date.erase(0, i + 1);
+                i = 0;
+            }
+        }
+    if (date != "") {
+        vec.push_back(date);
+    }        
+    d.day = stoi(vec[0]);
+        d.month = stoi(vec[1]);
+        d.year = stoi(vec[2]);
+        return d;
+    }
+
+    string date_to_str(stDate date) {
+        return to_string(date.day) + to_string(date.month) + to_string(date.year);
     }
 } // namespace name
