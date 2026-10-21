@@ -376,13 +376,6 @@ namespace my_date
     }
     
     int period_in_Days(stPeriod &p, bool include_current_day=false) {
-        int days = 0;
-        stDate d = p.from;
-        while (compareDates(d, p.to) == -1)
-        {
-            increase_date(d);
-            ++days;
-        }
-        return days + (include_current_day ? 1 : 0);
+        return diff_between_dates_positive(p.from, p.to, include_current_day);
     }
 } // namespace name
