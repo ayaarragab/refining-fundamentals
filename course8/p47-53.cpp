@@ -236,13 +236,13 @@ void handle_leap_year(stDate &date) {
 }
 
 bool is_end_of_week(stDate date) {
-    if (DayOfWeekOrder(date) == 7)
+    if (DayOfWeekOrder(date) == 6)
         return true;
     return false;
 }
 
 bool is_weekend(stDate date) {
-    if (DayOfWeekOrder(date) == 7 || DayOfWeekOrder(date) == 6)
+    if (DayOfWeekOrder(date) == 6 || DayOfWeekOrder(date) == 5)
         return true;
     return false;
 }
