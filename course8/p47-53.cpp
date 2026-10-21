@@ -32,14 +32,7 @@ short DayOfWeekOrder(short Day, short Month, short Year)
 
 short DayOfWeekOrder(stDate &date)
 {
-    short a, y, m;
-    a = (14 - date.month) / 12;
-    y = date.year - a;
-    m = date.month + (12 * a) - 2;
-    // Gregorian:
-    //0:sun, 1:Mon, 2:Tue...etc
-    return (date.day + y + (y / 4) - (y / 100) + (y / 400) + ((31 * m)
-    / 12)) % 7;
+    return DayOfWeekOrder(date.day, date.month, date.year);
 }
 
 bool is_leap_year(int year)
