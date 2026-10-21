@@ -299,10 +299,10 @@ int calculate_vacation_days(stDate &d1, stDate &d2) {
   while (date1_before_date2(d1, d2))
   {
     if (is_weekend(d1)) {
-      ++d1.day;
+      increase_date(d1);
       continue;
     }
-    ++d1.day;
+    increase_date(d1);
     ++days;
   }
   return days;
@@ -310,8 +310,8 @@ int calculate_vacation_days(stDate &d1, stDate &d2) {
 
 int main()
 {
-    stDate date1 = { 1, 9, 2022 };
-    stDate date2 = { 5, 9, 2022 };
+    stDate date1 = { 1, 1, 2022 };
+    stDate date2 = { 2, 2, 2022 };
     print_date(date1);
     print_date(date2);
     cout << "Vacation days are: " << calculate_vacation_days(date1, date2) << endl;
