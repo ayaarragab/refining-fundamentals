@@ -143,8 +143,8 @@ namespace user_namspc
     {
       vector<string> substring;
       my_string_funcs::words_to_vec(s, substring, delim);
-      user.username = substring[0].substr(0, substring[0].length() - 1);
-      user.password = substring[1].substr(0, substring[1].length() - 1);
+      user.username = substring[0];
+      user.password = substring[1];
       user.permissions = stoi(substring[2]);
       vec.push_back(user);
     }
@@ -158,6 +158,18 @@ namespace user_namspc
     for (stUser &u : users)
     {
       if (u.username == username)
+        return u;
+    }
+    return { "", "", 0 };
+  }
+
+  stUser find_user(string username, string password) {
+    vector<stUser> users;
+    vector<string> vec = read_users_from_file("users.txt");
+    users = convert_users_to_vecStruct(vec);
+    for (stUser &u : users)
+    {
+      if (u.username == username && u.password == password)
         return u;
     }
     return { "", "", 0 };
@@ -189,6 +201,13 @@ namespace user_namspc
     fstream file;
     open_file(file, "users.txt", 'a');
     file << generate_record(user) + "\n";
+  }
+
+  stUser login() {
+    string username = input_funcs::readString("Enter username:");
+    string password = input_funcs::readString("Enter user password:");
+    stUser user = find_user(username, password);
+    return user;
   }
 
   void print_user(stUser &user) {

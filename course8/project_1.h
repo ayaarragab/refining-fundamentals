@@ -5,6 +5,11 @@
 
 namespace project1
 {
+  struct stSystemSession
+  {
+    user_namspc::stUser user;
+  };
+  
   enum enOptions
   {
     ClientList = 1,
@@ -24,6 +29,58 @@ namespace project1
     Withdraw = 2,
     tMainMenu = 3
   };
+  void start_session(stSystemSession &session);
+  void show_login(stSystemSession &session);
+  void check_permissions(stSystemSession &session, user_namspc::enPermissions requiredPermissions) {
+    bool allowed = user_namspc::check_access(session.user.permissions, requiredPermissions);
+    system("clear");
+    if (!allowed)
+    {
+      cout << "Access Denied" << endl;
+      cout << "You're unauthorized to access this section" << endl;
+      cout << "Only authorized users allowed." << endl;
+      start_session(session);
+    }
+  }
+
+  void start_program(enOptions option, stSystemSession &session);
+  void show_main_menu();
+
+  void start_session(stSystemSession &session) {
+    show_main_menu();
+    enOptions option = (project1::enOptions)input_funcs::readNum("Enter option 1-7, 8 for main menu ,or -1 for ending the program:");
+    while (option != -1)
+    {
+      start_program(option, session);
+      option = (project1::enOptions)input_funcs::readNum("Enter option 1-7, 8 for main menu ,or -1 for ending the program:");
+      show_main_menu();
+  }
+  }
+
+  void login_header() {
+    client_data_funcs::print_dashs();
+    cout << client_data_funcs::tabs_(3) << " Login Screen " << client_data_funcs::tabs_(3) << endl;
+    client_data_funcs::print_dashs();
+  }
+
+  void show_login(stSystemSession &session) {
+    login_header();
+    bool enter_again = true;
+    while (enter_again)
+    {
+      user_namspc::stUser user = user_namspc::login();
+      if (user.username != "")
+      {
+        session.user = user;
+        cout << "You've logged in successfully!\n";
+        system("clear");
+        start_session(session);
+      }
+      cout << "There're no users with this name!\n";
+      enter_again = input_funcs::wants_to_enter();
+    }
+    
+  }
 
   void show_main_menu()
   {
@@ -108,8 +165,9 @@ namespace project1
     }
   }
 
-  void manage_users_start()
+  void manage_users_start(stSystemSession &session)
   {
+    check_permissions(session, user_namspc::ManageUsers);
     show_manage_users_menu();
     user_namspc::enManageUsersOp option = (user_namspc::enManageUsersOp)input_funcs::readNum("Enter option 1-5, 6 for main menu ,or -1 for ending the program:");
     while (option != -1)
@@ -122,13 +180,15 @@ namespace project1
     show_main_menu();
   }
 
-  void show_clients_list()
+  void show_clients_list(stSystemSession &session)
   {
+    check_permissions(session, user_namspc::ClientList);
     client_data_funcs::display_clients();
   }
 
-  void show_add_client()
+  void show_add_client(stSystemSession &session)
   {
+    check_permissions(session, user_namspc::AddClient);
     client_data_funcs::stClientData client;
     client_data_funcs::print_dashs();
     cout << client_data_funcs::tabs_(3) << " Add New Client Screen " << client_data_funcs::tabs_(3) << endl;
@@ -137,8 +197,9 @@ namespace project1
     cout << "Client data entered successfully\n";
   }
 
-  void show_delete_client()
+  void show_delete_client(stSystemSession &session)
   {
+    check_permissions(session, user_namspc::DeleteClient);
     client_data_funcs::stClientData client;
     client_data_funcs::print_dashs();
     cout << client_data_funcs::tabs_(3) << " Delete Client Screen " << client_data_funcs::tabs_(3) << endl;
@@ -148,8 +209,9 @@ namespace project1
     cout << "Client deleted successfully\n";
   }
 
-  void show_update_client()
+  void show_update_client(stSystemSession &session)
   {
+    check_permissions(session, user_namspc::UpdateClient);
     client_data_funcs::stClientData client;
     client_data_funcs::print_dashs();
     cout << client_data_funcs::tabs_(3) << " Update Client Screen " << client_data_funcs::tabs_(3) << endl;
@@ -196,8 +258,9 @@ namespace project1
     }
   }
 
-  void transactions_start()
+  void transactions_start(stSystemSession &session)
   {
+    check_permissions(session, user_namspc::Transactions);
     show_transactions_menu();
     enTranOptions option = (enTranOptions)input_funcs::readNum("Enter option 1-2, 3 for main menu ,or -1 for ending the program:");
     while (option != -1)
@@ -209,37 +272,37 @@ namespace project1
     show_main_menu();
   }
 
-  void start_program(enOptions option)
+  void start_program(enOptions option, stSystemSession &session)
   {
     switch (option)
     {
     case ClientList:
       system("clear");
-      show_clients_list();
+      show_clients_list(session);
       break;
     case AddClient:
       system("clear");
-      show_add_client();
+      show_add_client(session);
       break;
     case DeleteClient:
       system("clear");
-      show_delete_client();
+      show_delete_client(session);
       break;
     case UpdateClient:
       system("clear");
-      show_update_client();
+      show_update_client(session);
       break;
     case FindClient:
       system("clear");
-      show_update_client();
+      show_update_client(session);
       break;
     case Transactions:
       system("clear");
-      transactions_start();
+      transactions_start(session);
       break;
     case ManageUsers:
       system("clear");
-      manage_users_start();
+      manage_users_start(session);
       break;
     case Exit:
       system("clear");
