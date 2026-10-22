@@ -84,4 +84,12 @@ namespace user_namspc
     give_permissions(user);
   }
 
+  bool check_access(int userPermissions, enPermissions requiredPermissions) {
+    if ((enPermissions)userPermissions == All)
+      return true;
+    if ((int)requiredPermissions & userPermissions == (int)requiredPermissions)
+      return true;
+    return false;
+  }
+
 } // namespace user_funcs
