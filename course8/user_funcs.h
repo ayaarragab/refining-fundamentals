@@ -141,9 +141,10 @@ namespace user_namspc
     stUser user;
     for (string &s : users)
     {
+      vector<string> substring;
       my_string_funcs::words_to_vec(s, substring, delim);
-      user.username = substring[0];
-      user.password = substring[1];
+      user.username = substring[0].substr(0, substring[0].length() - 1);
+      user.password = substring[1].substr(0, substring[1].length() - 1);
       user.permissions = stoi(substring[2]);
       vec.push_back(user);
     }

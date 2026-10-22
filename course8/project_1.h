@@ -67,8 +67,11 @@ namespace project1
     while (add_again)
     {
       user_namspc::add_user(user);
+      cout << "Do you want to add another user ? \n";
       add_again = input_funcs::wants_to_enter();
     }
+    system("clear");
+    show_manage_users_menu();
   }
 
   void start_manage_users(user_namspc::enManageUsersOp option) {
