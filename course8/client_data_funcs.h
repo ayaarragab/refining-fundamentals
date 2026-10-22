@@ -1,3 +1,4 @@
+#pragma once
 #include "my_string_funcs.h"
 #include <fstream>
 #include <iomanip>

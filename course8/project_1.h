@@ -1,4 +1,6 @@
+#pragma once
 #include "client_data_funcs.h"
+#include "user_funcs.h"
 #include <cstdlib>
 
 namespace project1
@@ -10,8 +12,9 @@ namespace project1
     UpdateClient=4,
     FindClient=5,
     Transactions=6,
-    Exit=7,
-    MainMenu=8
+    ManageUsers=7,
+    Exit=8,
+    MainMenu=9
   };
 
   enum enTranOptions {
@@ -29,7 +32,8 @@ namespace project1
     cout << "\t\t\t[4] Update Client\t\t\t\n";
     cout << "\t\t\t[5] Find Client\t\t\t\n";
     cout << "\t\t\t[6] Transactions\t\t\t\n";
-    cout << "\t\t\t[7] Exit\t\t\t\n";
+    cout << "\t\t\t[7] Manage Users\t\t\t\n";
+    cout << "\t\t\t[8] Exit\t\t\t\n";
     cout << "==============================================================\n";
   }
 
@@ -42,6 +46,71 @@ namespace project1
     cout << "==============================================================\n";
   }
   
+  void show_manage_users_menu() {
+    cout << "==============================================================\n";
+    cout << "\t\t\tManage Users Menu Screen\t\t\t\n";
+    cout << "\t\t\t[1] List Users\t\t\t\n";
+    cout << "\t\t\t[2] Add Users\t\t\t\n";
+    cout << "\t\t\t[3] Delete Users\t\t\t\n";
+    cout << "\t\t\t[4] Update Users\t\t\t\n";
+    cout << "\t\t\t[5] Find Users\t\t\t\n";
+    cout << "\t\t\t[6] Back to Main Menue\t\t\t\n";
+    cout << "==============================================================\n";
+  }
+
+  void show_add_user() {
+    client_data_funcs::print_dashs();
+    cout << client_data_funcs::tabs_(3) << " Add New User Screen " << client_data_funcs::tabs_(3) << endl;
+    client_data_funcs::print_dashs();
+    user_namspc::stUser user;
+    bool add_again = true;
+    while (add_again)
+    {
+      user_namspc::add_user(user);
+      add_again = input_funcs::wants_to_enter();
+    }
+  }
+
+  void start_manage_users(user_namspc::enManageUsersOp option) {
+    switch (option)
+    {
+    case user_namspc::ListUsers:
+      system("clear");
+      break;
+    case user_namspc::AddUsers:
+      system("clear");
+      show_add_user();
+      break;
+    case user_namspc::DeleteUsers:
+      system("clear");
+      break;
+    case user_namspc::UpdateUsers:
+      system("clear");
+      break;
+    case user_namspc::FindUsers:
+      system("clear");
+      break;
+    case user_namspc::mMainMenu:
+      system("clear");
+      break;
+    default:
+      break;
+    }
+  }
+
+  void manage_users_start() {
+    show_manage_users_menu();
+    user_namspc::enManageUsersOp option = (user_namspc::enManageUsersOp)input_funcs::readNum("Enter option 1-5, 6 for main menu ,or -1 for ending the program:");
+    while (option != -1)
+    {
+      start_manage_users(option);
+      option = (user_namspc::enManageUsersOp)input_funcs::readNum("Enter option 1-5, 6 for main menu ,or -1 for ending the program:");
+      show_manage_users_menu();
+    }
+    system("clear");
+    show_main_menu();
+  }
+
   void show_clients_list() {
     client_data_funcs::display_clients();
   }
@@ -148,6 +217,10 @@ namespace project1
     case Transactions:
       system("clear");
       transactions_start();
+      break;
+    case ManageUsers:
+      system("clear");
+      manage_users_start();
       break;
     case Exit:
       system("clear");

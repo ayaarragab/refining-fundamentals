@@ -1,3 +1,4 @@
+#pragma once
 #include "my_string_funcs.h"
 #include <fstream>
 #include <iomanip>
@@ -19,7 +20,17 @@ namespace user_namspc
     DeleteClient = 4,
     UpdateClient = 8,
     FindClient = 16,
-    Transactions = 32
+    Transactions = 32,
+    ManageUsers = 64
+  };
+
+  enum enManageUsersOp {
+    ListUsers=1,
+    AddUsers=2,
+    FindUsers=3,
+    DeleteUsers=4,
+    UpdateUsers=5,
+    mMainMenu=6
   };
 
   void give_permissions(stUser &user)
@@ -165,7 +176,7 @@ namespace user_namspc
     read_user_data_from_input(user);
     fstream file;
     open_file(file, "users.txt", 'a');
-    file << generate_record(user) << endl;
+    file << "\n" + generate_record(user) + "\n";
   }
 
   void print_user(stUser &user) {

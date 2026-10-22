@@ -1,3 +1,4 @@
+#pragma once
 #include "input_funcs.h"
 #include <cctype>
 #include <vector>
