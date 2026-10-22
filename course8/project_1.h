@@ -5,25 +5,28 @@
 
 namespace project1
 {
-  enum enOptions {
-    ClientList=1,
-    AddClient=2,
-    DeleteClient=3,
-    UpdateClient=4,
-    FindClient=5,
-    Transactions=6,
-    ManageUsers=7,
-    Exit=8,
-    MainMenu=9
+  enum enOptions
+  {
+    ClientList = 1,
+    AddClient = 2,
+    DeleteClient = 3,
+    UpdateClient = 4,
+    FindClient = 5,
+    Transactions = 6,
+    ManageUsers = 7,
+    Exit = 8,
+    MainMenu = 9
   };
 
-  enum enTranOptions {
-    Deposit=1,
-    Withdraw=2,
-    tMainMenu=3
+  enum enTranOptions
+  {
+    Deposit = 1,
+    Withdraw = 2,
+    tMainMenu = 3
   };
 
-  void show_main_menu() {
+  void show_main_menu()
+  {
     cout << "==============================================================\n";
     cout << "\t\t\tMain Menu Screen\t\t\t\n";
     cout << "\t\t\t[1] Show Client List\t\t\t\n";
@@ -37,7 +40,8 @@ namespace project1
     cout << "==============================================================\n";
   }
 
-  void show_transactions_menu() {
+  void show_transactions_menu()
+  {
     cout << "==============================================================\n";
     cout << "\t\t\tTransactions Menu Screen\t\t\t\n";
     cout << "\t\t\t[1] Deposit\t\t\t\n";
@@ -45,8 +49,9 @@ namespace project1
     cout << "\t\t\t[2] Back to Main Menue\t\t\t\n";
     cout << "==============================================================\n";
   }
-  
-  void show_manage_users_menu() {
+
+  void show_manage_users_menu()
+  {
     cout << "==============================================================\n";
     cout << "\t\t\tManage Users Menu Screen\t\t\t\n";
     cout << "\t\t\t[1] List Users\t\t\t\n";
@@ -58,7 +63,8 @@ namespace project1
     cout << "==============================================================\n";
   }
 
-  void show_add_user() {
+  void show_add_user()
+  {
     client_data_funcs::print_dashs();
     cout << client_data_funcs::tabs_(3) << " Add New User Screen " << client_data_funcs::tabs_(3) << endl;
     client_data_funcs::print_dashs();
@@ -74,7 +80,8 @@ namespace project1
     show_manage_users_menu();
   }
 
-  void start_manage_users(user_namspc::enManageUsersOp option) {
+  void start_manage_users(user_namspc::enManageUsersOp option)
+  {
     switch (option)
     {
     case user_namspc::ListUsers:
@@ -101,7 +108,8 @@ namespace project1
     }
   }
 
-  void manage_users_start() {
+  void manage_users_start()
+  {
     show_manage_users_menu();
     user_namspc::enManageUsersOp option = (user_namspc::enManageUsersOp)input_funcs::readNum("Enter option 1-5, 6 for main menu ,or -1 for ending the program:");
     while (option != -1)
@@ -114,11 +122,13 @@ namespace project1
     show_main_menu();
   }
 
-  void show_clients_list() {
+  void show_clients_list()
+  {
     client_data_funcs::display_clients();
   }
-  
-  void show_add_client() {
+
+  void show_add_client()
+  {
     client_data_funcs::stClientData client;
     client_data_funcs::print_dashs();
     cout << client_data_funcs::tabs_(3) << " Add New Client Screen " << client_data_funcs::tabs_(3) << endl;
@@ -127,7 +137,8 @@ namespace project1
     cout << "Client data entered successfully\n";
   }
 
-  void show_delete_client() {
+  void show_delete_client()
+  {
     client_data_funcs::stClientData client;
     client_data_funcs::print_dashs();
     cout << client_data_funcs::tabs_(3) << " Delete Client Screen " << client_data_funcs::tabs_(3) << endl;
@@ -137,7 +148,8 @@ namespace project1
     cout << "Client deleted successfully\n";
   }
 
-  void show_update_client() {
+  void show_update_client()
+  {
     client_data_funcs::stClientData client;
     client_data_funcs::print_dashs();
     cout << client_data_funcs::tabs_(3) << " Update Client Screen " << client_data_funcs::tabs_(3) << endl;
@@ -147,7 +159,8 @@ namespace project1
     cout << "Client updated successfully\n";
   }
 
-  void find_client() {
+  void find_client()
+  {
     client_data_funcs::stClientData client;
     client_data_funcs::print_dashs();
     cout << client_data_funcs::tabs_(3) << " Find Client Screen " << client_data_funcs::tabs_(3) << endl;
@@ -156,13 +169,14 @@ namespace project1
     client_data_funcs::find_with_acc_num(acc_num);
   }
 
-  void exit_() {
+  void exit_()
+  {
     cout << "Exiting ..." << endl;
     exit(0);
   }
 
-
-    void start_transactions(enTranOptions option) {
+  void start_transactions(enTranOptions option)
+  {
     switch (option)
     {
     case Deposit:
@@ -182,7 +196,8 @@ namespace project1
     }
   }
 
-  void transactions_start() {
+  void transactions_start()
+  {
     show_transactions_menu();
     enTranOptions option = (enTranOptions)input_funcs::readNum("Enter option 1-2, 3 for main menu ,or -1 for ending the program:");
     while (option != -1)
@@ -194,7 +209,8 @@ namespace project1
     show_main_menu();
   }
 
-  void start_program(enOptions option) {
+  void start_program(enOptions option)
+  {
     switch (option)
     {
     case ClientList:
