@@ -64,7 +64,7 @@ namespace my_string_funcs
       str.append(delim);
     }
 
-    return str.substr(0, str.length() - 1 - delim.length());
+    return str.substr(0, str.length() - delim.length());
   }
 
   string join(string arr[], short size, string delim)
@@ -76,7 +76,7 @@ namespace my_string_funcs
       str.append(delim);
     }
 
-    return str.substr(0, str.length() - 1);
+    return str.substr(0, str.length() - delim.length());
   }
 
 } // namespace my_string_funcs
