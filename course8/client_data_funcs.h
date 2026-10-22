@@ -134,7 +134,10 @@ namespace client_data_funcs
     {
       string line;
       while (getline(file, line))
-        vec.push_back(record_to_client(line));
+      {
+        if (line != "")
+          vec.push_back(record_to_client(line));
+      }
       file.close();
     }
     return vec;

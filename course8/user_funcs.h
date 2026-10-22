@@ -132,6 +132,7 @@ namespace user_namspc
     vector<string> vec;
     while (getline(file, line))
       vec.push_back(line);
+    file.close();
     return vec;
   }
 
@@ -201,6 +202,7 @@ namespace user_namspc
     fstream file;
     open_file(file, "users.txt", 'a');
     file << generate_record(user) + "\n";
+    file.close();
   }
 
   stUser login() {
