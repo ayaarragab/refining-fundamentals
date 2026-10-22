@@ -32,7 +32,7 @@ namespace project1
   void start_session(stSystemSession &session);
   void show_login(stSystemSession &session);
   bool check_permissions(stSystemSession &session, user_namspc::enPermissions requiredPermissions) {
-      bool allowed = user_namspc::check_access(session.user.permissions, requiredPermissions);
+      bool allowed = user_namspc::check_access((int)session.user.permissions, requiredPermissions);
       if (!allowed)
       {
         system("clear");

@@ -101,7 +101,7 @@ namespace user_namspc
   {
     if ((enPermissions)userPermissions == All)
       return true;
-    if ((int)requiredPermissions & userPermissions == (int)requiredPermissions)
+    if (((int)requiredPermissions & userPermissions) == (int)requiredPermissions)
       return true;
     return false;
   }
