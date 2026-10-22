@@ -176,7 +176,7 @@ namespace user_namspc
     read_user_data_from_input(user);
     fstream file;
     open_file(file, "users.txt", 'a');
-    file << "\n" + generate_record(user) + "\n";
+    file << generate_record(user) + "\n";
   }
 
   void print_user(stUser &user) {
