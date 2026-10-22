@@ -56,13 +56,17 @@ namespace client_data_funcs
   }
 
   stClientData record_to_client(string record)
-  {
-    stClientData client;
-    vector<string> vec;
-    my_string_funcs::words_to_vec(record, vec, "//#");
-    vec_to_client_data(vec, client);
-    return client;
-  }
+    {
+      stClientData client;
+      vector<string> vec;
+      my_string_funcs::words_to_vec(record, vec, "//#");
+      
+      if (vec.size() < 5) 
+        return client;
+        
+      vec_to_client_data(vec, client);
+      return client;
+    }
 
   void print_client_data(stClientData &client)
   {
