@@ -9,8 +9,15 @@ namespace project1
     DeleteClient=3,
     UpdateClient=4,
     FindClient=5,
-    Exit=6,
-    MainMenue=7
+    Transactions=6,
+    Exit=7,
+    MainMenu=8
+  };
+
+  enum enTranOptions {
+    Deposit=1,
+    Withdraw=2,
+    tMainMenu=3
   };
 
   void show_main_menu() {
@@ -18,10 +25,20 @@ namespace project1
     cout << "\t\t\tMain Menu Screen\t\t\t\n";
     cout << "\t\t\t[1] Show Client List\t\t\t\n";
     cout << "\t\t\t[2] Add Client\t\t\t\n";
-    cout << "\t\t\t[2] Delete Client\t\t\t\n";
-    cout << "\t\t\t[3] Update Client\t\t\t\n";
-    cout << "\t\t\t[4] Find Client\t\t\t\n";
-    cout << "\t\t\t[5] Exit\t\t\t\n";
+    cout << "\t\t\t[3] Delete Client\t\t\t\n";
+    cout << "\t\t\t[4] Update Client\t\t\t\n";
+    cout << "\t\t\t[5] Find Client\t\t\t\n";
+    cout << "\t\t\t[6] Transactions\t\t\t\n";
+    cout << "\t\t\t[7] Exit\t\t\t\n";
+    cout << "==============================================================\n";
+  }
+
+  void show_transactions_menu() {
+    cout << "==============================================================\n";
+    cout << "\t\t\tTransactions Menu Screen\t\t\t\n";
+    cout << "\t\t\t[1] Deposit\t\t\t\n";
+    cout << "\t\t\t[2] Withdraw\t\t\t\n";
+    cout << "\t\t\t[2] Back to Main Menue\t\t\t\n";
     cout << "==============================================================\n";
   }
   
@@ -72,6 +89,39 @@ namespace project1
     exit(0);
   }
 
+
+    void start_transactions(enTranOptions option) {
+    switch (option)
+    {
+    case Deposit:
+      system("clear");
+      client_data_funcs::deposit();
+      break;
+    case Withdraw:
+      system("clear");
+      client_data_funcs::withdraw();
+      break;
+    case tMainMenu:
+      system("clear");
+      show_main_menu();
+      break;
+    default:
+      break;
+    }
+  }
+
+  void transactions_start() {
+    show_transactions_menu();
+    enTranOptions option = (enTranOptions)input_funcs::readNum("Enter option 1-2, 3 for main menu ,or -1 for ending the program:");
+    while (option != -1)
+    {
+      start_transactions(option);
+      option = (enTranOptions)input_funcs::readNum("Enter option 1-2, 3 for main menu ,or -1 for ending the program:");
+      show_transactions_menu();
+    }
+    show_main_menu();
+  }
+
   void start_program(enOptions option) {
     switch (option)
     {
@@ -95,16 +145,20 @@ namespace project1
       system("clear");
       show_update_client();
       break;
+    case Transactions:
+      system("clear");
+      transactions_start();
+      break;
     case Exit:
       system("clear");
       exit_();
       break;
-    case MainMenue:
+    case MainMenu:
       system("clear");
       show_main_menu();
       break;
     default:
       break;
-    }
+    };
   }
 } // namespace project1
