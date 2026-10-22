@@ -150,7 +150,10 @@ namespace user_namspc
     return vec;
   }
 
-  stUser find_user(vector<stUser> &users, string username) {
+  stUser find_user(string username) {
+    vector<stUser> users;
+    vector<string> vec = read_users_from_file("users.txt");
+    users = convert_users_to_vecStruct(vec);
     for (stUser &u : users)
     {
       if (u.username == username)
@@ -174,6 +177,14 @@ namespace user_namspc
 
   void add_user(stUser &user) {
     read_user_data_from_input(user);
+    stUser user_found = find_user(user.username);
+    
+    if (user_found.username != "")
+    {
+      cout << "This user already exists!" << endl;
+      return;
+    }
+    
     fstream file;
     open_file(file, "users.txt", 'a');
     file << generate_record(user) + "\n";
