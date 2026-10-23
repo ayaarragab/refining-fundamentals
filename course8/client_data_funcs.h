@@ -213,6 +213,22 @@ namespace client_data_funcs
     return false;
   }
 
+  bool find_with_acc_num(string account_num, stClientData &c)
+  {
+    vector<stClientData> vec = read_clients_file_and_convert_to_struct("clients.txt");
+    vector<stClientData>::iterator iter = vec.begin();
+    while (iter != vec.end())
+    {
+      if (iter->account_number == account_num)
+      {
+        c = *(iter);
+        return true;
+      }
+      ++iter;
+    }
+    return false;
+  }
+
   bool sure_to(bool update = false)
   {
     string delete_or_update = update ? "update" : "delete";
@@ -400,6 +416,17 @@ namespace client_data_funcs
       }
       update_client(client);
     }
+  }
+
+  void get_balance(string acc_num) {
+    stClientData c;
+    bool found = find_with_acc_num(acc_num, c);
+    if (!found)
+    {
+      cout << "No account exists with this number\n";
+      return;
+    }
+    cout << "Your balance is $" << c.balance << endl; 
   }
 
 } // namespace client_data_funcs
