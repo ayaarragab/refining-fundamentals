@@ -31,6 +31,7 @@ namespace project1
   };
   void start_session(stSystemSession &session);
   void show_login(stSystemSession &session);
+  void show_main_menu();
   bool check_permissions(stSystemSession &session, user_namspc::enPermissions requiredPermissions) {
       bool allowed = user_namspc::check_access((int)session.user.permissions, requiredPermissions);
       if (!allowed)
@@ -39,6 +40,8 @@ namespace project1
         cout << "Access Denied" << endl;
         cout << "You're unauthorized to access this section" << endl;
         cout << "Only authorized users allowed." << endl;
+        system("clear");
+        show_main_menu();
         return false;
       }
       return true;
@@ -49,11 +52,11 @@ namespace project1
 
   void start_session(stSystemSession &session) {
     show_main_menu();
-    enOptions option = (project1::enOptions)input_funcs::readNum("Enter option 1-7, 8 for main menu ,or -1 for ending the program:");
+    enOptions option = (project1::enOptions)input_funcs::readNum("Enter option 1-7, 9 for main menu ,or -1 for ending the program:");
     while (option != -1)
     {
       start_program(option, session);
-      option = (project1::enOptions)input_funcs::readNum("Enter option 1-7, 8 for main menu ,or -1 for ending the program:");
+      option = (project1::enOptions)input_funcs::readNum("Enter option 1-7, 9 for main menu ,or -1 for ending the program:");
       show_main_menu();
   }
   }

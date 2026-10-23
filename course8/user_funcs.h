@@ -311,15 +311,18 @@ namespace user_namspc
     return user;
   }
 
-  void print_user(stUser &user) {
-    cout << setw(5) << user.username << setw(5) << user.password << setw(5) << user.permissions << endl;
-  }
 
   void print_users_header() {
     cout << "-------------------------------------------" << endl;
-    cout << setw(5) << "Username" << setw(5) << "Password" << setw(5) << "Permissions" << endl;
+    cout << setw(15) << "Username" << setw(15) << "Password" << setw(15) << "Permissions" << endl;
     cout << "-------------------------------------------" << endl;
   }
+
+  void print_user(stUser &user) {
+    print_users_header();
+    cout << setw(15) << user.username << setw(15) << user.password << setw(15) << user.permissions << endl;
+  }
+
 
   void print_users(vector<stUser> &users) {
     print_users_header();
