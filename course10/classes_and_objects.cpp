@@ -8,19 +8,21 @@ class clsPerson {
     string _last_name;
   
   public:
-    void set_full_name(string first_name, string last_name) {
-        _last_name = last_name;
-        _first_name = first_name;
+    void setFirstName(string firstName) {
+      _first_name = firstName;
     }
-    string get_fullName() {
-        return _first_name + " " + _last_name;
-      }
+    string getFirstName() {
+      return _first_name;
+    }
+    void setLastName(string lastname) {
+      _last_name = lastname;
+    }
+    string getLastName() {
+      return _last_name;
+    }
 };
 
 int main() {
   clsPerson p;
-  p.set_full_name("Aya", "R.");
-  p.get_fullName();
-  cout << p.get_fullName() << endl;
   return 0;
 }
