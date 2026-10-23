@@ -138,6 +138,69 @@ namespace project1
     show_manage_users_menu();
   }
 
+  void update_user_header() {
+    client_data_funcs::print_dashs();
+    cout << client_data_funcs::tabs_(3) << " Update User Screen " << client_data_funcs::tabs_(3) << endl;
+    client_data_funcs::print_dashs();
+  }
+
+  void delete_user_header() {
+    client_data_funcs::print_dashs();
+    cout << client_data_funcs::tabs_(3) << " Delete User Screen " << client_data_funcs::tabs_(3) << endl;
+    client_data_funcs::print_dashs();
+  }
+
+  void find_user_header() {
+    client_data_funcs::print_dashs();
+    cout << client_data_funcs::tabs_(3) << " Find User Screen " << client_data_funcs::tabs_(3) << endl;
+    client_data_funcs::print_dashs();
+  }
+
+  void show_update_user() {
+    update_user_header();
+    bool add_again = true;
+    while (add_again)
+    {
+      string username = input_funcs::readString("Enter username");
+      user_namspc::update_user_in_file(username);
+      cout << "Do you want to update another user ? \n";
+      add_again = input_funcs::wants_to_enter();
+    }
+    system("clear");
+    show_manage_users_menu();
+  }
+
+  void show_delete_user() {
+    delete_user_header();
+    bool add_again = true;
+    while (add_again)
+    {
+      string username = input_funcs::readString("Enter username");
+      user_namspc::delete_user(username, true);
+      cout << "Do you want to delete another user ? \n";
+      add_again = input_funcs::wants_to_enter();
+    }
+    system("clear");
+    show_manage_users_menu();
+  }
+
+  void show_find_user() {
+    find_user_header();
+    bool add_again = true;
+    while (add_again)
+    {
+      string username = input_funcs::readString("Enter username");
+      user_namspc::stUser user = user_namspc::find_user(username);
+      if (user.username != "")
+        user_namspc::print_user(user);
+      
+      cout << "Do you want to find another user ? \n";
+      add_again = input_funcs::wants_to_enter();
+    }
+    system("clear");
+    show_manage_users_menu();
+  }
+
   void start_manage_users(user_namspc::enManageUsersOp option)
   {
     switch (option)
@@ -151,15 +214,19 @@ namespace project1
       break;
     case user_namspc::DeleteUsers:
       system("clear");
+      show_delete_user();
       break;
     case user_namspc::UpdateUsers:
       system("clear");
+      show_update_user();
       break;
     case user_namspc::FindUsers:
       system("clear");
+      show_find_user();
       break;
     case user_namspc::mMainMenu:
       system("clear");
+      show_main_menu();
       break;
     default:
       break;

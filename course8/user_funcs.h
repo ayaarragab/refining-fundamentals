@@ -25,14 +25,15 @@ namespace user_namspc
   };
 
   enum enManageUsersOp {
-    ListUsers=1,
-    AddUsers=2,
-    FindUsers=3,
-    DeleteUsers=4,
-    UpdateUsers=5,
-    mMainMenu=6
+    ListUsers = 1,
+    AddUsers = 2,
+    DeleteUsers = 3,
+    UpdateUsers = 4,
+    FindUsers = 5,
+    mMainMenu = 6
   };
-
+  void print_users(vector<stUser> &users);
+  void print_user(stUser &user);
   void give_permissions(stUser &user)
   {
     bool permisson;
@@ -189,6 +190,29 @@ namespace user_namspc
     return my_string_funcs::join(vec, "//#");
   }
 
+  vector<string> generate_records(vector<stUser> &vec) {
+    vector<string> vec_records;
+    for (stUser &c : vec)
+      vec_records.push_back(generate_record(c));
+    return vec_records;
+  }
+  
+  void save_records_to_file(string filename, vector<string> records, char mode='a') {
+    fstream file;
+    open_file(file, filename, mode);
+    if (file.is_open()) {
+      for (string &s : records)
+        file << s << "\n";
+    }
+    file.close();
+  }
+
+  void write_vector_to_file(vector<stUser> vec) {
+    vector<string> vec_records = generate_records(vec);
+    save_records_to_file("users.txt", vec_records, 'w');
+  }
+
+
   void add_user(stUser &user) {
     read_user_data_from_input(user);
     stUser user_found = find_user(user.username);
@@ -203,6 +227,81 @@ namespace user_namspc
     open_file(file, "users.txt", 'a');
     file << generate_record(user) + "\n";
     file.close();
+  }
+
+
+  vector<stUser> load_users() {
+    vector<string> users_str_vec = read_users_from_file("users.txt");
+    vector<stUser> vec = convert_users_to_vecStruct(users_str_vec);
+    return vec;    
+  }
+  
+  bool sure_to(bool update=false) {
+    string delete_or_update = update ? "update" : "delete";
+    char c = input_funcs::readCharacter("Are you sure you want to " + delete_or_update + " it? (y/n)");
+    return c == 'y' || c == 'Y';
+  }
+
+  bool find_in_vector(string username, vector<stUser> &vec, vector<stUser>::iterator &iter) {
+    iter = vec.begin();
+    while (iter != vec.end())
+    {
+     if (iter->username == username)
+     {
+      print_user(*(iter));
+      return true;
+     }
+     ++iter;
+    }
+    return false;
+  }
+
+  void delete_user(string username, bool display_sure=true) {
+    vector<stUser> vec = load_users();
+    vector<stUser>::iterator iter;
+    bool found = find_in_vector(username, vec, iter);
+    bool sure = true;
+    if (found)
+    {
+      if (display_sure)
+        sure = sure_to();
+      if (sure)
+      {
+        vec.erase(iter);
+        print_users(vec);
+        write_vector_to_file(vec);
+      }
+    }
+  }
+
+  stUser update_user(stUser &u) {
+    string username = input_funcs::readString("Enter username:");
+    string password = input_funcs::readString("Enter password:");  
+    if (username != "")
+      u.username = username;
+    if (password != "")
+      u.password = password;
+    
+    give_permissions(u);
+    return u;
+  }
+
+  void update_user_in_file(string username) {
+    vector<stUser> vec = load_users();
+    vector<stUser>::iterator iter;
+    bool found = find_in_vector(username, vec, iter);
+    bool sure = true;
+    if (found)
+    {
+      sure = sure_to(true);
+      if (sure)
+      {
+        update_user(*(iter));
+        print_users(vec);
+        write_vector_to_file(vec);
+      }
+    } else
+      cout << "No users exists with this username \n";
   }
 
   stUser login() {
