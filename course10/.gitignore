@@ -2,3 +2,5 @@ execute
 .vscode
 clients.txt
 users.txt
+create_file.sh
+run.sh
