@@ -27,6 +27,9 @@ class Calculator {
     void clear() {
       _result = 0;
     }
+    ~Calculator() {
+      cout << "End of calculations\n";
+    }
 };
 
 int main() {
