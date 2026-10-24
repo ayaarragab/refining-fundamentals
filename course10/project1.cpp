@@ -6,6 +6,9 @@ class Calculator {
     int _result = 0;
   
   public:
+    Calculator(int initial_value) {
+      _result = initial_value;
+    }
     void add(int num) {
       _result += num;
     }
@@ -27,7 +30,7 @@ class Calculator {
 };
 
 int main() {
-  Calculator calculator;
+  Calculator calculator(5);
   calculator.add(1);
   calculator.multiply(10);
   calculator.divide(2);
