@@ -3,26 +3,26 @@ using namespace std;
 
 class Calculator {
   private:
-    int result = 0;
+    int _result = 0;
   
   public:
     void add(int num) {
-      result += num;
+      _result += num;
     }
     void subtract(int num) {
-      result -= num;
+      _result -= num;
     }
     void multiply(int num) {
-      result *= num;
+      _result *= num;
     }
     void divide(int num) {
-      result /= num;
+      _result /= num;
     }
-    void printResult() {
-      cout << result << endl;
+    void print_result() {
+      cout << _result << endl;
     }
     void clear() {
-      result = 0;
+      _result = 0;
     }
 };
 
@@ -31,8 +31,8 @@ int main() {
   calculator.add(1);
   calculator.multiply(10);
   calculator.divide(2);
-  calculator.printResult();
+  calculator.print_result();
   calculator.clear();
-  calculator.printResult();
+  calculator.print_result();
   return 0;
 }
