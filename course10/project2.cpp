@@ -18,6 +18,9 @@ class clsPerson {
       _email = email;
       _phone = phone;
     }
+    string getId() {
+      return _id;
+    }
     string getFirstName() {
       return _firstName;
     }
