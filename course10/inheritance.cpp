@@ -135,6 +135,9 @@ class clsProgrammer: public clsEmployee {
       cout << setw(10) <<"Programming Language: " << _programmingLanguage << setw(10) << endl;
       cout << "----------------------------------------------------" << endl;
     }
+    ~clsProgrammer() {
+      cout << "Bye!" << endl;
+    }
 };
 
 
@@ -145,5 +148,8 @@ int main() {
   cout << programmer.getLastName() << endl;
   cout << programmer.getSalary() << endl;
   cout << programmer.getMainProgrammingLanguage() << endl;
+  clsPerson * person = &programmer;
+  cout << person->getFirstName() << endl;
+  cout << "We can only make up casting from subclass to super class" << endl;
   return  0;
 }
