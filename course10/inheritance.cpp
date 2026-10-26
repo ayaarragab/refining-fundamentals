@@ -96,7 +96,7 @@ class clsEmployee: public clsPerson {
     string getTitle() {
       return _title;
     }
-    void print() {
+    virtual void print() {
       cout << "----------------------------------------------------" << endl;
       cout <<  setw(10) << "First Name: " << getFirstName() << setw(10) << endl;
       cout << setw(10) << "Last Name: " << getLastName() << setw(10) << endl;
@@ -123,7 +123,7 @@ class clsProgrammer: public clsEmployee {
     string getMainProgrammingLanguage() {
       return _programmingLanguage;
     }
-    void print() {
+    virtual void print() {
       cout << "----------------------------------------------------" << endl;
       cout <<  setw(10) << "First Name: " << getFirstName() << setw(10) << endl;
       cout << setw(10) << "Last Name: " << getLastName() << setw(10) << endl;
