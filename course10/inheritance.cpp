@@ -11,8 +11,6 @@ class clsPerson {
     string _fullName;
   
   public:
-    clsPerson() {}
-
     clsPerson(string id, string firstName, string lastName, string email, string phone) {
       _id = id;
       _firstName = firstName;
@@ -67,13 +65,18 @@ class clsPerson {
 
 class clsEmployee: public clsPerson {
   private:
-    string _salary;
+    int _salary;
     string _title;
   public:
-    void setSalary(string salary) {
+    clsEmployee(string id, string firstName, string lastName, string email, string phone, string title, int salary) : clsPerson (id, firstName, lastName, email, phone){
+      _title = title;
       _salary = salary;
     }
-    string getSalary() {
+
+    void setSalary(int salary) {
+      _salary = salary;
+    }
+    int getSalary() {
       return _salary;
     }
     void setTitle(string title) {
@@ -85,12 +88,10 @@ class clsEmployee: public clsPerson {
 };
 
 int main() {
-  clsEmployee employee;
+  clsEmployee employee("A1223", "Aya", "R.", "A@A.COM", "010232242", "Software Engineer", 1000000);
   
-  employee.setFirstName("Aya");
-  employee.setLastName("R.");
-  employee.setTitle("Software Engineer");
   cout << employee.getFirstName() << endl;
   cout << employee.getLastName() << endl;
+  cout << employee.getSalary() << endl;
   return  0;
 }
