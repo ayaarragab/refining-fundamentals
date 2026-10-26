@@ -148,8 +148,9 @@ int main() {
   cout << programmer.getLastName() << endl;
   cout << programmer.getSalary() << endl;
   cout << programmer.getMainProgrammingLanguage() << endl;
+  programmer.print(); // static/early binding 
   clsPerson * person = &programmer;
-  cout << person->getFirstName() << endl;
+  cout << person->getFirstName() << endl; // Dynamic/late binding
   cout << "We can only make up casting from subclass to super class" << endl;
   return  0;
 }
