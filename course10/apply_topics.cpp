@@ -2,7 +2,34 @@
 #include <iomanip>
 using namespace std;
 
-class clsPerson {
+class human {
+  public:
+    virtual string getId() = 0;
+    
+    virtual string getFirstName() = 0 ;
+    
+    virtual void setFirstName(string firstName) = 0;
+  
+    virtual string getLastName() = 0;
+
+    virtual void setLastName(string lastname) = 0 ;
+
+    virtual string getEmail() = 0;
+
+    virtual void setEmail(string email) = 0;
+
+    virtual string getPhone() = 0 ;
+
+    virtual void setPhone(string phone) = 0;
+
+    virtual void sendEmail(string subject, string body) = 0;
+
+    virtual void sendSMS(string body) = 0;
+  
+    virtual void print() = 0;
+};
+
+class clsPerson: public human {
   private:
     string _id;
     string _firstName;
