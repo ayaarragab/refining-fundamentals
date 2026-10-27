@@ -82,6 +82,18 @@ class clsString
       return new_str.substr(0, new_str.length() - 1);
     }
 
+    static string replace_word(string str, string word, string new_word)
+    {
+      int pos = str.find(word);
+      while (pos != string::npos)
+      {
+        str.replace(pos, word.length(), new_word);
+        pos = str.find(word);
+      }
+
+      return str;
+    }
+
     string replace_word(string word, string new_word) {
       return replace_word(this->_str, this->_delim, word, new_word);
     }
