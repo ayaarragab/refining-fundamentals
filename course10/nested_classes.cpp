@@ -12,20 +12,23 @@ class clsPerson
     string City;
     string Country;
     
-    clsAddress(string AddressLine1_, string AddressLine2_, string City_, string Country_) {
-      AddressLine1 = AddressLine1_;
-      AddressLine2 = AddressLine2_;
-      City = City_;
-      Country = Country_;
+    clsAddress(string AddressLine1, string AddressLine2, string City, string Country) {
+      this->AddressLine1 = AddressLine1;
+      this->AddressLine2 = AddressLine2;
+      this->City = City;
+      this->Country = Country;
     }
 
-    void Print()
+    static void Print(clsAddress addr)
     {
       cout << "\nAddress:\n";
-      cout << AddressLine1 << endl;
-      cout << AddressLine2 << endl;
-      cout << City << endl;
-      cout << Country << endl;
+      cout << addr.AddressLine1 << endl;
+      cout << addr.AddressLine2 << endl;
+      cout << addr.City << endl;
+      cout << addr.Country << endl;
+    }
+    void callPrintAddress() {
+      Print(*this);
     }
   };
 
@@ -34,7 +37,7 @@ public:
   clsAddress Address = clsAddress("", "", "", "");
   clsPerson()
   {
-    Address = clsAddress(" 10", "Queen Rania Street", "Amman", "Jordan");
+    this->Address = clsAddress(" 10", "Queen Rania Street", "Amman", "Jordan");
     FullName = "Mohammed Abu-Hadhoud";
   }
 };
@@ -42,7 +45,6 @@ public:
 int main()
 {
   clsPerson Person1;
-  Person1.Address.Print();
-  system("pause>0");
+  Person1.Address.callPrintAddress();
   return 0;
 }
