@@ -1,10 +1,10 @@
-#include "csString.h"
+#include "clsString.h"
 
 
 int main() {
-  csString str = csString("Aya Ragab");
+  clsString str = clsString("Aya Ragab");
   cout << str.replace_word("Ragab", "R.") << endl;
-  cout << csString::replace_word("Aya Ragab", " ", "Ragab", "R.") << endl;
+  cout << clsString::replace_word("Aya Ragab", " ", "Ragab", "R.") << endl;
 
   return 0;
 }

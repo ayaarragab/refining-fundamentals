@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 
-class csString
+class clsString
 {
   private:
     string _str;
@@ -11,13 +11,13 @@ class csString
     string _delim;
 
   public:
-    csString(string str, string delim = " ") {
+    clsString(string str, string delim = " ") {
       this->_str = str;
-      csString::words_to_vec(this->_str, this->_str_vec, delim);
+      clsString::words_to_vec(this->_str, this->_str_vec, delim);
       this->_delim = delim;
     };
 
-    csString() {};
+    clsString() {};
 
     static string remove_punct(string &s)
     {
