@@ -240,5 +240,8 @@ public:
 
     }
 
+    static void DisplayError(string message) {
+        cout << "Error: " << message << endl;
+    }
 };
 
