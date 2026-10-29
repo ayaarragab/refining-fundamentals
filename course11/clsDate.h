@@ -89,25 +89,20 @@ private:
 
   static clsDate _get_system_date()
   {
-    clsDate now;
-    time_t t = time(0);
-    tm *l_t = localtime(&t);
-    now._day = l_t->tm_mday;
-    now._month = l_t->tm_mon + 1;
-    now._year = l_t->tm_year + 1900;
+      time_t t = time(0);
+      tm* l_t = localtime(&t);
 
-    return now;
-  }
-
-  void _set_to_system_date()
-  {
-    *(this) = _get_system_date();
+      return clsDate(
+          l_t->tm_mday,
+          l_t->tm_mon + 1,
+          l_t->tm_year + 1900
+      );
   }
 
 public:
   clsDate()
   {
-    _set_to_system_date();
+    *(this) = _get_system_date();
   };
   
   clsDate(int day, int month, int year)

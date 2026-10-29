@@ -82,7 +82,7 @@ class clsInputValidate
       return number;
     }
 
-    static double ReadFloatNumber(string whenError) {
+    static float ReadFloatNumber(string whenError) {
       float number;
       cout << "Enter a double Number" << endl;
       cin >> number;
@@ -101,11 +101,11 @@ class clsInputValidate
       return loop_untill_getting_val(from, to, whenError);
     }
 
-    static int ReadFloatNumberBetween(float from, float to, string whenError) {
+    static float ReadFloatNumberBetween(float from, float to, string whenError) {
       return loop_untill_getting_val(from, to, whenError);
     }
 
-    static int ReadDoubleNumberBetween(double from, double to, string whenError) {
+    static double ReadDoubleNumberBetween(double from, double to, string whenError) {
       return loop_untill_getting_val(from, to, whenError);
     }
 
