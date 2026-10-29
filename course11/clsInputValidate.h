@@ -67,7 +67,7 @@ class clsInputValidate
       return clsInput::readNum("Enter an integer number", whenError);
     }
 
-    static double ReadDoubleNumber(string whenError) {
+    static double ReadDblNumber(string whenError) {
       double number;
       cout << "Enter a double Number" << endl;
       cin >> number;
@@ -105,7 +105,7 @@ class clsInputValidate
       return loop_untill_getting_val(from, to, whenError);
     }
 
-    static double ReadDoubleNumberBetween(double from, double to, string whenError) {
+    static double ReadDblNumberBetween(double from, double to, string whenError) {
       return loop_untill_getting_val(from, to, whenError);
     }
 

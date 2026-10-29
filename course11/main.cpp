@@ -21,10 +21,10 @@ int main()
     int y = clsInputValidate::ReadIntNumberBetween(1,5,"Number is not within range, enter again:\n");
     cout << "y=" << y;
 
-    double a = clsInputValidate::ReadDoubleNumber("Invalid Number, Enter again:\n");
+    double a = clsInputValidate::ReadDblNumber("Invalid Number, Enter again:\n");
     cout << "a=" << a;
 
-    double b = clsInputValidate::ReadDoubleNumberBetween(1, 5, "Number is not within range, enter again:\n");
+    double b = clsInputValidate::ReadDblNumberBetween(1, 5, "Number is not within range, enter again:\n");
     cout << "b=" << b;
 
     cout << endl << clsInputValidate::IsValideDate(clsDate(35,12,2022)) << endl;
