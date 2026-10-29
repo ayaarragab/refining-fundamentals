@@ -145,5 +145,9 @@ class clsBankClient : public clsPerson
     }
     return _GetEmptyObject();
   }
+
+  static bool IsClientExist(string AccountNumber) {
+    return (!Find(AccountNumber).IsEmpty());
+  } 
 };
 
