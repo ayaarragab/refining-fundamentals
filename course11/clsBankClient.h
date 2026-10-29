@@ -129,11 +129,10 @@ class clsBankClient : public clsPerson
     }
 
   static clsBankClient Find(string AccountNumber) {
-    vector<clsBankClient> clients;
     vector<string> vec = _ReadClientsFromFile("clients.txt");
-    clients = _StrVecToObjVec(vec);
-    for (clsBankClient &c : clients)
+    for (string &s : vec)
     {
+      clsBankClient c = _RecordToObject(s);
       if (c.GetAccountNumber() == AccountNumber)
         return c;
     }
@@ -141,12 +140,11 @@ class clsBankClient : public clsPerson
   }
 
   static clsBankClient Find(string AccountNumber, string PinCode) {
-    vector<clsBankClient> clients;
     vector<string> vec = _ReadClientsFromFile("clients.txt");
-    clients = _StrVecToObjVec(vec);
-    for (clsBankClient &c : clients)
+    for (string &s : vec)
     {
-      if ((c.GetAccountNumber() == AccountNumber) && (c.getPinCode() == PinCode))
+      clsBankClient c = _RecordToObject(s);
+      if (c.GetAccountNumber() == AccountNumber && c.getPinCode() == PinCode)
         return c;
     }
     return _GetEmptyObject();
