@@ -128,9 +128,9 @@ class clsBankClient : public clsPerson
       cout << "Account Pin Code: " << _PinCode << endl;
     }
 
-  clsBankClient Find(string AccountNumber) {
+  static clsBankClient Find(string AccountNumber) {
     vector<clsBankClient> clients;
-    vector<string> vec = _ReadClientsFromFile("users.txt");
+    vector<string> vec = _ReadClientsFromFile("clients.txt");
     clients = _StrVecToObjVec(vec);
     for (clsBankClient &c : clients)
     {
@@ -140,9 +140,9 @@ class clsBankClient : public clsPerson
     return _GetEmptyObject();
   }
 
-  clsBankClient Find(string AccountNumber, string PinCode) {
+  static clsBankClient Find(string AccountNumber, string PinCode) {
     vector<clsBankClient> clients;
-    vector<string> vec = _ReadClientsFromFile("users.txt");
+    vector<string> vec = _ReadClientsFromFile("clients.txt");
     clients = _StrVecToObjVec(vec);
     for (clsBankClient &c : clients)
     {
