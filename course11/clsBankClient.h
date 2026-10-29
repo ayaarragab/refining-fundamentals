@@ -114,10 +114,6 @@ class clsBankClient : public clsPerson
       _AccountBalance = AccountBalance;
     }
 
-    void setAccountNumber(string AccountNumber) {
-      _AccountNumber = AccountNumber;
-    }
-
     void Print()
     {
       cout << "Account Name: " << this->GetFirstName() + " " + this->GetLastName() << endl;
