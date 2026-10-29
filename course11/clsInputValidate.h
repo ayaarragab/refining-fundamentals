@@ -56,26 +56,60 @@ class clsInputValidate
       return (num >= from && num <= to);
     }
 
-    static bool IsDateBetween(clsDate date, clsDate &from, clsDate &to) {
+    static bool IsDateBetween(clsDate date, clsDate from, clsDate to) {
       if (from.date1_after_date2(to))
         clsDate::swapDates(from, to); 
       
       return ((date.date1_after_date2(from) || date.date1_equal_date2(from)) && (date.date1_before_date2(to) || date.date1_equal_date2(to)));
     }
 
-    static int ReadIntNumber(int from, int to, string whenError) {
+    static int ReadIntNumber(string whenError) {
+      return clsInput::readNum("Enter an integer number", whenError);
+    }
+
+    static double ReadDoubleNumber(string whenError) {
+      double number;
+      cout << "Enter a double Number" << endl;
+      cin >> number;
+      while (cin.fail())
+      {
+       cout << whenError << endl;
+       cin.clear();
+       cin.ignore(numeric_limits<streamsize>::max(), '\n');
+       cout << "Enter a double Number" << endl;
+       cin >> number;
+      }
+      return number;
+    }
+
+    static double ReadFloatNumber(string whenError) {
+      float number;
+      cout << "Enter a double Number" << endl;
+      cin >> number;
+      while (cin.fail())
+      {
+       cout << whenError << endl;
+       cin.clear();
+       cin.ignore(numeric_limits<streamsize>::max(), '\n');
+       cout << "Enter a double Number" << endl;
+       cin >> number;
+      }
+      return number;
+    }
+
+    static int ReadIntNumberBetween(int from, int to, string whenError) {
       return loop_untill_getting_val(from, to, whenError);
     }
 
-    static int ReadFloatNumber(float from, float to, string whenError) {
+    static int ReadFloatNumberBetween(float from, float to, string whenError) {
       return loop_untill_getting_val(from, to, whenError);
     }
 
-    static int ReadDoubleNumber(double from, double to, string whenError) {
+    static int ReadDoubleNumberBetween(double from, double to, string whenError) {
       return loop_untill_getting_val(from, to, whenError);
     }
 
-    static bool isValidDate(clsDate date) {
+    static bool IsValideDate(clsDate date) {
       return date.is_valid_date();
     }
 };

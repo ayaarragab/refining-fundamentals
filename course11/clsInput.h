@@ -23,6 +23,21 @@ class clsInput {
       
       return num;
     }
+    static int readNum(string message, string whenError) {
+      print_input_message(message);
+      int num;
+      cin >> num;
+      while (cin.fail())
+      {
+        cout << whenError << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        print_input_message(message);
+        cin >> num;
+      }
+      
+      return num;
+    }
     static bool wants_to_enter() {
       char c;
       cout << "Enter y\\n\n";
