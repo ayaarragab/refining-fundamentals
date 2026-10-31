@@ -71,7 +71,7 @@ class clsInput {
       return str;
     }
 
-    static string readStringOtional(string message, string fieldName) {
+    static string readStringOptional(string message, string fieldName) {
       bool wantsToEnter = wants_to_enter("Do you want to change \"" + fieldName + "\" ?");
       if (wantsToEnter)
       {

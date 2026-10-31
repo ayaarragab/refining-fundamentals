@@ -4,11 +4,11 @@
 using namespace std;
 
 void UpdateClientInfo(clsBankClient &client) {
-  string FirstName = clsInput::readStringOtional("Enter client First Name", "First Name");
-  string LastName = clsInput::readStringOtional("Enter client Last Name", "Last Name");
-  string Email = clsInput::readStringOtional("Enter client Email", "Enter client Email");
-  string Phone = clsInput::readStringOtional("Enter client Phone", "Phone");
-  string PinCode = clsInput::readStringOtional("Enter the Pin Code", "Pin Code");
+  string FirstName = clsInput::readStringOptional("Enter client First Name", "First Name");
+  string LastName = clsInput::readStringOptional("Enter client Last Name", "Last Name");
+  string Email = clsInput::readStringOptional("Enter client Email", "Enter client Email");
+  string Phone = clsInput::readStringOptional("Enter client Phone", "Phone");
+  string PinCode = clsInput::readStringOptional("Enter the Pin Code", "Pin Code");
   if (FirstName.length() != 0)
     client.SetFirstName(FirstName);
   if (LastName.length() != 0)
