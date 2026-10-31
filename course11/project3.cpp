@@ -1,9 +1,44 @@
 #include "clsBankClient.h"
 #include "clsInput.h"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
-void UpdateClientInfo(clsBankClient &client) {
+void print_dashs()
+{
+  cout << "-------------------------------------------------------------------------\n";
+}
+
+string tabs_(int num)
+{
+  string t = "";
+  for (short i = 0; i < num; i++)
+    t.append("\t");
+  return t;
+}
+
+void print_header(short vec_length)
+{
+    cout << tabs_(3) << "  Client List (" << vec_length << ") Client(s).\n";
+    print_dashs();
+    
+    cout << "| " << left << setw(15) << "Account Number"
+         << "| " << left << setw(10) << "Pin Code"
+         << "| " << left << setw(20) << "Client Name"
+         << "| " << left << setw(14) << "Phone"
+         << "| " << left << setw(12) << "Balance"
+         << "\n";
+         
+    print_dashs();
+}
+
+void print_footer()
+{
+  print_dashs();
+}
+
+void UpdateClientInfo(clsBankClient &client)
+{
   string FirstName = clsInput::readStringOptional("Enter client First Name", "First Name");
   string LastName = clsInput::readStringOptional("Enter client Last Name", "Last Name");
   string Email = clsInput::readStringOptional("Enter client Email", "Enter client Email");
@@ -21,8 +56,8 @@ void UpdateClientInfo(clsBankClient &client) {
     client.setPinCode(PinCode);
 }
 
-
-void ReadClientInfo(clsBankClient &client) {
+void ReadClientInfo(clsBankClient &client)
+{
   string FirstName = clsInput::readString("Enter client First Name");
   string LastName = clsInput::readString("Enter client Last Name");
   string Email = clsInput::readString("Enter client Email");
@@ -43,17 +78,19 @@ void ReadClientInfo(clsBankClient &client) {
     client.setAccountBalance(stof(Balance));
 }
 
-void UpdateClient() {
+void UpdateClient()
+{
   string AccountNumber = clsInput::readString("Enter account Number");
-  
+
   clsBankClient client = clsBankClient::Find(AccountNumber);
-  
-  while (client.IsEmpty()) {
+
+  while (client.IsEmpty())
+  {
     cout << "No Client Exists with this Account Number" << endl;
     AccountNumber = clsInput::readString("Enter account Number");
     client = clsBankClient::Find(AccountNumber);
   }
-  
+
   UpdateClientInfo(client);
 
   clsBankClient::enSaveResults result = client.Save();
@@ -72,23 +109,25 @@ void UpdateClient() {
   }
 }
 
-void AddClient() {
+void AddClient()
+{
   string AccountNumber = clsInput::readString("Enter account Number");
-  
+
   clsBankClient client = clsBankClient::Find(AccountNumber);
-  
-  while (!client.IsEmpty()) {
+
+  while (!client.IsEmpty())
+  {
     cout << "This account number already in use" << endl;
     AccountNumber = clsInput::readString("Enter account Number");
     client = clsBankClient::Find(AccountNumber);
   }
-  
+
   client = clsBankClient::getAddNewClient(AccountNumber);
 
   ReadClientInfo(client);
 
   clsBankClient::enSaveResults result = client.Save();
-  
+
   switch (result)
   {
   case clsBankClient::enSaveResults::svSuceeded:
@@ -104,17 +143,19 @@ void AddClient() {
   }
 }
 
-void DeleteClient() {
+void DeleteClient()
+{
   string AccountNumber = clsInput::readString("Enter account Number");
-  
+
   clsBankClient client = clsBankClient::Find(AccountNumber);
-  
-  while (client.IsEmpty()) {
+
+  while (client.IsEmpty())
+  {
     cout << "No Client Exists with this Account Number" << endl;
     AccountNumber = clsInput::readString("Enter account Number");
     client = clsBankClient::Find(AccountNumber);
   }
-  
+
   bool deleted = client.Delete();
 
   if (deleted)
@@ -123,9 +164,27 @@ void DeleteClient() {
     cout << "No Client is deleted" << endl;
 }
 
-int main() {
+void ListClients()
+{
+    vector<clsBankClient> clients = clsBankClient::ClientList();
+    print_header(clients.size());
 
-  DeleteClient();
+    for (clsBankClient &c : clients)
+    {
+        cout << "| " << left << setw(15) << c.GetAccountNumber()
+             << "| " << left << setw(10) << c.GetPinCode()
+             << "| " << left << setw(20) << (c.GetFirstName() + " " + c.GetLastName())
+             << "| " << left << setw(14) << c.GetPhone()
+             << "| " << left << setw(12) << c.getAccountBalance()
+             << endl;
+    }
+    
+    print_dashs();
+}
+int main()
+{
+
+  ListClients();
 
   return 0;
 }

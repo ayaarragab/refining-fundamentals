@@ -29,7 +29,7 @@ private:
         client.GetEmail(),
         client.GetPhone(),
         client.GetAccountNumber(),
-        client.getPinCode(),
+        client.GetPinCode(),
         to_string(client.getAccountBalance())
     };
   }
@@ -193,7 +193,7 @@ public:
     return _AccountNumber;
   }
 
-  string getPinCode()
+  string GetPinCode()
   {
     return _PinCode;
   }
@@ -241,7 +241,7 @@ public:
     for (string &s : vec)
     {
       clsBankClient c = _RecordToObject(s);
-      if (c.GetAccountNumber() == AccountNumber && c.getPinCode() == PinCode)
+      if (c.GetAccountNumber() == AccountNumber && c.GetPinCode() == PinCode)
         return c;
     }
     return _GetEmptyObject();
@@ -263,6 +263,10 @@ public:
       result = _Delete();
     return result;
   } 
+
+  static vector<clsBankClient> ClientList() {
+    return _StrVecToObjVec(_ReadClientsFromFile("clients.txt"));
+  }
 
   enSaveResults Save() {
     switch (_Mode)
