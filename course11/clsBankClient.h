@@ -218,6 +218,10 @@ public:
     return (!Find(AccountNumber).IsEmpty());
   }
 
+  static clsBankClient getAddNewClient(string AccountNumber) {
+    return clsBankClient(enMode::AddNew, "", "", "", "", AccountNumber, "", 0);
+  }
+
   enSaveResults Save() {
     switch (_Mode)
     {
