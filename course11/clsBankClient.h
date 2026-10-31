@@ -4,6 +4,7 @@
 #include "clsPerson.h"
 #include "clsString.h"
 #include "clsHelper.h"
+#include "clsInput.h"
 
 class clsBankClient : public clsPerson
 {
@@ -17,6 +18,7 @@ private:
   enMode _Mode;
   string _AccountNumber;
   string _PinCode;
+  bool _MarkForDelete;
   float _AccountBalance;
 
   static vector<string> _ObjectToVector(clsBankClient &client)
@@ -38,7 +40,7 @@ private:
     return clsString::join(vec, "//#");
   }
 
-  static vector<string> _GenerateRecords(vector<clsBankClient> &vec)
+  static vector<string> _GenerateRecords(vector<clsBankClient> vec)
   {
     vector<string> vec_records;
     for (clsBankClient &c : vec)
@@ -89,12 +91,24 @@ private:
     file.close();
   }
 
+
+  static vector<clsBankClient> _FilterMarkedForDelete(vector<clsBankClient> clients) {
+    vector<clsBankClient> filtered;
+    for (clsBankClient &c : clients)
+    {
+      if (c.MarkForDelete())
+        continue;
+      filtered.push_back(c);
+    }
+    return filtered;
+  }
+
   static void _WriteClientsToFile(vector<clsBankClient> clients) {
-    vector<string> str_vec = _GenerateRecords(clients);
+    vector<string> str_vec = _GenerateRecords(_FilterMarkedForDelete(clients));
     _SaveRecordsToFile("clients.txt", str_vec, 'w');
   }
 
-  static vector<clsBankClient> _StrVecToObjVec(vector<string> &users, string delim = "//#")
+  static vector<clsBankClient> _StrVecToObjVec(vector<string> users, string delim = "//#")
   {
     vector<clsBankClient> vec;
     vector<string> substring;
@@ -127,6 +141,21 @@ private:
     return found;
   }
 
+  bool _Delete() {
+    vector<clsBankClient> clients = _StrVecToObjVec(_ReadClientsFromFile("clients.txt"));
+    bool found = false;
+    for (clsBankClient &c : clients)
+    {
+      if (c.GetAccountNumber() == this->GetAccountNumber())
+      {
+        c._MarkForDelete = true;
+        found = true;
+      }
+    }
+    _WriteClientsToFile(clients);
+    return found;
+  }
+
   void _AddRecordToFile(string record, string filename) {
     fstream file;
     clsHelper::open_file(file, filename, 'a');
@@ -147,11 +176,16 @@ public:
     _AccountNumber = AccountNumber;
     _PinCode = PinCode;
     _AccountBalance = AccountBalance;
+    _MarkForDelete = false;
   };
 
   bool IsEmpty()
   {
     return (_Mode == enMode::EmptyMode);
+  }
+
+  bool MarkForDelete() {
+    return _MarkForDelete;
   }
 
   string GetAccountNumber()
@@ -222,6 +256,14 @@ public:
     return clsBankClient(enMode::AddNew, "", "", "", "", AccountNumber, "", 0);
   }
 
+  bool Delete() {
+    bool wantToDelete = clsInput::wants_to_enter("Do you really want to delete the string ?");
+    bool result = false;
+    if(wantToDelete)
+      result = _Delete();
+    return result;
+  } 
+
   enSaveResults Save() {
     switch (_Mode)
     {
@@ -247,5 +289,4 @@ public:
         break;
     }
   }
-
 };
