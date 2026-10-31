@@ -255,6 +255,7 @@ namespace user_namspc
     }
     return false;
   }
+  
 
   void delete_user(string username, bool display_sure=true) {
     vector<stUser> vec = load_users();

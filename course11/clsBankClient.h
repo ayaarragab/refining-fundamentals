@@ -34,7 +34,7 @@ private:
     return clsString::join(vec, "//#");
   }
 
-  vector<string> _GenerateRecords(vector<clsBankClient> &vec)
+  static vector<string> _GenerateRecords(vector<clsBankClient> &vec)
   {
     vector<string> vec_records;
     for (clsBankClient &c : vec)
@@ -75,6 +75,21 @@ private:
     return vec;
   }
 
+  static void _SaveRecordsToFile(string filename, vector<string> records, char mode='a') {
+    fstream file;
+    clsHelper::open_file(file, filename, mode);
+    if (file.is_open()) {
+      for (string &s : records)
+        file << s << "\n";
+    }
+    file.close();
+  }
+
+  static void _WriteClientsToFile(vector<clsBankClient> clients) {
+    vector<string> str_vec = _GenerateRecords(clients);
+    _SaveRecordsToFile("clients.txt", str_vec);
+  }
+
   static vector<clsBankClient> _StrVecToObjVec(vector<string> &users, string delim = "//#")
   {
     vector<clsBankClient> vec;
@@ -88,7 +103,28 @@ private:
     return vec;
   }
 
+  bool _Update() {
+    vector<string> clients_str = _ReadClientsFromFile("clients.txt");
+    bool found = false;
+    for (string &s : clients_str)
+    {
+      clsBankClient client_before_update = _RecordToObject(s);
+      if (client_before_update.GetAccountNumber() == this->GetAccountNumber())
+      {
+        s = _GenerateRecord(*this);
+        found = true;
+        break;
+      }
+    }
+    if (found)
+      _WriteClientsToFile(_StrVecToObjVec(clients_str));
+    
+    return found;
+  }
+
 public:
+  enum enSaveResults { svFailedEmptyObject = 0, svSuceeded = 1 };
+
   clsBankClient(enMode Mode, string FirstName, string LastName, string Email, string Phone, string AccountNumber, string PinCode, float AccountBalance) : clsPerson(FirstName, LastName, Email, Phone)
   {
     _Mode = Mode;
@@ -165,4 +201,20 @@ public:
   {
     return (!Find(AccountNumber).IsEmpty());
   }
+
+  enSaveResults Save() {
+    switch (_Mode)
+    {
+      case enMode::EmptyMode:
+        return enSaveResults::svFailedEmptyObject;
+
+        case enMode::UpdateMode:
+        bool result = _Update();
+        return result ? enSaveResults::svSuceeded : enSaveResults::svFailedEmptyObject;
+
+        default:
+        break;
+    }
+  }
+
 };

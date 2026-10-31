@@ -125,4 +125,9 @@ class clsString
 
       return str.substr(0, str.length() - delim.length());
     }
+    vector<string> Split(string delim) {
+      vector<string> vec;
+      words_to_vec(this->_str, vec, delim);
+      return vec;
+    }
 };
