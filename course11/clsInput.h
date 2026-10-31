@@ -50,12 +50,40 @@ class clsInput {
       }
       return ((c == 'y') || (c == 'Y'));
   }
+
+    static bool wants_to_enter(string message) {
+      char c;
+      cout << message << " -> Enter y\\n\n";
+      cin >> c;
+      while (cin.fail())
+      {
+        cin.clear();
+        cout << "Please enter a valid character!\n";
+        cin >> c;
+      }
+      return ((c == 'y') || (c == 'Y'));
+    }
+
     static string readString(string message) {
       print_input_message(message);
       string str;
       getline(cin >> ws, str);
       return str;
     }
+
+    static string readStringOtional(string message, string fieldName) {
+      bool wantsToEnter = wants_to_enter("Do you want to change \"" + fieldName + "\" ?");
+      if (wantsToEnter)
+      {
+        print_input_message(message);
+        string str;
+        getline(cin >> ws, str);
+        return str;
+      } else {
+        return "";
+      }
+    }
+
     static char readCharacter(string message) {
       print_input_message(message);
       char c;

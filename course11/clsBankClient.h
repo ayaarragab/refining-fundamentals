@@ -11,7 +11,8 @@ private:
   enum enMode
   {
     EmptyMode = 0,
-    UpdateMode = 1
+    UpdateMode = 1,
+    AddNew = 2
   };
   enMode _Mode;
   string _AccountNumber;
@@ -21,11 +22,14 @@ private:
   static vector<string> _ObjectToVector(clsBankClient &client)
   {
     return {
-        client._AccountNumber,
-        to_string(client._AccountBalance),
         client.GetFirstName(),
+        client.GetLastName(),
+        client.GetEmail(),
         client.GetPhone(),
-        client._PinCode};
+        client.GetAccountNumber(),
+        client.getPinCode(),
+        to_string(client.getAccountBalance())
+    };
   }
 
   static string _GenerateRecord(clsBankClient &client)
@@ -87,7 +91,7 @@ private:
 
   static void _WriteClientsToFile(vector<clsBankClient> clients) {
     vector<string> str_vec = _GenerateRecords(clients);
-    _SaveRecordsToFile("clients.txt", str_vec);
+    _SaveRecordsToFile("clients.txt", str_vec, 'w');
   }
 
   static vector<clsBankClient> _StrVecToObjVec(vector<string> &users, string delim = "//#")
@@ -111,6 +115,7 @@ private:
       clsBankClient client_before_update = _RecordToObject(s);
       if (client_before_update.GetAccountNumber() == this->GetAccountNumber())
       {
+        cout << _GenerateRecord(*this) << endl;
         s = _GenerateRecord(*this);
         found = true;
         break;
@@ -122,8 +127,19 @@ private:
     return found;
   }
 
+  void _AddRecordToFile(string record, string filename) {
+    fstream file;
+    clsHelper::open_file(file, filename, 'a');
+    file << record + "\n";
+    file.close();
+  }
+
+  void _Add() {
+    _AddRecordToFile(_GenerateRecord(*this), "clients.txt");
+  }
+
 public:
-  enum enSaveResults { svFailedEmptyObject = 0, svSuceeded = 1 };
+  enum enSaveResults { svFailedEmptyObject = 0, svSuceeded = 1, svFailedAccountInUse = 2 };
 
   clsBankClient(enMode Mode, string FirstName, string LastName, string Email, string Phone, string AccountNumber, string PinCode, float AccountBalance) : clsPerson(FirstName, LastName, Email, Phone)
   {
@@ -208,11 +224,22 @@ public:
       case enMode::EmptyMode:
         return enSaveResults::svFailedEmptyObject;
 
-        case enMode::UpdateMode:
+      case enMode::UpdateMode:
+      {
         bool result = _Update();
         return result ? enSaveResults::svSuceeded : enSaveResults::svFailedEmptyObject;
+      }
 
-        default:
+      case enMode::AddNew:       
+      {
+        if (IsClientExist(this->GetAccountNumber()))
+          return enSaveResults::svFailedAccountInUse;
+        _Add();
+        _Mode = enMode::UpdateMode;
+        return enSaveResults::svSuceeded;
+      }
+
+      default:
         break;
     }
   }

@@ -4,11 +4,11 @@
 using namespace std;
 
 void ReadClientInfo(clsBankClient &client) {
-  string FirstName = clsInput::readString("Enter client First Name");
-  string LastName = clsInput::readString("Enter client Last Name");
-  string Email = clsInput::readString("Enter client Email");
-  string Phone = clsInput::readString("Enter client Phone");
-  string PinCode = clsInput::readString("Enter the Pin Code");
+  string FirstName = clsInput::readStringOtional("Enter client First Name", "First Name");
+  string LastName = clsInput::readStringOtional("Enter client Last Name", "Last Name");
+  string Email = clsInput::readStringOtional("Enter client Email", "Enter client Email");
+  string Phone = clsInput::readStringOtional("Enter client Phone", "Phone");
+  string PinCode = clsInput::readStringOtional("Enter the Pin Code", "Pin Code");
   if (FirstName.length() != 0)
     client.SetFirstName(FirstName);
   if (LastName.length() != 0)
@@ -35,14 +35,24 @@ void UpdatClient() {
   ReadClientInfo(client);
 
   clsBankClient::enSaveResults result = client.Save();
+  switch (result)
+  {
+  case clsBankClient::enSaveResults::svSuceeded:
+    cout << "Succeeded!" << endl;
+    break;
+
+  case clsBankClient::enSaveResults::svFailedEmptyObject:
+    cout << "Empty!" << endl;
+    break;
+
+  default:
+    break;
+  }
 }
 
 int main() {
-  clsBankClient client = clsBankClient::Find("A0121");
-  client.Print();
-  
-  clsBankClient client2 = clsBankClient::Find("A0121", "324343");
-  client2.Print();
+
+  UpdatClient();
 
   return 0;
 }
