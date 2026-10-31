@@ -268,6 +268,14 @@ public:
     return _StrVecToObjVec(_ReadClientsFromFile("clients.txt"));
   }
 
+  static double GetSumOfBalances() {
+    double sum = 0;
+    vector<clsBankClient> clients = ClientList();
+    for (auto &c : clients)
+      sum += c.getAccountBalance();
+    return sum;
+  }
+
   enSaveResults Save() {
     switch (_Mode)
     {
