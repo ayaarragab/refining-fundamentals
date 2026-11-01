@@ -18,7 +18,7 @@ class clsDeleteClientScreen: protected clsScreen
   
   public:
 
-    static void DeleteClient()
+    static void ShowDeleteClientScreen()
     {
       string AccountNumber = clsInput::readString("Enter account Number");
 

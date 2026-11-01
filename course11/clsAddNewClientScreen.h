@@ -40,7 +40,7 @@ class clsAddNewClientScreen: protected clsScreen
   
   public:
 
-    static void AddClient()
+    static void ShowAddClientScreen()
     {
       _DrawScreenHeader("Add New Client Screen");
       string AccountNumber = clsInput::readString("Enter account Number");
