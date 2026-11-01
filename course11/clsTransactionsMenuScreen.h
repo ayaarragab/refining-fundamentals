@@ -1,6 +1,8 @@
 #pragma once
 #include <iomanip>
 #include "clsScreen.h"
+#include "clsDepositScreen.h"
+#include "clsInputValidate.h"
 
 class clsTransactionsMenuScreen : protected clsScreen
 {
@@ -13,7 +15,15 @@ private:
     tMainMenu = 4
   };
 
-  static void _ShowDepositScreen() {}
+  static enTranOptions _ReadTransactionMenuOption()
+  {
+    enTranOptions option = (enTranOptions)clsInputValidate::ReadIntNumberBetween(1, 9, "This is an invalid number");
+    return option;
+  }
+
+  static void _ShowDepositScreen() {
+    clsDepositClientScreen::ShowDepositClient();
+  }
 
   static void _ShowWithdrawScreen() {}
 
@@ -25,7 +35,7 @@ private:
 
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cin.get();
-
+    system("clear");
     ShowTransactionMenuScreen();
   }
 
@@ -48,9 +58,7 @@ private:
       _ShowListBalancesScreen();
       _GoBackToTransactionsMenu();
       break;
-    case tMainMenu:
-      system("clear");
-      break;
+    case tMainMenu: {}
     default:
       break;
     }
@@ -66,5 +74,6 @@ public:
     cout << setw(37) << left << "" << "\t\t\t[2] Withdraw\t\t\t\n";
     cout << setw(37) << left << "" << "\t\t\t[2] Back to Main Menue\t\t\t\n";
     cout << setw(37) << left << "" << "==============================================================\n";
+    _PerformTransationsMenuOtions(_ReadTransactionMenuOption());
   }
 };

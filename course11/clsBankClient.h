@@ -254,6 +254,11 @@ public:
     return result;
   } 
 
+  void Deposit(double number) {
+    _AccountBalance += number;
+    Save();
+  }
+
   static vector<clsBankClient> ClientList() {
     return _StrVecToObjVec(_ReadClientsFromFile("clients.txt"));
   }
