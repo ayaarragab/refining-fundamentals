@@ -1,16 +1,16 @@
 #pragma once
 #include <iomanip>
 #include "clsScreen.h"
-#include "clsMainScreen.h"
 
-class clsTransactionsMenuScreen : clsScreen
+class clsTransactionsMenuScreen : protected clsScreen
 {
 private:
   enum enTranOptions
   {
     Deposit = 1,
     Withdraw = 2,
-    tMainMenu = 3
+    TotalBalances = 3,
+    tMainMenu = 4
   };
 
   static void _ShowDepositScreen() {}
@@ -19,7 +19,7 @@ private:
 
   static void _ShowListBalancesScreen() {}
 
-  static void _GoBackToTransactionsMenue()
+  static void _GoBackToTransactionsMenu()
   {
     cout << setw(37) << left << "" << "\n\t\t\t\tPress any key to go back to Main Menue...\n";
 
@@ -36,16 +36,20 @@ private:
     case Deposit:
       system("clear");
       _ShowDepositScreen();
-      _GoBackToTransactionsMenue();
+      _GoBackToTransactionsMenu();
       break;
     case Withdraw:
       system("clear");
       _ShowWithdrawScreen();
-      _GoBackToTransactionsMenue();
+      _GoBackToTransactionsMenu();
+      break;
+    case TotalBalances:
+      system("clear");
+      _ShowListBalancesScreen();
+      _GoBackToTransactionsMenu();
       break;
     case tMainMenu:
       system("clear");
-      clsMainScreen::ShowMainMenue();
       break;
     default:
       break;
