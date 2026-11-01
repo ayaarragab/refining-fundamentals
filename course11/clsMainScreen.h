@@ -1,8 +1,9 @@
 #pragma once
-#include "clsScreen.h"
-#include "clsInputValidate.h"
 #include <iomanip>
 #include <limits>
+#include "clsScreen.h"
+#include "clsInputValidate.h"
+#include "clsClientScreen.h"
 
 class clsMainScreen : protected clsScreen
 {
@@ -28,7 +29,7 @@ private:
 
   static void _GoBackToMainMenue()
   {
-      cout << setw(37) << left << "" << "\n\tPress any key to go back to Main Menue...\n";
+      cout << setw(37) << left << "" << "\n\t\t\t\tPress any key to go back to Main Menue...\n";
 
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
       cin.get();
@@ -38,7 +39,7 @@ private:
 
   static void _ShowAllClientsScreen()
   {
-     cout << "\nClient List Screen Will be here...\n";
+     clsClientListScreen::ShowClientList();
   }
 
   static void _ShowAddNewClientsScreen()
