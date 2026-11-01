@@ -247,7 +247,7 @@ public:
   }
 
   bool Delete() {
-    bool wantToDelete = clsInput::wants_to_enter("Do you really want to delete the string ?");
+    bool wantToDelete = clsInput::wants_to_enter("Do you really want to delete this client ?");
     bool result = false;
     if(wantToDelete)
       result = _Delete();
