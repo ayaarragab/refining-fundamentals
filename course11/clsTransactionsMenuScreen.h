@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "clsScreen.h"
 #include "clsDepositScreen.h"
+#include "clsWithdrawScreen .h"
 #include "clsInputValidate.h"
 
 class clsTransactionsMenuScreen : protected clsScreen
@@ -25,7 +26,9 @@ private:
     clsDepositClientScreen::ShowDepositClient();
   }
 
-  static void _ShowWithdrawScreen() {}
+  static void _ShowWithdrawScreen() {
+    clsWithdrawClientScreen::ShowWithdrawClient();
+  }
 
   static void _ShowListBalancesScreen() {}
 

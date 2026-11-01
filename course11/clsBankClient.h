@@ -129,7 +129,6 @@ private:
       clsBankClient client_before_update = _RecordToObject(s);
       if (client_before_update.GetAccountNumber() == this->GetAccountNumber())
       {
-        cout << _GenerateRecord(*this) << endl;
         s = _GenerateRecord(*this);
         found = true;
         break;
@@ -257,6 +256,15 @@ public:
   void Deposit(double number) {
     _AccountBalance += number;
     Save();
+  }
+
+  bool Withdraw(double number) {
+    if (number > _AccountBalance)
+      return false;
+    
+    _AccountBalance -= number;
+    Save();
+    return true;
   }
 
   static vector<clsBankClient> ClientList() {
