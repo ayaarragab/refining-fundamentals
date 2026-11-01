@@ -213,16 +213,6 @@ public:
     _AccountBalance = AccountBalance;
   }
 
-  void Print()
-  {
-    cout << "Account Name: " << this->GetFirstName() + " " + this->GetLastName() << endl;
-    cout << "Account Phone: " << this->GetPhone() << endl;
-    cout << "Account Email: " << this->GetEmail() << endl;
-    cout << "Account Number: " << _AccountNumber << endl;
-    cout << "Account Balance: " << _AccountBalance << endl;
-    cout << "Account Pin Code: " << _PinCode << endl;
-  }
-
   static clsBankClient Find(string AccountNumber)
   {
     vector<string> vec = _ReadClientsFromFile("clients.txt");
