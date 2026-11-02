@@ -1,8 +1,6 @@
-#include "clsMainScreen.h"
-using namespace std;
-
+#include "clsLoginScreen.h"
 int main()
 {
-  clsMainScreen::ShowMainMenue();
+  clsLoginScreen::ShowLoginScreen();
   return 0;
 }
