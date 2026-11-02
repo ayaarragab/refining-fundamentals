@@ -288,6 +288,16 @@ public:
       file.close();
   }
 
+  static vector<string> GetLoggedInUsers() {
+    fstream file;
+    vector<string> users;
+    clsHelper::open_file(file, "loginRegister.txt", 'r');
+    string line;
+    while (getline(file, line))
+      users.push_back(line);
+    return users;
+  }
+
   enSaveResults Save() {
     switch (_Mode)
     {

@@ -10,6 +10,7 @@
 #include "clsFindClientScreen.h"
 #include "clsTransactionsMenuScreen.h"
 #include "clsManageUsersScreen.h"
+#include "clsLoginRegisterScreen.h"
 #include "Global.h"
 
 class clsMainScreen : protected clsScreen
@@ -24,8 +25,9 @@ private:
     FindClient = 5,
     Transactions = 6,
     ManageUsers = 7,
-    Logout = 8,
-    MainMenu = 9
+    LoginRegister = 8,
+    Logout = 9,
+    MainMenu = 10
   };
   static enMainMenuOptions _ReadMainMenuOption()
   {
@@ -79,6 +81,11 @@ private:
     clsManageUsersScreen::ShowManageUsersMenuScreen();
   }
 
+  static void _ShowLoginRegisterScreen()
+  {
+    clsLoginRegisterScreen::ShowLoginRegisterScreen();
+  }
+
   static void _ShowEndScreen()
   {
     cout << "\nEnd Screen Will be here...\n";
@@ -126,6 +133,10 @@ private:
       system("clear");
       _ShowManageUsersMenue();
       _GoBackToMainMenue();
+    case LoginRegister:
+      system("clear");
+      _ShowLoginRegisterScreen();
+      _GoBackToMainMenue();
       break;
     case Logout:
       system("clear");
@@ -158,7 +169,8 @@ public:
     cout << setw(37) << left << "" << "\t[5] Find Client.\n";
     cout << setw(37) << left << "" << "\t[6] Transactions.\n";
     cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
-    cout << setw(37) << left << "" << "\t[8] Logout.\n";
+    cout << setw(37) << left << "" << "\t[8] Login Register.\n";
+    cout << setw(37) << left << "" << "\t[9] Logout.\n";
     cout << setw(37) << left << "" << "===========================================\n";
     _PerformMainMenuOperations(_ReadMainMenuOption());
   }
