@@ -1,6 +1,11 @@
 #include "clsLoginScreen.h"
 int main()
 {
-  clsLoginScreen::ShowLoginScreen();
+  while (true)
+  {
+    if (!clsLoginScreen::ShowLoginScreen())
+      break;
+  }
+
   return 0;
 }

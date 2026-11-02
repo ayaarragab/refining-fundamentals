@@ -7,7 +7,7 @@
 class clsLoginScreen: protected clsScreen
 {
   private:
-    static void _Login() {
+    static bool _Login() {
       for (short i = 3; i >= 1; i--)
       {
         string Username = clsInput::readString("Enter Username");
@@ -20,14 +20,14 @@ class clsLoginScreen: protected clsScreen
         else {
           CurrentUser = User;
           clsMainScreen::ShowMainMenue();
-          break;
+          return true;
         };      
       }
-      
+      return false;
     }
   public:
-    static void ShowLoginScreen() {
+    static bool ShowLoginScreen() {
       _DrawScreenHeader("Login Screen");
-      _Login();
+      return _Login();
     }
 };
