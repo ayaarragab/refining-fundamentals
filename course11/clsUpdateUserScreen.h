@@ -109,6 +109,7 @@ private:
 public:
   static void ShowUpdateUser()
   {
+    _DrawScreenHeader("Update User Screen");
     string username = clsInput::readString("Enter username");
 
     clsUser User = clsUser::Find(username);
