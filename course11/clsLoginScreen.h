@@ -1,6 +1,7 @@
 #include "clsScreen.h"
 #include "clsInput.h"
 #include "clsUser.h"
+#include "clsMainScreen.h"
 #include "Global.h"
 
 class clsLoginScreen: protected clsScreen
@@ -21,6 +22,7 @@ class clsLoginScreen: protected clsScreen
           loginFailed = false;
         };
       } while (loginFailed);
+      clsMainScreen::ShowMainMenue();
     }
   public:
     static void ShowLoginScreen() {
