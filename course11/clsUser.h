@@ -273,7 +273,7 @@ public:
   static bool CheckPermissions(enPermissions userPermissions, enPermissions reqPermissions) {
     if ((enPermissions)userPermissions == All)
       return true;
-    if (((int)reqPermissions & (int)reqPermissions) == (int)reqPermissions)
+    if (((int)userPermissions & (int)reqPermissions) == (int)reqPermissions)
       return true;
     return false;
   }
