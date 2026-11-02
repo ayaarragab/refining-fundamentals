@@ -15,22 +15,10 @@ private:
     UpdateMode = 1,
     AddNew = 2
   };
-  enum enPermissions
-  {
-    None = 0,
-    All = -1,
-    ClientList = 1,
-    AddClient = 2,
-    DeleteClient = 4,
-    UpdateClient = 8,
-    FindClient = 16,
-    Transactions = 32,
-    ManageUsers = 64,
-  };
   enMode _Mode;
   string _Username;
   string _Password;
-  enPermissions _Permissions;
+  int _Permissions;
   bool _MarkForDelete;
 
   static vector<string> _ObjectToVector(clsUser &user)
@@ -41,7 +29,8 @@ private:
         user.GetEmail(),
         user.GetPhone(),
         user.GetUsername(),
-        user.GetPassword()
+        user.GetPassword(),
+        to_string(user.GetPermissions())
     };
   }
 
@@ -179,6 +168,18 @@ private:
   }
 
 public:
+  enum enPermissions
+  {
+    None = 0,
+    All = -1,
+    ClientList = 1,
+    AddClient = 2,
+    DeleteClient = 4,
+    UpdateClient = 8,
+    FindClient = 16,
+    Transactions = 32,
+    ManageUsers = 64,
+  };
   enum enSaveResults { svFailedEmptyObject = 0, svSuceeded = 1, svFailedAccountInUse = 2 };
 
   clsUser(enMode Mode, string FirstName, string LastName, string Email, string Phone, string Username, string Password, int permissions) : clsPerson(FirstName, LastName, Email, Phone)
@@ -216,11 +217,11 @@ public:
   }
 
   void SetPassword(string Password) {
-    _Username = Password;
+    _Password = Password;
   }
 
-  void SetPermissions(string permissions) {
-    _Username = permissions;
+  void SetPermissions(int permissions) {
+    _Permissions = (enPermissions)permissions;
   }
 
   static clsUser Find(string Username)
@@ -253,7 +254,7 @@ public:
     return (!Find(Username).IsEmpty());
   }
 
-  static clsUser getAddNewuser(string Username) {
+  static clsUser GetAddNewUser(string Username) {
     return clsUser(enMode::AddNew, "", "", "", "", Username, "", None);
   }
 

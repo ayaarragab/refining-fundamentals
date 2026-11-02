@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "clsScreen.h"
 #include "clsListUsersScreen.h"
+#include "clsAddNewUserScreen.h"
 
 class clsManageUsersScreen : protected clsScreen
 {
@@ -26,6 +27,7 @@ private:
   }
 
   static void _ShowAddUsersScreen() {
+    clsAddNewUserScreen::ShowAddUserScreen();
   }
 
   static void _ShowDeleteUsersScreen() {
