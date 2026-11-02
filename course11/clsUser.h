@@ -207,12 +207,20 @@ public:
     return  _Password;
   }
 
+  int GetPermissions() {
+    return  int(_Permissions);
+  }
+
   void SetUsername(string Username) {
     _Username = Username;
   }
 
   void SetPassword(string Password) {
     _Username = Password;
+  }
+
+  void SetPermissions(string permissions) {
+    _Username = permissions;
   }
 
   static clsUser Find(string Username)
@@ -257,7 +265,7 @@ public:
     return result;
   } 
 
-  static vector<clsUser> userList() {
+  static vector<clsUser> UserList() {
     return _StrVecToObjVec(_ReadUsersFromFile("users.txt"));
   }
 

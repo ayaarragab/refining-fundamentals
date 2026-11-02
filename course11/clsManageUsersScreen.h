@@ -1,10 +1,7 @@
 #pragma once
 #include <iomanip>
 #include "clsScreen.h"
-#include "clsDepositScreen.h"
-#include "clsWithdrawScreen .h"
-#include "clsInputValidate.h"
-#include "clsTotalBalancesScreen.h"
+#include "clsListUsersScreen.h"
 
 class clsManageUsersScreen : protected clsScreen
 {
@@ -25,6 +22,7 @@ private:
   }
 
   static void _ShowListUsersScreen() {
+    clsListUsers::ShowUserList();
   }
 
   static void _ShowAddUsersScreen() {
