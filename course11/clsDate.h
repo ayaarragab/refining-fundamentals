@@ -506,7 +506,7 @@ public:
 
   static string date_to_str(clsDate date)
   {
-    return to_string(date._day) + "/" + to_string(date._month) + "/" + to_string(date._year);
+    return to_string(date._day) + "-" + to_string(date._month) + "-" + to_string(date._year);
   }
 
   static string formatDate(clsDate date, string format = "dd/mm/yyyy")
