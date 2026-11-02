@@ -2,6 +2,8 @@
 #include <iostream>
 #include "clsBankClient.h"
 #include "clsScreen.h"
+#include "Global.h"
+
 using namespace std;
 
 class clsUpdateClientScreen : protected clsScreen

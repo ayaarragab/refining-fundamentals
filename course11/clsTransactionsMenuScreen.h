@@ -5,6 +5,7 @@
 #include "clsWithdrawScreen .h"
 #include "clsInputValidate.h"
 #include "clsTotalBalancesScreen.h"
+#include "Global.h"
 
 class clsTransactionsMenuScreen : protected clsScreen
 {

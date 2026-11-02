@@ -3,6 +3,8 @@
 #include "clsBankClient.h"
 #include "clsScreen.h"
 #include "clsInputValidate.h"
+#include "Global.h"
+
 using namespace std;
 
 class clsFindClientScreen: protected clsScreen

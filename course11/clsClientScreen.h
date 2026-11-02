@@ -2,6 +2,7 @@
 #include <vector>
 #include "clsBankClient.h"
 #include "clsScreen.h"
+#include "Global.h"
 
 class clsClientListScreen: protected clsScreen {
   private:

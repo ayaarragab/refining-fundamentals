@@ -6,6 +6,7 @@
 #include "clsDeleteUserScreen.h"
 #include "clsUpdateUserScreen.h"
 #include "clsFindUserScreen.h"
+#include "Global.h"
 
 class clsManageUsersScreen : protected clsScreen
 {
