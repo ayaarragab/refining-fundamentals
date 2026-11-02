@@ -506,7 +506,7 @@ public:
 
   static string date_to_str(clsDate date)
   {
-    return to_string(date._day) + "-" + to_string(date._month) + "-" + to_string(date._year);
+    return to_string(date._day) + "/" + to_string(date._month) + "/" + to_string(date._year);
   }
 
   static string formatDate(clsDate date, string format = "dd/mm/yyyy")
@@ -527,4 +527,9 @@ public:
         d1 = d2;
         d2 = temp;
       }
+  static string getNowDateAndTime() {
+      time_t t = time(0);
+      tm* l_t = localtime(&t);
+      return to_string(l_t->tm_mday) + '-' + to_string(l_t->tm_mon + 1) + '-'  + to_string(l_t->tm_year + 1900) + " " + to_string(l_t->tm_hour) + ":" + to_string(l_t->tm_min) + ":" + to_string(l_t->tm_sec);
+  }
 };

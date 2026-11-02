@@ -5,6 +5,7 @@
 #include "clsString.h"
 #include "clsHelper.h"
 #include "clsInput.h"
+#include "clsDate.h"
 
 class clsUser : public clsPerson
 {
@@ -162,7 +163,6 @@ private:
     file << record + "\n";
     file.close();
   }
-
   void _Add() {
     _AddRecordToFile(_GenerateRecord(*this), "users.txt");
   }
@@ -276,6 +276,16 @@ public:
     if (((int)userPermissions & (int)reqPermissions) == (int)reqPermissions)
       return true;
     return false;
+  }
+
+  static void AddToLogFile(string username, string password) {
+      clsUser user = clsUser::Find(username, password);
+      int permissions = !user.IsEmpty() ? user.GetPermissions() : 0;
+      string RegisterRecord = clsDate::getNowDateAndTime() + "//#" + username + "//#" + password + "//#" + to_string(permissions);
+      fstream file;
+      clsHelper::open_file(file, "loginRegister.txt", 'a');
+      file << RegisterRecord << endl;
+      file.close();
   }
 
   enSaveResults Save() {

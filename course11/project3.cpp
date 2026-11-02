@@ -1,4 +1,5 @@
 #include "clsLoginScreen.h"
+#include "Global.h"
 int main()
 {
   while (true)
