@@ -3,6 +3,8 @@
 #include "clsScreen.h"
 #include "clsListUsersScreen.h"
 #include "clsAddNewUserScreen.h"
+#include "clsDeleteUserScreen.h"
+
 
 class clsManageUsersScreen : protected clsScreen
 {
@@ -31,6 +33,7 @@ private:
   }
 
   static void _ShowDeleteUsersScreen() {
+    clsDeleteUserScreen::ShowDeleteUserScreen();
   }
 
   static void _ShowUpdateUsersScreen() {
