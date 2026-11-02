@@ -8,21 +8,22 @@ class clsLoginScreen: protected clsScreen
 {
   private:
     static void _Login() {
-      bool loginFailed = false;
-      do
+      for (short i = 3; i >= 1; i--)
       {
         string Username = clsInput::readString("Enter Username");
         string Password = clsInput::readString("Enter Password");
         clsUser User = clsUser::Find(Username, Password);
-        loginFailed = User.IsEmpty();
-        if (loginFailed)
+        if (User.IsEmpty()) {
           cout << "User Not Found" << endl;
+          cout << "You have " << i - 1 << " Trail(s)" << endl;
+        }
         else {
           CurrentUser = User;
-          loginFailed = false;
-        };
-      } while (loginFailed);
-      clsMainScreen::ShowMainMenue();
+          clsMainScreen::ShowMainMenue();
+          break;
+        };      
+      }
+      
     }
   public:
     static void ShowLoginScreen() {
