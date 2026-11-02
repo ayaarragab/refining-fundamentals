@@ -2,6 +2,7 @@
 #include <iostream>
 #include "clsBankClient.h"
 #include "clsScreen.h"
+#include "Global.h"
 using namespace std;
 
 class clsAddNewClientScreen: protected clsScreen
@@ -42,6 +43,12 @@ class clsAddNewClientScreen: protected clsScreen
 
     static void ShowAddClientScreen()
     {
+      if (!clsUser::CheckPermissions((clsUser::enPermissions)CurrentUser.GetPermissions(), clsUser::enPermissions::AddClient))
+      {
+        cout << "Access Denied" << endl;
+        return;
+      }
+      
       _DrawScreenHeader("Add New Client Screen");
       string AccountNumber = clsInput::readString("Enter account Number");
 

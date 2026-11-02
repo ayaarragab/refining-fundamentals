@@ -23,15 +23,18 @@ private:
     return option;
   }
 
-  static void _ShowDepositScreen() {
+  static void _ShowDepositScreen()
+  {
     clsDepositClientScreen::ShowDepositClient();
   }
 
-  static void _ShowWithdrawScreen() {
+  static void _ShowWithdrawScreen()
+  {
     clsWithdrawClientScreen::ShowWithdrawClient();
   }
 
-  static void _ShowListBalancesScreen() {
+  static void _ShowListBalancesScreen()
+  {
     clsTotalBalancesScreen::ShowTotalBalances();
   }
 
@@ -64,7 +67,9 @@ private:
       _ShowListBalancesScreen();
       _GoBackToTransactionsMenu();
       break;
-    case tMainMenu: {}
+    case tMainMenu:
+    {
+    }
     default:
       break;
     }
@@ -73,6 +78,11 @@ private:
 public:
   static void ShowTransactionMenuScreen()
   {
+    if (!clsUser::CheckPermissions((clsUser::enPermissions)CurrentUser.GetPermissions(), clsUser::enPermissions::Transactions))
+    {
+      cout << "Access Denied" << endl;
+      return;
+    }
     _DrawScreenHeader("Transactions Menu Screen");
     cout << setw(37) << left << "" << "==============================================================\n";
     cout << setw(37) << left << "" << "\t\t\tTransactions Menu Screen\t\t\t\n";

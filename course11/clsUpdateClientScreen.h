@@ -39,6 +39,11 @@ private:
 public:
   static void ShowUpdateClient()
   {
+    if (!clsUser::CheckPermissions((clsUser::enPermissions)CurrentUser.GetPermissions(), clsUser::enPermissions::UpdateClient))
+    {
+      cout << "Access Denied" << endl;
+      return;
+    }
     string AccountNumber = clsInput::readString("Enter account Number");
 
     clsBankClient client = clsBankClient::Find(AccountNumber);

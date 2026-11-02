@@ -35,6 +35,11 @@ class clsClientListScreen: protected clsScreen {
     
     static void _ListClients()
     {
+      if (!clsUser::CheckPermissions((clsUser::enPermissions)CurrentUser.GetPermissions(), clsUser::enPermissions::ClientList))
+      {
+        cout << "Access Denied" << endl;
+        return;
+      }
       vector<clsBankClient> clients = clsBankClient::ClientList();
       _print_header(clients.size());
 

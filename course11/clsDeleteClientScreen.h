@@ -20,6 +20,11 @@ class clsDeleteClientScreen: protected clsScreen
 
     static void ShowDeleteClientScreen()
     {
+      if (!clsUser::CheckPermissions((clsUser::enPermissions)CurrentUser.GetPermissions(), clsUser::enPermissions::DeleteClient))
+      {
+        cout << "Access Denied" << endl;
+        return;
+      }
       string AccountNumber = clsInput::readString("Enter account Number");
 
       clsBankClient client = clsBankClient::Find(AccountNumber);

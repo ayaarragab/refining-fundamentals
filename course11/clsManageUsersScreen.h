@@ -95,6 +95,11 @@ private:
 public:
   static void ShowManageUsersMenuScreen()
   {
+    if (!clsUser::CheckPermissions((clsUser::enPermissions)CurrentUser.GetPermissions(), clsUser::enPermissions::ManageUsers))
+    {
+      cout << "Access Denied" << endl;
+        return;
+    }
     _DrawScreenHeader("Manage Users Menu Screen");
     cout << setw(37) << left << "" << "==============================================================\n";
     cout << setw(37) << left << "" << "\t\t\tManage Users Menu Screen\t\t\t\n";

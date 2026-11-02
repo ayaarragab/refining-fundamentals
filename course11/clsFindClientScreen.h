@@ -19,6 +19,11 @@ class clsFindClientScreen: protected clsScreen
   
   public:
     static void ShowFindClient() {
+      if (!clsUser::CheckPermissions((clsUser::enPermissions)CurrentUser.GetPermissions(), clsUser::enPermissions::FindClient))
+      {
+        cout << "Access Denied" << endl;
+        return;
+      }
       _DrawScreenHeader("Find Client Screen");
       clsBankClient client = clsBankClient::Find(clsInput::readString("Enter Account Number"));
       if (client.GetAccountNumber() == "")
