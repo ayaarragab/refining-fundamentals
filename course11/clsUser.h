@@ -9,6 +9,13 @@
 
 class clsUser : public clsPerson
 {
+public:
+  struct stLoggingRegister {
+    string DateTime;
+    string Username;
+    string Password;
+    string permissions;
+  };
 private:
   enum enMode
   {
@@ -122,6 +129,17 @@ private:
     return vec;
   }
 
+  static stLoggingRegister _ConvertToStructLoggingRegister(string line) {
+    stLoggingRegister user;
+    vector<string> splitted;
+    clsString::words_to_vec(line, splitted, "//#");
+    user.DateTime = splitted[0];
+    user.Username = splitted[1];
+    user.Password = splitted[2];
+    user.permissions = splitted[3];
+    return user;
+  }
+
   bool _Update() {
     vector<string> users_str = _ReadUsersFromFile("users.txt");
     bool found = false;
@@ -180,6 +198,7 @@ public:
     Transactions = 32,
     ManageUsers = 64,
   };
+
   enum enSaveResults { svFailedEmptyObject = 0, svSuceeded = 1, svFailedAccountInUse = 2 };
 
   clsUser(enMode Mode, string FirstName, string LastName, string Email, string Phone, string Username, string Password, int permissions) : clsPerson(FirstName, LastName, Email, Phone)
@@ -288,13 +307,14 @@ public:
       file.close();
   }
 
-  static vector<string> GetLoggedInUsers() {
+  static vector<stLoggingRegister> GetLoggedInUsers() {
     fstream file;
-    vector<string> users;
+    vector<stLoggingRegister> users;
     clsHelper::open_file(file, "loginRegister.txt", 'r');
     string line;
-    while (getline(file, line))
-      users.push_back(line);
+    while (getline(file, line)) {
+      users.push_back(_ConvertToStructLoggingRegister(line));
+    }
     return users;
   }
 

@@ -31,22 +31,20 @@ private:
 
     _print_dashs();
   }
-  static void _PrintLine(string line)
+  static void _PrintLine(clsUser::stLoggingRegister user)
   {
-    vector<string> vec;
-    clsString::words_to_vec(line, vec, "//#");
-    cout << setw(20) << left << "" << "| " << left << setw(15) << vec[0]
-         << "| " << left << setw(20) << vec[1]
-         << "| " << left << setw(20) << vec[2]
-         << "| " << left << setw(14) << vec[3]
+    cout << setw(20) << left << "" << "| " << left << setw(15) << user.DateTime
+         << "| " << left << setw(20) << user.Username
+         << "| " << left << setw(20) << user.Password
+         << "| " << left << setw(14) << user.permissions
          << "\n";
   }
 
 public:
   static void ShowLoginRegisterScreen() {
-    vector<string> users = clsUser::GetLoggedInUsers();
+    vector<clsUser::stLoggingRegister> users = clsUser::GetLoggedInUsers();
     _print_header(users.size());
-    for (string &u: users)
+    for (clsUser::stLoggingRegister &u: users)
       _PrintLine(u);
   }
 };
