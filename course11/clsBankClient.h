@@ -151,6 +151,7 @@ private:
         found = true;
       }
     }
+    *(this) = _GetEmptyObject();
     _WriteClientsToFile(clients);
     return found;
   }
