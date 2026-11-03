@@ -5,6 +5,7 @@
 #include "clsString.h"
 #include "clsHelper.h"
 #include "clsInput.h"
+#include "Global.h"
 
 class clsBankClient : public clsPerson
 {
@@ -167,6 +168,14 @@ private:
     _AddRecordToFile(_GenerateRecord(*this), "clients.txt");
   }
 
+  static void _AddTransferToLogFile(double OldBalanceSender, clsBankClient Sender, clsBankClient Reciever, string DateTime) {
+    string record = DateTime + "//#" + Sender.GetAccountNumber() + "//#" + Reciever.GetAccountNumber() + "//#" + to_string(OldBalanceSender) + "//#" + to_string(Sender.getAccountBalance()) + "//#" + to_string(Reciever.getAccountBalance()) + "//#" + CurrentUser.GetUsername();
+    fstream file;
+    clsHelper::open_file(file, "transferLog.txt" ,'a');
+    file << record << endl;
+    file.close();
+  } 
+
 public:
   enum enSaveResults { svFailedEmptyObject = 0, svSuceeded = 1, svFailedAccountInUse = 2 };
 
@@ -281,8 +290,11 @@ public:
   }
 
   static bool Transfer(clsBankClient Sender, clsBankClient Reciever, double quantity) {
+    double OldQuantity = Sender.getAccountBalance();
     Reciever.Deposit(quantity);
     Sender.Withdraw(quantity);
+    _AddTransferToLogFile(OldQuantity, Sender, Reciever, clsDate::getNowDateAndTime());
+    return true;
   }
 
   enSaveResults Save() {
