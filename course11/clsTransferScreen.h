@@ -13,14 +13,20 @@ class clsTransferScreen: protected clsScreen {
     }
 public:
     static void ShowTransferScreen() {
-      string Sender = clsInput::readString("Enter Sender Account Number");
-      string Reciever = clsInput::readString("Enter Reciever Account Number");
+      clsBankClient Sender = clsBankClient::Find(clsInput::readString("Enter Sender Account Number"));
+      clsBankClient Reciever = clsBankClient::Find(clsInput::readString("Enter Sender Account Number"));
       double Quantity = clsInputValidate::ReadDblNumber("Invalid number");
+
+      _PrintClientInfo(Sender);
+      _PrintClientInfo(Reciever);
 
       bool TransferDone = clsBankClient::Transfer(Sender, Reciever, Quantity);
       
-      if (TransferDone)
+      if (TransferDone) {
         cout << "Transfer is done successfully" << endl;
+        _PrintClientInfo(Sender);
+        _PrintClientInfo(Reciever);
+      }
       else
         cout << "One of the accounts not found" << endl;
     }

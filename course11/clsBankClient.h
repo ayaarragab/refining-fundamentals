@@ -167,28 +167,6 @@ private:
     _AddRecordToFile(_GenerateRecord(*this), "clients.txt");
   }
 
-    static bool _IncrementReciever(string AccountNumber, double Amount) {
-      clsBankClient client = clsBankClient::Find(AccountNumber);
-      if (!client.IsEmpty())
-      {
-        client.setAccountBalance(client.getAccountBalance() + Amount);
-        client.Save();
-        return true;
-      }
-      return false;
-    }
-
-    static bool _DecrementSender(string AccountNumber, double Amount) {
-      clsBankClient client = clsBankClient::Find(AccountNumber);
-      if (!client.IsEmpty())
-      {
-        client.setAccountBalance(client.getAccountBalance() - Amount);
-        client.Save();
-        return true;
-      }
-      return false;
-    }
-
 public:
   enum enSaveResults { svFailedEmptyObject = 0, svSuceeded = 1, svFailedAccountInUse = 2 };
 
@@ -302,15 +280,10 @@ public:
     return sum;
   }
 
-  static bool Transfer(string Sender, string Reciever, double quantity) {
-      bool amountSent = _DecrementSender(Sender, quantity);
-      if (amountSent) {
-        bool amountRecived = _IncrementReciever(Reciever, quantity);
-        if (amountRecived)
-          return true;
-      }
-      return false;
-    }
+  static bool Transfer(clsBankClient Sender, clsBankClient Reciever, double quantity) {
+    Reciever.Deposit(quantity);
+    Sender.Withdraw(quantity);
+  }
 
   enSaveResults Save() {
     switch (_Mode)
