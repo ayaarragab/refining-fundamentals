@@ -24,7 +24,7 @@ private:
 
   static enTranOptions _ReadTransactionMenuOption()
   {
-    enTranOptions option = (enTranOptions)clsInputValidate::ReadIntNumberBetween(1, 9, "This is an invalid number");
+    enTranOptions option = (enTranOptions)clsInputValidate::ReadIntNumberBetween(1, 6, "This is an invalid number");
     return option;
   }
 
