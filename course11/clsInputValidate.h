@@ -10,7 +10,7 @@ using namespace std;
 class clsInputValidate
 {
   private:
-    static int loop_untill_getting_val(int from, int to, string whenError) {
+    template <typename T> static T loop_untill_getting_val(T from, int T, string whenError) {
       int num = clsInput::readNum("Enter a number between" + to_string(from) + " and " + to_string(to));
       
       while(!IsNumberBetween(num, from, to))
@@ -21,38 +21,8 @@ class clsInputValidate
       return num;
     }
 
-    static float loop_untill_getting_val(float from, float to, string whenError) {
-      float num = clsInput::readNum("Enter an integer number between" + to_string(from) + " and " + to_string(to));
-      
-      while(!IsNumberBetween(num, from, to))
-      {
-        clsUtil::DisplayError(whenError);
-        num = clsInput::readNum("Enter a float number between" + to_string(from) + " and " + to_string(to));
-      }
-      return num;
-    }
-
-    static double loop_untill_getting_val(double from, double to, string whenError) {
-      double num = clsInput::readNum("Enter a number between" + to_string(from) + " and " + to_string(to));
-      
-      while(!IsNumberBetween(num, from, to))
-      {
-        clsUtil::DisplayError(whenError);
-        num = clsInput::readNum("Enter a float/double number between" + to_string(from) + " and " + to_string(to));
-      }
-      return num;
-    }
-
   public:
-    static bool IsNumberBetween(int num, int from, int to) {
-      return (num >= from && num <= to);
-    }
-
-    static bool IsNumberBetween(float num, float from, float to) {
-      return (num >= from && num <= to);
-    }
-
-    static bool IsNumberBetween(double num, double from, double to) {
+    template <typename T> static bool IsNumberBetween(T num, T from, T to) {
       return (num >= from && num <= to);
     }
 
