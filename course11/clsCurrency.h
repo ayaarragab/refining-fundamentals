@@ -24,7 +24,7 @@ private:
   static clsCurrency _StrConvertToObj(string line)
   {
     vector<string> splitted;
-    clsString::words_to_vec(line, splitted, "//#");
+    clsString::words_to_vec(line, splitted, "#//#");
     return clsCurrency(enMode::UpdateMode, splitted[0], splitted[1], splitted[2], stof(splitted[3]));
   }
   static clsCurrency _GetEmptyObject()
@@ -88,6 +88,7 @@ public:
   static clsCurrency FindByCode(string Code)
   {
     vector<clsCurrency> vec = getCurrencies();
+    cout << vec[0].Country() << endl;
     for (clsCurrency &c : vec)
     {
       if (c.CurrencyCode() == Code)
