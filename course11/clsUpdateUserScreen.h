@@ -69,7 +69,14 @@ private:
 
     if (permisson)
       user.SetPermissions(user.GetPermissions() + (int)clsUser::ManageUsers);
-  }
+  
+      // Login Register
+      cout << "You want to give this user [128].Login Register permission? " << endl;
+      permisson = clsInput::wants_to_enter();
+
+      if (permisson)
+        user.SetPermissions(user.GetPermissions() + (int)clsUser::LoginRegister);
+    }
   static void _UpdateUserInfo(clsUser &User)
   {
     string FirstName = clsInput::readStringOptional("Enter User First Name", "First Name");
