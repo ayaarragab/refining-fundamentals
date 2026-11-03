@@ -3,6 +3,7 @@
 #include "clsUser.h"
 #include "clsScreen.h"
 #include "clsInput.h"
+#include "clsUtil.h"
 using namespace std;
 
 class clsAddNewUserScreen: protected clsScreen
@@ -99,7 +100,7 @@ class clsAddNewUserScreen: protected clsScreen
       if (Username.length() != 0)
         User.SetUsername(Username);
       if (Password.length() != 0)
-        User.SetPassword(Password);
+        User.SetPassword(clsUtil::EncryptText(Password, 4));
       _GivePermissions(User);
     }
 

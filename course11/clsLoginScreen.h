@@ -5,6 +5,7 @@
 #include "clsMainScreen.h"
 #include "clsHelper.h"
 #include "clsDate.h"
+#include "clsUtil.h"
 #include "Global.h"
 
 class clsLoginScreen: protected clsScreen
@@ -16,6 +17,7 @@ class clsLoginScreen: protected clsScreen
       {
         string Username = clsInput::readString("Enter Username");
         string Password = clsInput::readString("Enter Password");
+        Password = clsUtil::EncryptText(Password, 4);
         clsUser User = clsUser::Find(Username, Password);
         clsUser::AddToLogFile(Username, Password);
         if (User.IsEmpty()) {
