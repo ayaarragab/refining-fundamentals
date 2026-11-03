@@ -79,6 +79,14 @@ class clsAddNewUserScreen: protected clsScreen
 
       if (permisson)
         user.SetPermissions(user.GetPermissions() + (int)clsUser::LoginRegister);
+
+
+      // CurrencyExchange
+      cout << "You want to give this user [265].Currency Exchange permission? " << endl;
+      permisson = clsInput::wants_to_enter();
+
+      if (permisson)
+        user.SetPermissions(user.GetPermissions() + (int)clsUser::CurrencyExchange);
     }
 
     static void _ReadUserInfo(clsUser &User)
