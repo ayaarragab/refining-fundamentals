@@ -5,6 +5,7 @@
 #include "clsWithdrawScreen .h"
 #include "clsInputValidate.h"
 #include "clsTotalBalancesScreen.h"
+#include "clsTransferScreen.h"
 #include "Global.h"
 
 class clsTransactionsMenuScreen : protected clsScreen
@@ -15,7 +16,8 @@ private:
     Deposit = 1,
     Withdraw = 2,
     TotalBalances = 3,
-    tMainMenu = 4
+    Transfer = 4,
+    tMainMenu = 5
   };
 
   static enTranOptions _ReadTransactionMenuOption()
@@ -37,6 +39,11 @@ private:
   static void _ShowListBalancesScreen()
   {
     clsTotalBalancesScreen::ShowTotalBalances();
+  }
+
+  static void _ShowTransferScreen()
+  {
+    clsTransferScreen::ShowTransferScreen();
   }
 
   static void _GoBackToTransactionsMenu()
@@ -68,6 +75,11 @@ private:
       _ShowListBalancesScreen();
       _GoBackToTransactionsMenu();
       break;
+    case Transfer:
+      system("clear");
+      _ShowTransferScreen();
+      _GoBackToTransactionsMenu();
+      break;
     case tMainMenu:
     {
     }
@@ -90,7 +102,8 @@ public:
     cout << setw(37) << left << "" << "\t\t\t[1] Deposit\t\t\t\n";
     cout << setw(37) << left << "" << "\t\t\t[2] Withdraw\t\t\t\n";
     cout << setw(37) << left << "" << "\t\t\t[3] Total Balances\t\t\t\n";
-    cout << setw(37) << left << "" << "\t\t\t[4] Back to Main Menue\t\t\t\n";
+    cout << setw(37) << left << "" << "\t\t\t[4] Transfer\t\t\t\n";
+    cout << setw(37) << left << "" << "\t\t\t[5] Back to Main Menue\t\t\t\n";
     cout << setw(37) << left << "" << "==============================================================\n";
     _PerformTransationsMenuOtions(_ReadTransactionMenuOption());
   }
