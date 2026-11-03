@@ -6,6 +6,7 @@
 #include "clsHelper.h"
 #include "clsInput.h"
 #include "clsDate.h"
+#include "clsUtil.h"
 
 class clsUser : public clsPerson
 {

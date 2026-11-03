@@ -64,13 +64,32 @@ private:
       _ShowCurrencyCalculator();
       _GoBackToCurrenciesMenu();
       break;
-    case MainMenu: {}
-      break;
+    case MainMenu:
+    {
+    }
+    break;
     default:
       break;
     }
   }
 
 public:
-  static void ShowCurrencyExchangeScreen() {}
+  static void ShowCurrencyExchangeScreen()
+  {
+
+    system("clear");
+    _DrawScreenHeader("    Currancy Exhange Main Screen");
+
+    cout << setw(37) << left << "" << "===========================================\n";
+    cout << setw(37) << left << "" << "\t\t  Currency Exhange Menue\n";
+    cout << setw(37) << left << "" << "===========================================\n";
+    cout << setw(37) << left << "" << "\t[1] List Currencies.\n";
+    cout << setw(37) << left << "" << "\t[2] Find Currency.\n";
+    cout << setw(37) << left << "" << "\t[3] Update Rate.\n";
+    cout << setw(37) << left << "" << "\t[4] Currency Calculator.\n";
+    cout << setw(37) << left << "" << "\t[5] Main Menue.\n";
+    cout << setw(37) << left << "" << "===========================================\n";
+
+    _PerformMenuOperation((enOption)_ReadMainMenuOption());
+  }
 };
