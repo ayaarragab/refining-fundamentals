@@ -11,6 +11,7 @@
 #include "clsTransactionsMenuScreen.h"
 #include "clsManageUsersScreen.h"
 #include "clsLoginRegisterScreen.h"
+#include "clsCurrenciesExchangeScreen.h"
 #include "Global.h"
 
 class clsMainScreen : protected clsScreen
@@ -26,8 +27,9 @@ private:
     Transactions = 6,
     ManageUsers = 7,
     LoginRegister = 8,
-    Logout = 9,
-    MainMenu = 10
+    CurrencyExchange = 9,
+    Logout = 10,
+    MainMenu = 11
   };
   static enMainMenuOptions _ReadMainMenuOption()
   {
@@ -79,6 +81,11 @@ private:
   static void _ShowManageUsersMenue()
   {
     clsManageUsersScreen::ShowManageUsersMenuScreen();
+  }
+
+  static void _ShowCurrencyExchangeScreen()
+  {
+    clsCurrencyExchangeScreen::ShowCurrencyExchangeScreen();
   }
 
   static void _ShowLoginRegisterScreen()
@@ -138,6 +145,11 @@ private:
       _ShowLoginRegisterScreen();
       _GoBackToMainMenue();
       break;
+    case CurrencyExchange:
+      system("clear");
+      _ShowCurrencyExchangeScreen();
+      _GoBackToMainMenue();
+      break;
     case Logout:
       system("clear");
       _ShowEndScreen();
@@ -170,7 +182,8 @@ public:
     cout << setw(37) << left << "" << "\t[6] Transactions.\n";
     cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
     cout << setw(37) << left << "" << "\t[8] Login Register.\n";
-    cout << setw(37) << left << "" << "\t[9] Logout.\n";
+    cout << setw(37) << left << "" << "\t[9] Currency Exchange.\n";
+    cout << setw(37) << left << "" << "\t[10] Logout.\n";
     cout << setw(37) << left << "" << "===========================================\n";
     _PerformMainMenuOperations(_ReadMainMenuOption());
   }
