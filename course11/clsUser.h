@@ -197,6 +197,7 @@ public:
     FindClient = 16,
     Transactions = 32,
     ManageUsers = 64,
+    LoginRegister = 128
   };
 
   enum enSaveResults { svFailedEmptyObject = 0, svSuceeded = 1, svFailedAccountInUse = 2 };
