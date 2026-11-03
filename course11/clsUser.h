@@ -301,7 +301,7 @@ public:
   static void AddToLogFile(string username, string password) {
       clsUser user = clsUser::Find(username, password);
       int permissions = !user.IsEmpty() ? user.GetPermissions() : 0;
-      string RegisterRecord = clsDate::getNowDateAndTime() + "//#" + username + "//#" + password + "//#" + to_string(permissions);
+      string RegisterRecord = clsDate::getNowDateAndTime() + "//#" + username + "//#" + clsUtil::EncryptText(password, 4) + "//#" + to_string(permissions);
       fstream file;
       clsHelper::open_file(file, "loginRegister.txt", 'a');
       file << RegisterRecord << endl;
