@@ -176,4 +176,13 @@ public:
     clsCurrency C1 = clsCurrency::FindByCode(Code);
     return (!C1.IsEmpty());
   }
+
+  static double Convert(clsCurrency from, clsCurrency to, double quantity) {
+    double USDQuantity = quantity * from.Rate();
+    
+    if (to.CurrencyCode() == "USD")
+      return USDQuantity;
+    
+    return USDQuantity / to.Rate();
+  }
 };
