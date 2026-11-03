@@ -13,7 +13,7 @@ class clsCurrency
   private:
     enMode _Mode;
     string _Country;
-    string _Code;
+    string _CurrencyCode;
     string _CurrencyName;
     float _Rate;
     
@@ -24,10 +24,10 @@ class clsCurrency
     }
   
     public:
-      clsCurrency(enMode Mode, string Country, string Code, string CurrencyCode, float Rate) {
+      clsCurrency(enMode Mode, string Country, string CurrencyCode, string CurrencyName, float Rate) {
         _Country = Country;
-        _Code = Code;
-        _CurrencyName = CurrencyCode;
+        _CurrencyCode = CurrencyCode;
+        _CurrencyName = CurrencyName;
         _Mode = Mode;
         _Rate = Rate;
       }
@@ -42,4 +42,35 @@ class clsCurrency
         }
       return Currencies;
   } 
+    bool IsEmpty()
+    {
+        return (_Mode == enMode::EmptyMode);
+    }
+
+    string Country()
+    {
+        return _Country;
+    }
+ 
+    string CurrencyCode()
+    {
+        return _CurrencyCode;
+    }
+    
+    string CurrencyName()
+    {
+        return _CurrencyName;
+    }
+   
+    void UpdateRate(float NewRate)
+    {
+        _Rate = NewRate;
+        // _Update();
+    }
+
+    float Rate()
+    {
+        return _Rate;
+    }
+   
 };

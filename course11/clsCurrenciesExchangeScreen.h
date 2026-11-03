@@ -1,6 +1,7 @@
 #pragma once
 #include "clsScreen.h"
 #include "clsInputValidate.h"
+#include "clsCurrenciesListScreen.h"
 
 class clsCurrencyExchangeScreen : protected clsScreen
 {
@@ -8,11 +9,11 @@ class clsCurrencyExchangeScreen : protected clsScreen
 public:
   enum enOption
   {
-    ListCurrencies = 0,
-    FindCurrency = 1,
-    UpdateRate = 2,
-    CurrencyCalculator = 3,
-    MainMenu = 4
+    ListCurrencies = 1,
+    FindCurrency = 2,
+    UpdateRate = 3,
+    CurrencyCalculator = 4,
+    MainMenu = 5
   };
 
 private:
@@ -32,7 +33,9 @@ private:
     ShowCurrencyExchangeScreen();
   }
 
-  static void _ShowListCurrencies() {}
+  static void _ShowListCurrencies() {
+    clsCurrenciesScreen::ShowCurrencyListScreen();
+  }
 
   static void _ShowFindCurrency() {}
 
