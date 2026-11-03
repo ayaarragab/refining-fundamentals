@@ -183,6 +183,6 @@ public:
     if (to.CurrencyCode() == "USD")
       return USDQuantity;
     
-    return USDQuantity / to.Rate();
+    return USDQuantity * to.Rate();
   }
 };
