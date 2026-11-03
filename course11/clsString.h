@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <cctype>
 using namespace std;
 
 class clsString
@@ -129,5 +130,10 @@ class clsString
       vector<string> vec;
       words_to_vec(this->_str, vec, delim);
       return vec;
+    }
+    static string UpperAllString(string str) {
+        for (short i = 0; i < str.length(); i++)
+            str[i] = toupper(str[i]);
+        return str;
     }
 };
