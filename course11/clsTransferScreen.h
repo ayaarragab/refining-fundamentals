@@ -14,7 +14,7 @@ class clsTransferScreen: protected clsScreen {
 public:
     static void ShowTransferScreen() {
       clsBankClient Sender = clsBankClient::Find(clsInput::readString("Enter Sender Account Number"));
-      clsBankClient Reciever = clsBankClient::Find(clsInput::readString("Enter Sender Account Number"));
+      clsBankClient Reciever = clsBankClient::Find(clsInput::readString("Enter Reciever Account Number"));
       double Quantity = clsInputValidate::ReadDblNumber("Invalid number");
 
       _PrintClientInfo(Sender);

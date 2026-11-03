@@ -9,6 +9,16 @@
 
 class clsBankClient : public clsPerson
 {
+public:
+  struct stTransferLogInfo {
+    string DateTime;
+    string SenderAccNum;
+    string RecieverAccNum;
+    string SenderOldBalance;
+    string SenderNewBalance;
+    string RecieverBalance;
+    string Username;
+  };
 private:
   enum enMode
   {
@@ -176,6 +186,20 @@ private:
     file.close();
   } 
 
+  static stTransferLogInfo _ConvertToStructTransferLog(string line) {
+    stTransferLogInfo transfer;
+    vector<string> splitted;
+    clsString::words_to_vec(line, splitted, "//#");
+    transfer.DateTime = splitted[0];
+    transfer.SenderAccNum = splitted[1];
+    transfer.RecieverAccNum = splitted[2];
+    transfer.SenderOldBalance = splitted[3];
+    transfer.SenderNewBalance = splitted[4];
+    transfer.RecieverBalance = splitted[5];
+    transfer.Username = splitted[6];
+    return transfer;
+  }
+
 public:
   enum enSaveResults { svFailedEmptyObject = 0, svSuceeded = 1, svFailedAccountInUse = 2 };
 
@@ -295,6 +319,17 @@ public:
     Sender.Withdraw(quantity);
     _AddTransferToLogFile(OldQuantity, Sender, Reciever, clsDate::getNowDateAndTime());
     return true;
+  }
+
+  static vector<stTransferLogInfo> GetTransfersInfo() {
+    fstream file;
+    vector<stTransferLogInfo> transfers;
+    clsHelper::open_file(file, "transferLog.txt", 'r');
+    string line;
+    while (getline(file, line)) {
+      transfers.push_back(_ConvertToStructTransferLog(line));
+    }
+    return transfers;
   }
 
   enSaveResults Save() {
