@@ -1,0 +1,76 @@
+#pragma once
+#include "clsScreen.h"
+#include "clsInputValidate.h"
+
+class clsCurrencyExchangeScreen : protected clsScreen
+{
+
+public:
+  enum enOption
+  {
+    ListCurrencies = 0,
+    FindCurrency = 1,
+    UpdateRate = 2,
+    CurrencyCalculator = 3,
+    MainMenu = 4
+  };
+
+private:
+  static enOption _ReadMainMenuOption()
+  {
+    enOption option = (enOption)clsInputValidate::ReadIntNumberBetween(1, 9, "This is an invalid number");
+    return option;
+  }
+
+  static void _GoBackToCurrenciesMenu()
+  {
+    cout << setw(37) << left << "" << "\n\t\t\t\tPress any key to go back to Main Menue...\n";
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.get();
+    system("clear");
+    ShowCurrencyExchangeScreen();
+  }
+
+  static void _ShowListCurrencies() {}
+
+  static void _ShowFindCurrency() {}
+
+  static void _ShowUpdateRate() {}
+
+  static void _ShowCurrencyCalculator() {}
+
+  static void _PerformMenuOperation(enOption option)
+  {
+    switch (option)
+    {
+    case ListCurrencies:
+      system("clear");
+      _ShowListCurrencies();
+      _GoBackToCurrenciesMenu();
+      break;
+    case FindCurrency:
+      system("clear");
+      _ShowFindCurrency();
+      _GoBackToCurrenciesMenu();
+      break;
+    case UpdateRate:
+      system("clear");
+      _ShowUpdateRate();
+      _GoBackToCurrenciesMenu();
+      break;
+    case CurrencyCalculator:
+      system("clear");
+      _ShowCurrencyCalculator();
+      _GoBackToCurrenciesMenu();
+      break;
+    case MainMenu: {}
+      break;
+    default:
+      break;
+    }
+  }
+
+public:
+  static void ShowCurrencyExchangeScreen() {}
+};
