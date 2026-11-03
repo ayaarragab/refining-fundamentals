@@ -71,6 +71,13 @@ class clsAddNewUserScreen: protected clsScreen
 
       if (permisson)
         user.SetPermissions(user.GetPermissions() + (int)clsUser::ManageUsers);
+
+      // Login Register
+      cout << "You want to give this user [128].Login Register permission? " << endl;
+      permisson = clsInput::wants_to_enter();
+
+      if (permisson)
+        user.SetPermissions(user.GetPermissions() + (int)clsUser::LoginRegister);
     }
 
     static void _ReadUserInfo(clsUser &User)
