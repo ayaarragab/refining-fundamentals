@@ -26,8 +26,9 @@ int main()
 
     int max_num, size;
     int *arr = inputArray(size);
-
-    max_(arr, size, max_num);
+    max_num = arr[0];
+    max_(arr, size - 1, max_num);
+    delete[] arr;
     cout << max_num << "\n";
     return 0;
 }
