@@ -3,16 +3,16 @@
 using namespace std;
 
 
-string reverse(int idx, string word) {
-    if (idx < 0)
-        return "";
+void reverse(int idx, string word) {
+    if (idx == word.length())
+        return;
 
-    return word[idx] + reverse(idx - 1, word);
+    reverse(idx + 1, word);
+    cout << word[idx] << endl;
 }
 
 int main() {
   string word = "ABCD";
-  word = reverse(word.length(), word);
-  cout << word << endl;
+  reverse(0, word);
   return 0;
 }
