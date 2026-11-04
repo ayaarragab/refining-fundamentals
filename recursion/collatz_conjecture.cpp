@@ -11,7 +11,7 @@ int odd_behavior(int num) {
 }
 
 int decide(int num) {
-  bool isEven = num % 2 == 0;
+  bool isEven = ((num & 1) == 0);
   switch (isEven)
   {
   case false:
