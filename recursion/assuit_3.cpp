@@ -4,8 +4,13 @@ using namespace std;
 void NToOne(int n) {
     if (n == 0)
         return;
-
-    cout << n << "\n";
+    if (n == 1)
+    {
+        cout << n << "\n";
+        return;
+    }
+    
+    cout << n << " ";
     NToOne(n - 1);
 }
 
