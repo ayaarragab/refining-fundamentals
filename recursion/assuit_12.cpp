@@ -11,7 +11,7 @@ static int *inputArray(int &size)
     return arr;
 }
 
-void sum_(int *array, int size, int &sum)
+void sum_(int *array, int size, long long &sum)
 {
     if (size < 0)
         return;
@@ -24,10 +24,12 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int sum = 0, size;
+    long long sum = 0;
+    int size;
     int *arr = inputArray(size);
 
-    sum_(arr, size, sum);
+    sum_(arr, size - 1, sum);
+    delete[] arr;
     cout << sum << "\n";
     return 0;
 }
