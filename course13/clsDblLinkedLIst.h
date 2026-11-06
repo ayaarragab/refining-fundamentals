@@ -107,6 +107,8 @@ public:
     new_node->next = curr;
     if (curr)
       curr->prev = new_node;
+    else
+      tail = new_node;
 
     head = new_node;
     ++_length;
@@ -273,8 +275,8 @@ public:
   void DeleteNode(T val)
   {
 
-    InsertAtBeginning(NULL);
-    InsertAtEnd(NULL);
+    InsertAtBeginning(0);
+    InsertAtEnd(0);
 
     Node<T> *to_be_deleted = Find(val);
 

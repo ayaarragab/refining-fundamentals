@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #include "clsDblLinkedLIst.h"
-#include "clsMyQueue.h" // اسم ملف الـ Queue الخاص بك
+#include "clsMyQueue.h"
 
 using namespace std;
 
