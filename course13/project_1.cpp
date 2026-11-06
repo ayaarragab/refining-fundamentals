@@ -36,9 +36,9 @@ int main()
   // cout << "After Reversing\n\n";
   // list.PrintList();
 
-  int item = list.GetItem(2);
+  list.UpdateItem(2, 100);
 
-  cout << "[" << item << "]" << endl;
+  list.PrintList();
 
   return 0;
 }
