@@ -32,7 +32,19 @@ template <typename T> class clsDblLinkedList
 
       cout << "[" << curr->val << "],";
     }
-
+    void _DeallocateList()
+    {
+      Node<T> *curr = head;
+      while (curr)
+      {
+        Node<T> *temp = curr->next;
+        delete curr;
+        curr = temp;
+      }
+      _length = 0;
+      head = NULL;
+      tail = NULL;
+  }
 public:
   Node<T> *head;
   Node<T> *tail;
@@ -50,7 +62,8 @@ public:
 
   ~clsDblLinkedList()
   {
-    DeallocateList();
+    _DeallocateList();
+    cout << "---Memory freed successfully---\n";
   }
 
   void InsertAtBeginning(T val)
@@ -113,21 +126,6 @@ public:
       _handle_node_print(curr);
       curr = curr->next;
     }
-  }
-
-  void DeallocateList()
-  {
-    Node<T> *curr = head;
-    while (curr)
-    {
-      Node<T> *temp = curr->next;
-      delete curr;
-      curr = temp;
-    }
-    _length = 0;
-    head = NULL;
-    tail = NULL;
-    cout << "---Memory freed successfully---\n";
   }
 
   Node<T> *Find(T val)
@@ -203,5 +201,9 @@ public:
 
   bool IsEmpty() {
     return !_length;
+  }
+
+  void Clear() {
+    _DeallocateList();
   }
 };

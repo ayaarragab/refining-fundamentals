@@ -29,5 +29,9 @@ int main()
 
   cout << "List Size is " << list.Size() << endl;
 
+  list.Clear();
+  list.PrintList();
+  cout << "List Size is " << list.Size() << endl;
+
   return 0;
 }
