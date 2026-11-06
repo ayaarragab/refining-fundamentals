@@ -110,7 +110,7 @@ public:
                 return curr;
             curr = curr->next;
         }
-        return _empty_node();
+        return nullptr;
     }
 
     void delete_front() {
