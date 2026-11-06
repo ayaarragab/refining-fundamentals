@@ -310,6 +310,9 @@ public:
 
   T GetItem(int idx) {
     Node<T>* node = GetNode(idx);
+    if (!node)
+      return NULL;
+    
     return node->val;
   }
 };
