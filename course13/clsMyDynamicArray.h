@@ -1,25 +1,35 @@
+#include <bits/stdc++.h>
 #pragma once
-#include "clsDblLinkedLIst.h"
+
+using namespace std;
 
 template <typename T>
 class clsMyDynamicArray
 {
+private:
+  bool _IsIdxValid(int idx) {
+    return ((idx < _length) && (idx >= 0));
+  }
 protected:
-  clsDblLinkedList<T> _list;
+  T* _Array;
   int _length;
 public:
   clsMyDynamicArray(int length) {
     _length = length;
-    while (length--)
-      _list.InsertAtEnd(0);
+    _Array = new T[length];
   }
   void SetItem(int idx, int val) {
-    _list.InsertAfter(idx - 1, val);
+    if (!_IsIdxValid(idx))
+      return;
+    
+    _Array[idx] = val;
   }
   void PrintList() {
-    _list.PrintList();
+    for (short i = 0; i < _length; i++)
+      cout << _Array[i] << endl;
+    
   }
   bool IsEmpty() {
-    return _list.IsEmpty();
+    return !_length;
   }
 };
