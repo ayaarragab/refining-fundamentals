@@ -299,7 +299,7 @@ public:
   }
 
   Node<T>* GetNode(int idx) {
-    if (idx >= _length)
+    if (idx >= _length || idx < 0)
       return NULL;
     
     Node<T> *curr = head;
