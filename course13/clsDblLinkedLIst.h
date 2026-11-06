@@ -7,6 +7,7 @@ public:
   T val;
   Node<T> *next;
   Node<T> *prev;
+  
   Node(T val = NULL, Node<T> *next = NULL, Node<T> *prev = NULL)
   {
     this->val = val;
@@ -15,7 +16,7 @@ public:
   }
 };
 
-template <typename T> class clsDblLinkedLIst
+template <typename T> class clsDblLinkedList
 {
   private:
     void _handle_node_print(Node<T> *curr)
@@ -37,7 +38,7 @@ public:
   Node<T> *tail;
   T length;
 
-  clsDblLinkedLIst(Node<T> *head)
+  clsDblLinkedList(Node<T> *head)
   {
     this->head = head;
     this->tail = head;
@@ -47,7 +48,7 @@ public:
   void InsertAtBeginning(T val)
   {
     Node<T> *curr = head;
-    Node<T> *new_node = new Node(val, NULL);
+    Node<T> *new_node = new Node<T>(val, NULL);
     new_node->next = curr;
     if (curr && curr->prev)
       curr->prev = new_node;
@@ -58,7 +59,7 @@ public:
 
   void InsertAtEnd(T val)
   {
-    Node<T> *new_node = new Node(val, NULL);
+    Node<T> *new_node = new Node<T>(val, NULL);
     if (tail)
       tail->next = new_node;
     else {
@@ -73,7 +74,7 @@ public:
 
   void InsertAfter(T before_val, T val)
   {
-    Node<T> *new_node = new Node(val, NULL);
+    Node<T> *new_node = new Node<T>(val, NULL);
 
     Node<T> *before_node = Find(before_val);
 
