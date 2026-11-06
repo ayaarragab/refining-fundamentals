@@ -30,4 +30,32 @@ public:
   bool IsEmpty() {
     return _list.IsEmpty();
   }
+
+  T GetItem(int idx) {
+    return _list.GetItem(idx);
+  }
+
+  bool UpdateItem(int idx, T val) {
+    return _list.UpdateItem(idx, val);
+  }
+
+  void InsertAfter(int idx, int val) {
+    return _list.InsertAfter(idx, val);
+  }
+
+  void InsertAtFront(int val) {
+    return _list.InsertAtBeginning(val);
+  }
+
+  void InsertAtBack(int val) {
+    return _list.InsertAtEnd(val);
+  }
+
+  void Reverse() {
+    _list.Reverse();
+  }
+
+  void Clear() {
+    _list.Clear();
+  }
 };
