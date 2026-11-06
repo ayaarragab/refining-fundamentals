@@ -27,11 +27,9 @@ int main()
   cout << "After Deleting 10\n\n";
   list.PrintList();
 
-  cout << "List Size is " << list.Size() << endl;
-
-  list.Clear();
+  list.Reverse();
+  cout << "After Reversing\n\n";
   list.PrintList();
-  cout << "List Size is " << list.Size() << endl;
 
   return 0;
 }

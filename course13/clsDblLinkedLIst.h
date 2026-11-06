@@ -210,4 +210,21 @@ public:
   {
     _DeallocateList();
   }
+
+  void Reverse() {
+    Node<T>* prev_tail = tail->prev;
+    Node<T>* head_next = head->next;
+
+    tail->next = prev_tail;
+    prev_tail->prev = tail;
+    tail->prev = NULL;
+
+    head->prev = head_next;
+    head_next->next = head;
+    head->next = NULL;
+
+    Node<T>* temp = head;
+    head = tail;
+    tail = temp;
+  }
 };
