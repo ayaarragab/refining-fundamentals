@@ -285,14 +285,13 @@ public:
     while (curr)
     {
       save_next = curr->next;
-      save_prev = curr->prev;
 
       if (!save_next)
         head = curr;
-      if (!save_prev)
+      if (!curr->prev)
         tail = curr;
 
-      curr->next = save_prev;
+      curr->next = curr->prev;
       curr->prev = save_next;
 
       curr = save_next;
