@@ -6,7 +6,7 @@ class Node
 public:
     int val;
     Node *next;
-    Node(int val, Node *next = NULL)
+    Node(int val = NULL, Node *next = NULL)
     {
         this->val = val;
         this->next = next;
@@ -42,7 +42,7 @@ public:
     LinkedList(Node *head)
     {
         this->head = head;
-        this->tail = NULL;
+        this->tail = head;
         length = 1;
     }
 
@@ -52,13 +52,11 @@ public:
         Node *new_node = new Node(val, NULL);
         new_node->next = curr;
         head = new_node;
-        tail = curr;
         ++length;
     }
 
     void insert_at_the_end(int val)
     {
-        Node *curr = head;
         Node *new_node = new Node(val, NULL);
         tail->next = new_node;
         tail = new_node;
@@ -114,6 +112,49 @@ public:
         }
         return _empty_node();
     }
+
+    void delete_front() {
+        Node* new_head = head->next;
+        head->next = NULL;
+        delete head;
+        head = new_head;
+    }
+
+    void delete_end() {
+        Node *new_tail = head;
+        
+        while (new_tail->next != tail)
+            new_tail = new_tail->next;
+        
+
+        new_tail->next = NULL;
+        delete tail;
+        tail = new_tail;
+    }
+
+    void delete_node(int val) {
+        
+        insert_at_the_beginning(NULL);
+        insert_at_the_end(NULL);
+
+        Node* before_node = head;
+
+        while (before_node && before_node->next && before_node->next->val != val)
+            before_node = before_node->next;
+        
+        if (before_node->next)
+        {
+            if (before_node->next->next)
+            {
+                Node *to_be_deleted = before_node->next;
+                before_node->next = before_node->next->next;
+                delete to_be_deleted;
+            }
+        }
+        delete_front();
+        delete_end();
+        --length;
+    }
 };
 
 int main()
@@ -133,6 +174,10 @@ int main()
 
     list.insert_after(2, 10);
     cout << "After adding 10 after 2\n";
+    list.print_list();
+
+    list.delete_node(10);
+    cout << "After Deleting 10\n";
     list.print_list();
 
     list.deallocate_list();
