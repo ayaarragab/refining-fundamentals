@@ -5,52 +5,64 @@ class Node {
     public:
         int val;
         Node* next;
-        Node(int val, Node* next) {
+        Node(int val, Node* next = NULL) {
             this->val = val;
             this->next =next;
         }
 };
 
-void insert_at_the_beginning(Node *&head, int val) {
-    Node *curr = head;
-    Node *new_node = new Node(val, NULL);
-    new_node->next = curr;
-    head = new_node;
-}
-
-void print_list(Node *head) {
-    Node *curr = head;
-    while (curr)
-    {
-        if (!curr->next)
-        {
-            cout << "[" << curr->val << "]\n"; 
-            return;
+class LinkedList {
+    public:
+        Node *head;
+        int length;
+        
+        LinkedList(Node *head) {
+            this->head = head;
+            length = 1;
         }
-        cout << "[" << curr->val << "], "; 
-        curr = curr->next;
-    }
-}
 
-void deallocate_list(Node *head) {
-    Node *curr = head;
-    while (curr)
-    {
-        Node *temp = curr->next;
-        delete curr;
-        curr = temp;
-    }
-    cout << "---Memory freed successfully---\n";
-}
+        void insert_at_the_beginning(int val) {
+            Node *curr = head;
+            Node *new_node = new Node(val, NULL);
+            new_node->next = curr;
+            head = new_node;
+            ++length;
+        }
+
+        void print_list() {
+            Node *curr = head;
+            while (curr)
+            {
+                if (!curr->next)
+                {
+                    cout << "[" << curr->val << "]\n"; 
+                    return;
+                }
+                cout << "[" << curr->val << "], "; 
+                curr = curr->next;
+            }
+        }
+
+        void deallocate_list() {
+            Node *curr = head;
+            while (curr)
+            {
+                Node *temp = curr->next;
+                delete curr;
+                curr = temp;
+            }
+            cout << "---Memory freed successfully---\n";
+        }
+};
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     
-    Node *head = new Node(1, NULL);
-    insert_at_the_beginning(head, 2);
-    cout << head->val << endl;
-    print_list(head);
-    deallocate_list(head);
+    LinkedList list = LinkedList(new Node(1, NULL));
+
+    list.insert_at_the_beginning(2);
+    list.print_list();
+    list.deallocate_list();
     return 0;
 }
