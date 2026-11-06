@@ -18,10 +18,12 @@ class LinkedList {
         }
     public:
         Node *head;
+        Node *tail;
         int length;
         
         LinkedList(Node *head) {
             this->head = head;
+            this->tail = NULL;
             length = 1;
         }
 
@@ -30,6 +32,7 @@ class LinkedList {
             Node *new_node = new Node(val, NULL);
             new_node->next = curr;
             head = new_node;
+            tail = curr;
             ++length;
         }
 
@@ -80,6 +83,8 @@ int main() {
     list.print_list();
 
     cout << (list.find(1))->val << endl;
+
+    cout << list.tail->val << endl;
 
     list.deallocate_list();
 
