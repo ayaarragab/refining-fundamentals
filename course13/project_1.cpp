@@ -27,7 +27,5 @@ int main()
   cout << "After Deleting 10\n\n";
   list.PrintList();
 
-  list.DeallocateList();
-
   return 0;
 }

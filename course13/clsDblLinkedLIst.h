@@ -45,6 +45,11 @@ public:
     length = 1;
   }
 
+  ~clsDblLinkedList()
+  {
+    DeallocateList();
+  }
+
   void InsertAtBeginning(T val)
   {
     Node<T> *curr = head;
