@@ -188,4 +188,7 @@ public:
     DeleteLastNode();
     --length;
   }
+  int Size() {
+    return length;
+  }
 };
