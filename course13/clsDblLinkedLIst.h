@@ -1,3 +1,4 @@
+#pragma once
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -84,7 +85,7 @@ public:
   Node<T> *head;
   Node<T> *tail;
 
-  clsDblLinkedList(Node<T> *head)
+  clsDblLinkedList(Node<T> *head = NULL)
   {
     this->head = head;
     this->tail = head;
@@ -93,7 +94,6 @@ public:
     else
       _length = 0;
   }
-
   ~clsDblLinkedList()
   {
     _DeallocateList();
@@ -235,12 +235,19 @@ public:
   {
     if (!head)
       return;
-    Node<T> *new_head = head->next;
-    head->next = NULL;
-    delete head;
-    head = new_head;
-    if (new_head)
-      new_head->prev = NULL;
+
+    Node<T> *to_be_deleted = head;
+    
+    if (head == tail)
+    {
+      head = NULL;
+      tail = NULL;
+    } else {
+      head = head->next;
+      head->prev = NULL;
+    }
+    
+    delete to_be_deleted;
 
     --_length;
   }
