@@ -202,6 +202,6 @@ public:
   }
 
   bool IsEmpty() {
-    return _length == 0;
+    return !_length;
   }
 };
