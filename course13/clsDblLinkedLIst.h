@@ -1,13 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename T> class Node
+template <typename T>
+class Node
 {
 public:
   T val;
   Node<T> *next;
   Node<T> *prev;
-  
+
   Node(T val = NULL, Node<T> *next = NULL, Node<T> *prev = NULL)
   {
     this->val = val;
@@ -16,39 +17,33 @@ public:
   }
 };
 
-template <typename T> class clsDblLinkedList
+template <typename T>
+class clsDblLinkedList
 {
-  private:
-    void _handle_node_print(Node<T> *curr)
+private:
+  T _length;
+  void _handle_node_print(Node<T> *curr)
+  {
+    if (!curr->next)
     {
-      if (!curr->next)
-      {
-        cout << "[" << curr->val << "] <- Tail\n";
-        return;
-      }
-
-      if (curr == head)
-        cout << "Head ->";
-
-      cout << "[" << curr->val << "],";
+      cout << "[" << curr->val << "] <- Tail\n";
+      return;
     }
-    void _DeallocateList()
-    {
-      Node<T> *curr = head;
-      while (curr)
-      {
-        Node<T> *temp = curr->next;
-        delete curr;
-        curr = temp;
-      }
-      _length = 0;
-      head = NULL;
-      tail = NULL;
+
+    if (curr == head)
+      cout << "Head ->";
+
+    cout << "[" << curr->val << "],";
   }
+  void _DeallocateList()
+  {
+    while (_length > 0)
+      DeleteFirstNode();
+  }
+
 public:
   Node<T> *head;
   Node<T> *tail;
-  T _length;
 
   clsDblLinkedList(Node<T> *head)
   {
@@ -73,7 +68,7 @@ public:
     new_node->next = curr;
     if (curr && curr->prev)
       curr->prev = new_node;
-    
+
     head = new_node;
     ++_length;
   }
@@ -83,11 +78,12 @@ public:
     Node<T> *new_node = new Node<T>(val, NULL);
     if (tail)
       tail->next = new_node;
-    else {
+    else
+    {
       tail = new_node;
       head = new_node;
     }
-    
+
     new_node->prev = tail;
     tail = new_node;
     ++_length;
@@ -107,7 +103,7 @@ public:
       head = new_node;
     new_node->prev = before_node;
     new_node->next = save;
-    
+
     if (save)
       save->prev = new_node;
     else
@@ -137,16 +133,21 @@ public:
         return curr;
       curr = curr->next;
     }
-    return nullptr;;
+    return nullptr;
+    ;
   }
 
   void DeleteFirstNode()
   {
+    if (!head)
+      return;
     Node<T> *new_head = head->next;
     head->next = NULL;
     delete head;
     head = new_head;
-    new_head->prev = NULL;
+    if (new_head)
+      new_head->prev = NULL;
+    
     --_length;
   }
 
@@ -195,15 +196,18 @@ public:
     DeleteLastNode();
     --_length;
   }
-  int Size() {
+  int Size()
+  {
     return _length;
   }
 
-  bool IsEmpty() {
+  bool IsEmpty()
+  {
     return !_length;
   }
 
-  void Clear() {
+  void Clear()
+  {
     _DeallocateList();
   }
 };
