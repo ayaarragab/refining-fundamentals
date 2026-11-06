@@ -126,11 +126,32 @@ public:
     ++_length;
   }
 
-  void InsertAfter(T before_val, T val)
+  void InsertAfter(Node<T> * before_node, T val)
   {
     Node<T> *new_node = new Node<T>(val, NULL);
 
-    Node<T> *before_node = Find(before_val);
+    Node<T> *save = before_node->next;
+
+    if (before_node)
+      before_node->next = new_node;
+    else
+      head = new_node;
+    new_node->prev = before_node;
+    new_node->next = save;
+
+    if (save)
+      save->prev = new_node;
+    else
+      tail = new_node;
+
+    ++_length;
+  }
+
+  void InsertAfter(int idx, T val)
+  {
+    Node<T> *new_node = new Node<T>(val, NULL);
+
+    Node<T> *before_node = GetNode(idx);
 
     Node<T> *save = before_node->next;
 

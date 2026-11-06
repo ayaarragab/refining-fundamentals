@@ -36,7 +36,7 @@ int main()
   // cout << "After Reversing\n\n";
   // list.PrintList();
 
-  list.UpdateItem(2, 100);
+  list.InsertAfter(2, 100);
 
   list.PrintList();
 
