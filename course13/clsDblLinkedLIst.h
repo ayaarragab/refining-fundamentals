@@ -200,4 +200,8 @@ public:
   int Size() {
     return _length;
   }
+
+  bool IsEmpty() {
+    return _length == 0;
+  }
 };
