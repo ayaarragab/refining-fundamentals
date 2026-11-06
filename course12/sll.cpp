@@ -11,10 +11,10 @@ class Node {
         }
 };
 
-void insert_at_the_beginning(Node *head, int val) {
+void insert_at_the_beginning(Node *&head, int val) {
     Node *curr = head;
     Node *new_node = new Node(val, NULL);
-    curr->next = new_node;
+    new_node->next = curr;
     head = new_node;
 }
 
@@ -49,6 +49,7 @@ int main() {
     
     Node *head = new Node(1, NULL);
     insert_at_the_beginning(head, 2);
+    cout << head->val << endl;
     print_list(head);
     deallocate_list(head);
     return 0;
