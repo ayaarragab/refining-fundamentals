@@ -65,6 +65,17 @@ public:
         ++length;
     }
 
+    void insert_after(int before_val, int val) {
+        Node *new_node = new Node(val, NULL);
+
+        Node *before_node = find(before_val);
+        Node *save = before_node->next;
+        
+        before_node->next = new_node;
+        new_node->next = save;
+        ++length;
+    }
+
     void print_list()
     {
         Node *curr = head;
@@ -120,10 +131,11 @@ int main()
     cout << "After adding 3 to the end\n";
     list.print_list();
 
-    list.deallocate_list();
-
-    cout << "After Deallocation\n";
+    list.insert_after(2, 10);
+    cout << "After adding 10 after 2\n";
     list.print_list();
+
+    list.deallocate_list();
 
     return 0;
 }
