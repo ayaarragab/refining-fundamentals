@@ -22,7 +22,29 @@ class clsDblLinkedList
 {
 private:
   T _length;
+  void _print_header()
+  {
+    cout << left;
+    cout << setw(15) << "[Prev]" << setw(15) << "[Current]" << setw(15) << "[Next]" << "\n\n";
+  }
+
   void _handle_node_print(Node<T> *curr)
+  {
+    cout << left;
+
+    string prev_str = (curr->prev) ? "[" + to_string(curr->prev->val) + "]" : "[NULL]";
+    cout << setw(15) << prev_str;
+
+    string curr_str = "[" + to_string(curr->val) + "]";
+    cout << setw(15) << curr_str;
+
+    string next_str = (curr->next) ? "[" + to_string(curr->next->val) + "]" : "[NULL]";
+    cout << setw(15) << next_str;
+
+    cout << endl;
+  }
+
+  void _handle_node_print_next_path(Node<T> *curr)
   {
     if (!curr->next)
     {
@@ -35,6 +57,21 @@ private:
 
     cout << "[" << curr->val << "],";
   }
+
+  void _handle_node_print_prev_path(Node<T> *curr)
+  {
+    if (!curr->prev)
+    {
+      cout << "[" << curr->val << "] <- Head\n";
+      return;
+    }
+
+    if (curr == tail)
+      cout << "Tail ->";
+
+    cout << "[" << curr->val << "],";
+  }
+
   void _DeallocateList()
   {
     while (_length > 0)
@@ -66,7 +103,7 @@ public:
     Node<T> *curr = head;
     Node<T> *new_node = new Node<T>(val, NULL);
     new_node->next = curr;
-    if (curr && curr->prev)
+    if (curr)
       curr->prev = new_node;
 
     head = new_node;
@@ -117,11 +154,40 @@ public:
     Node<T> *curr = head;
     if (!curr)
       cout << "[]\n";
+    _print_header();
     while (curr)
     {
       _handle_node_print(curr);
       curr = curr->next;
     }
+  }
+
+  void DebugPrintNextPath()
+  {
+    Node<T> *curr = head;
+    if (!curr)
+      cout << "[]\n";
+    cout << endl;
+    while (curr)
+    {
+      _handle_node_print_next_path(curr);
+      curr = curr->next;
+    }
+    cout << endl;
+  }
+
+  void DebugPrintPrevPath()
+  {
+    Node<T> *curr = tail;
+    if (!curr)
+      cout << "[]\n";
+    cout << endl;
+    while (curr)
+    {
+      _handle_node_print_prev_path(curr);
+      curr = curr->prev;
+    }
+    cout << endl;
   }
 
   Node<T> *Find(T val)
@@ -147,7 +213,7 @@ public:
     head = new_head;
     if (new_head)
       new_head->prev = NULL;
-    
+
     --_length;
   }
 
@@ -211,20 +277,25 @@ public:
     _DeallocateList();
   }
 
-  void Reverse() {
-    Node<T>* prev_tail = tail->prev;
-    Node<T>* head_next = head->next;
+  void Reverse()
+  {
+    if (_length < 2)
+      return;
+    Node<T> *curr = head, *save_next, *save_prev;
+    while (curr)
+    {
+      save_next = curr->next;
+      save_prev = curr->prev;
 
-    tail->next = prev_tail;
-    prev_tail->prev = tail;
-    tail->prev = NULL;
+      if (!save_next)
+        head = curr;
+      if (!save_prev)
+        tail = curr;
 
-    head->prev = head_next;
-    head_next->next = head;
-    head->next = NULL;
+      curr->next = save_prev;
+      curr->prev = save_next;
 
-    Node<T>* temp = head;
-    head = tail;
-    tail = temp;
+      curr = save_next;
+    }
   }
 };
