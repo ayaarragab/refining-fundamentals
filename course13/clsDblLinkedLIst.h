@@ -36,16 +36,16 @@ template <typename T> class clsDblLinkedList
 public:
   Node<T> *head;
   Node<T> *tail;
-  T length;
+  T _length;
 
   clsDblLinkedList(Node<T> *head)
   {
     this->head = head;
     this->tail = head;
     if (head)
-      length = 1;
+      _length = 1;
     else
-      length = 0;
+      _length = 0;
   }
 
   ~clsDblLinkedList()
@@ -62,7 +62,7 @@ public:
       curr->prev = new_node;
     
     head = new_node;
-    ++length;
+    ++_length;
   }
 
   void InsertAtEnd(T val)
@@ -77,7 +77,7 @@ public:
     
     new_node->prev = tail;
     tail = new_node;
-    ++length;
+    ++_length;
   }
 
   void InsertAfter(T before_val, T val)
@@ -100,7 +100,7 @@ public:
     else
       tail = new_node;
 
-    ++length;
+    ++_length;
   }
 
   void PrintList()
@@ -124,7 +124,7 @@ public:
       delete curr;
       curr = temp;
     }
-    length = 0;
+    _length = 0;
     head = NULL;
     tail = NULL;
     cout << "---Memory freed successfully---\n";
@@ -149,7 +149,7 @@ public:
     delete head;
     head = new_head;
     new_head->prev = NULL;
-    --length;
+    --_length;
   }
 
   void DeleteLastNode()
@@ -167,7 +167,7 @@ public:
       head = NULL;
 
     delete to_be_deleted;
-    --length;
+    --_length;
   }
 
   void DeleteNode(T val)
@@ -195,9 +195,9 @@ public:
       delete to_be_deleted;
     DeleteFirstNode();
     DeleteLastNode();
-    --length;
+    --_length;
   }
   int Size() {
-    return length;
+    return _length;
   }
 };
