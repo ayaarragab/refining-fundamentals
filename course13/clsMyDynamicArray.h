@@ -15,8 +15,16 @@ protected:
   int _length;
 public:
   clsMyDynamicArray(int length) {
-    _length = length;
-    _Array = new T[length];
+    if (size > 0)
+    {
+      _length = length;
+      _Array = new T[length];
+    }
+    else
+      _length = 0;
+  }
+  ~clsMyDynamicArray() {
+    delete[] _Array;
   }
   void SetItem(int idx, int val) {
     if (!_IsIdxValid(idx))
