@@ -7,16 +7,16 @@ protected:
   clsDblLinkedList<T> _list;
 public:
   void Push(T val) {
-    _list->InsertAtEnd(val);
+    _list.InsertAtEnd(val);
   }
   void Pop() {
-    _list->DeleteFirstNode();
+    _list.DeleteFirstNode();
   }
   Node<T>* Front() {
-    return _list->head;
+    return _list.head;
   }
   Node<T>* Back() {
-    return _list->tail;
+    return _list.tail;
   }
 
   void PrintList() {
