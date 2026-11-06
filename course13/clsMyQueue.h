@@ -1,21 +1,33 @@
 #pragma once
 #include "clsDblLinkedLIst.h"
 
-template <typename T> class clsMyQueue: public clsDblLinkedList<T>
+template <typename T> class clsMyQueue
 {
-private:
-  /* data */
+protected:
+  clsDblLinkedList<T> _list;
 public:
   void Push(T val) {
-    this->InsertAtEnd(val);
+    _list->InsertAtEnd(val);
   }
   void Pop() {
-    this->DeleteFirstNode();
+    _list->DeleteFirstNode();
   }
   Node<T>* Front() {
-    return this->head;
+    return _list->head;
   }
   Node<T>* Back() {
-    return this->tail;
+    return _list->tail;
+  }
+
+  void PrintList() {
+    _list.PrintList();
+  }
+
+  int Size() {
+    return _list.Size();
+  }
+
+  bool IsEmpty() {
+    return _list.IsEmpty();
   }
 };
