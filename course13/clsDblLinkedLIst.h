@@ -297,4 +297,14 @@ public:
       curr = save_next;
     }
   }
+
+  Node<T>* GetNode(int idx) {
+    if (idx >= _length)
+      return NULL;
+    
+    Node<T> *curr = head;
+    while (idx--)
+      curr = curr->next;
+    return curr;
+  }
 };

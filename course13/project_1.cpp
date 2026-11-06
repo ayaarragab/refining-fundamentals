@@ -32,9 +32,13 @@ int main()
 
   // cout << list.head->val << endl;
 
-  list.Reverse();
-  cout << "After Reversing\n\n";
-  list.PrintList();
+  // list.Reverse();
+  // cout << "After Reversing\n\n";
+  // list.PrintList();
+
+  Node<int>* node = list.GetNode(2);
+
+  cout << "[" << node->val << "]" << endl;
 
   return 0;
 }
