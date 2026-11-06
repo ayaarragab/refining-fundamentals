@@ -315,4 +315,9 @@ public:
     
     return node->val;
   }
+
+  void UpdateItem(int idx, T val) {
+    Node<T>* node = GetNode(idx);
+    node->val = val;
+  }
 };
