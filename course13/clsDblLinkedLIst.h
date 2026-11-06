@@ -316,8 +316,12 @@ public:
     return node->val;
   }
 
-  void UpdateItem(int idx, T val) {
+  bool UpdateItem(int idx, T val) {
     Node<T>* node = GetNode(idx);
+    if (!node)
+      return false;
+    
     node->val = val;
+    return true;
   }
 };
