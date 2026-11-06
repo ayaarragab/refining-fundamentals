@@ -12,6 +12,10 @@ class Node {
 };
 
 class LinkedList {
+    private:
+        Node *_empty_node() {
+            return new Node(-1);
+        }
     public:
         Node *head;
         int length;
@@ -53,6 +57,17 @@ class LinkedList {
             }
             cout << "---Memory freed successfully---\n";
         }
+
+        Node * find(int val) {
+            Node *curr = head;
+            while (curr)
+            {
+                if (curr->val == val)
+                    return curr;
+                curr = curr->next;
+            }
+            return _empty_node();
+        }
 };
 
 int main() {
@@ -63,6 +78,10 @@ int main() {
 
     list.insert_at_the_beginning(2);
     list.print_list();
+
+    cout << (list.find(1))->val << endl;
+
     list.deallocate_list();
+
     return 0;
 }
