@@ -42,7 +42,10 @@ public:
   {
     this->head = head;
     this->tail = head;
-    length = 1;
+    if (head)
+      length = 1;
+    else
+      length = 0;
   }
 
   ~clsDblLinkedList()
@@ -146,6 +149,7 @@ public:
     delete head;
     head = new_head;
     new_head->prev = NULL;
+    --length;
   }
 
   void DeleteLastNode()
