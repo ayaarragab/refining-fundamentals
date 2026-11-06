@@ -27,7 +27,9 @@ private:
     cout << left;
     cout << setw(15) << "[Prev]" << setw(15) << "[Current]" << setw(15) << "[Next]" << "\n\n";
   }
-
+  bool _validate_index(int idx) {
+    return (idx < _length) && (idx > 0);
+  }
   void _handle_node_print(Node<T> *curr)
   {
     cout << left;
@@ -147,8 +149,11 @@ public:
     ++_length;
   }
 
-  void InsertAfter(int idx, T val)
+  bool InsertAfter(int idx, T val)
   {
+    if (!_validate_index(idx))
+      return false;
+  
     Node<T> *new_node = new Node<T>(val, NULL);
 
     Node<T> *before_node = GetNode(idx);
@@ -168,6 +173,8 @@ public:
       tail = new_node;
 
     ++_length;
+
+    return true;
   }
 
   void PrintList()
@@ -320,7 +327,7 @@ public:
   }
 
   Node<T>* GetNode(int idx) {
-    if (idx >= _length || idx < 0)
+    if (!_validate_index(idx))
       return NULL;
     
     Node<T> *curr = head;
