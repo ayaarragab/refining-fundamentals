@@ -309,12 +309,7 @@ public:
   }
 
   T GetItem(int idx) {
-    if (idx >= _length || idx < 0)
-      return NULL;
-    
-    Node<T> *curr = head;
-    while (idx--)
-      curr = curr->next;
-    return curr->val;
+    Node<T>* node = GetNode(idx);
+    return node->val;
   }
 };
