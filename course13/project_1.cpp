@@ -36,9 +36,9 @@ int main()
   // cout << "After Reversing\n\n";
   // list.PrintList();
 
-  Node<int>* node = list.GetNode(2);
+  int item = list.GetItem(2);
 
-  cout << "[" << node->val << "]" << endl;
+  cout << "[" << item << "]" << endl;
 
   return 0;
 }

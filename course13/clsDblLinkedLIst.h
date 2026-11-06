@@ -307,4 +307,14 @@ public:
       curr = curr->next;
     return curr;
   }
+
+  T GetItem(int idx) {
+    if (idx >= _length || idx < 0)
+      return NULL;
+    
+    Node<T> *curr = head;
+    while (idx--)
+      curr = curr->next;
+    return curr->val;
+  }
 };
