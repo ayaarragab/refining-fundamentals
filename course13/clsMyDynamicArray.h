@@ -153,7 +153,7 @@ public:
     return idx;
   }
 
-  void InsertAt(int idx, int val)
+  void InsertAt(int idx, T val)
   {
     if (!_IsIdxValid(idx))
       return;
@@ -172,5 +172,27 @@ public:
 
     delete[] _Array;
     _Array = newArr;
+  }
+
+  void InsertAtBeginning(T val) {
+    InsertAt(0, val);
+  }
+
+  void InsertBefore(int idx, T val) {
+    if (!_IsIdxValid(idx - 1))
+      return;
+    
+    InsertAt(idx - 1, val);
+  }
+
+  void InsertAfter(int idx, T val) {
+    if (!_IsIdxValid(idx + 1))
+      return;
+    
+    InsertAt(idx + 1, val);
+  }
+
+  void InsertAtEnd(T val) {
+    InsertAt(_length - 1, val);
   }
 };
