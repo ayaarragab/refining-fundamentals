@@ -20,6 +20,19 @@ private:
     _Array[r] = temp;
     _Reverse(l + 1, r - 1);
   }
+  void _SwapEntries(T &e1, T &e2) {
+    T temp = e1;
+    e1 = e2;
+    e2 = temp;
+  }
+  void _DeleteAtItem(int idx) {
+    if(!_IsIdxValid(idx))
+      return;
+    if (idx == _length - 1)
+      return;
+    _SwapEntries(_Array[idx], _Array[idx + 1]);
+    _DeleteAtItem(idx + 1);
+  }
 protected:
   T *_Array;
   int _length;
@@ -54,7 +67,7 @@ public:
   {
     cout << endl;
     for (short i = 0; i < _length; i++)
-      cout << _Array[i] << endl;
+      cout << "Index["  << i << "]: " << _Array[i] << endl;
     cout << "\n\n";
   }
 
@@ -93,4 +106,8 @@ public:
     return _Array[idx];
   }
 
+  void DeleteItemAt(int idx) {
+    _DeleteAtItem(idx);
+    --_length;
+  }
 };
