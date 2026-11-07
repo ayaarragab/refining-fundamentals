@@ -15,16 +15,13 @@ int main()
   MyArray.SetItem(2, 30);
   MyArray.SetItem(3, 40);
 
-  cout << "Array Elements Before Resizingto 2: ";
+  cout << "Before Reversing : \n";
   MyArray.PrintList();
   
-  cout << "Array Elements After Resizing to 2: ";
-  MyArray.Resize(2);
+  MyArray.Reverse();
+  cout << "After Reversing : \n";
   MyArray.PrintList();
-  
-  cout << "Array Elements After Resizing to 10: ";
-  MyArray.Resize(10);
-  MyArray.PrintList();
+
 
   return 0;
 }

@@ -11,7 +11,14 @@ private:
   {
     return ((idx < _length) && (idx >= 0));
   }
-
+  void _Reverse(int l, int r) {
+    if (l == r || l > r)
+      return;
+    T temp = _Array[l];
+    _Array[l] = _Array[r];
+    _Array[r] = temp;
+    _Reverse(l + 1, r - 1);
+  }
 protected:
   T *_Array;
   int _length;
@@ -27,10 +34,12 @@ public:
     else
       _length = 0;
   }
+
   ~clsMyDynamicArray()
   {
     delete[] _Array;
   }
+
   void SetItem(int idx, int val)
   {
     if (!_IsIdxValid(idx))
@@ -38,6 +47,7 @@ public:
 
     _Array[idx] = val;
   }
+
   void PrintList()
   {
     cout << endl;
@@ -45,10 +55,12 @@ public:
       cout << _Array[i] << endl;
     cout << "\n\n";
   }
+
   bool IsEmpty()
   {
     return !_length;
   }
+
   void Resize(int newSize) {
     if (newSize < 0)
       newSize = 0;
@@ -64,4 +76,18 @@ public:
     _Array = new_arr;
     _length = newSize;
   }
+
+  void Clear() {
+    delete[] _Array;
+    _length = 0;
+  }
+
+  void Reverse() {
+    _Reverse(0, _length - 1);
+  }
+
+  void GetItem(int idx) {
+    return _Array[idx];
+  }
+
 };
