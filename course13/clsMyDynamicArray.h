@@ -110,4 +110,12 @@ public:
     _DeleteAtItem(idx);
     --_length;
   }
+
+  void DeleteFirstItem() {
+    DeleteItemAt(0);
+  }
+
+  void DeleteLastItem() {
+    DeleteItemAt(_length - 1);
+  }
 };

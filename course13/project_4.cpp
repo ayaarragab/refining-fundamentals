@@ -16,12 +16,16 @@ int main()
   MyArray.SetItem(3, 40);
   MyArray.SetItem(4, 100);
 
-  cout << "Before Deleting item at 3 : \n";
+  cout << "Before Deleting first item: \n";
 
   MyArray.PrintList();
 
-  MyArray.DeleteItemAt(3);
-  cout << "After Deleting item at 3 : \n";
+  MyArray.DeleteFirstItem();
+  cout << "After Deleting first item: \n";
+  MyArray.PrintList();
+
+  MyArray.DeleteLastItem();
+  cout << "After Deleting last item: \n";
   MyArray.PrintList();
   return 0;
 }
