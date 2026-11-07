@@ -50,6 +50,9 @@ public:
     return !_length;
   }
   void Resize(int newSize) {
+    if (newSize < 0)
+      newSize = 0;
+    
     T* new_arr = new T[newSize];
     for (short i = 0; i < newSize; i++) {
       if (i < _length)
@@ -57,6 +60,7 @@ public:
       else
         break;
     }
+    delete[] _Array;
     _Array = new_arr;
     _length = newSize;
   }
