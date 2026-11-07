@@ -16,17 +16,12 @@ int main()
   MyArray.SetItem(3, 40);
   MyArray.SetItem(4, 100);
 
-  cout << "Before Deleting first item: \n";
+  cout << "Before inserting Element 50 at index 2: \n";
 
   MyArray.PrintList();
 
-  int index = MyArray.Find(30);
-  cout << "Element 30 at index " << index << endl;
-
-
-  cout << "Deleting Element 30 " << endl;;
-  
-  MyArray.DeleteItem(30);
+  MyArray.InsertAt(2, 50);
+  cout << "After inserting Element 50 at index 2" << endl;
   MyArray.PrintList();
   return 0;
 }

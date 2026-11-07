@@ -12,7 +12,8 @@ private:
   {
     return ((idx < _length) && (idx >= 0));
   }
-  void _Reverse(int l, int r) {
+  void _Reverse(int l, int r)
+  {
     if (l == r || l > r)
       return;
     T temp = _Array[l];
@@ -20,19 +21,22 @@ private:
     _Array[r] = temp;
     _Reverse(l + 1, r - 1);
   }
-  void _SwapEntries(T &e1, T &e2) {
+  void _SwapEntries(T &e1, T &e2)
+  {
     T temp = e1;
     e1 = e2;
     e2 = temp;
   }
-  void _DeleteAtItem(int idx) {
-    if(!_IsIdxValid(idx))
+  void _Shift(int idx)
+  {
+    if (!_IsIdxValid(idx))
       return;
     if (idx == _length - 1)
       return;
     _SwapEntries(_Array[idx], _Array[idx + 1]);
-    _DeleteAtItem(idx + 1);
+    _Shift(idx + 1);
   }
+
 protected:
   T *_Array;
   int _length;
@@ -67,7 +71,7 @@ public:
   {
     cout << endl;
     for (short i = 0; i < _length; i++)
-      cout << "Index["  << i << "]: " << _Array[i] << endl;
+      cout << "Index[" << i << "]: " << _Array[i] << endl;
     cout << "\n\n";
   }
 
@@ -76,12 +80,14 @@ public:
     return !_length;
   }
 
-  void Resize(int newSize) {
+  void Resize(int newSize)
+  {
     if (newSize < 0)
       newSize = 0;
-    
-    T* new_arr = new T[newSize];
-    for (short i = 0; i < newSize; i++) {
+
+    T *new_arr = new T[newSize];
+    for (short i = 0; i < newSize; i++)
+    {
       if (i < _length)
         new_arr[i] = _Array[i];
       else
@@ -92,34 +98,41 @@ public:
     _length = newSize;
   }
 
-  void Clear() {
+  void Clear()
+  {
     delete[] _Array;
     _length = 0;
     _IsCleared = true;
   }
 
-  void Reverse() {
+  void Reverse()
+  {
     _Reverse(0, _length - 1);
   }
 
-  T GetItem(int idx) {
+  T GetItem(int idx)
+  {
     return _Array[idx];
   }
 
-  void DeleteItemAt(int idx) {
-    _DeleteAtItem(idx);
+  void DeleteItemAt(int idx)
+  {
+    _Shift(idx);
     --_length;
   }
 
-  void DeleteFirstItem() {
+  void DeleteFirstItem()
+  {
     DeleteItemAt(0);
   }
 
-  void DeleteLastItem() {
+  void DeleteLastItem()
+  {
     DeleteItemAt(_length - 1);
   }
 
-  int Find(int value) {
+  int Find(int value)
+  {
     int i = 0;
     T val;
     while (i < _length)
@@ -132,10 +145,32 @@ public:
     return -1;
   }
 
-  int DeleteItem(int item) {
+  int DeleteItem(int item)
+  {
     int idx = Find(item);
     if (idx != -1)
       DeleteItemAt(idx);
     return idx;
+  }
+
+  void InsertAt(int idx, int val)
+  {
+    if (!_IsIdxValid(idx))
+      return;
+    
+    ++_length;
+    
+    T *newArr = new T[_length];
+
+    for (int i = 0; i < idx; ++i)
+      newArr[i] = _Array[i];
+
+    newArr[idx] = val;
+
+    for (int i = idx + 1; i < _length; ++i)
+      newArr[i] = _Array[i - 1];
+
+    delete[] _Array;
+    _Array = newArr;
   }
 };
