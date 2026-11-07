@@ -196,7 +196,7 @@ public:
   void InsertBefore(int idx, T val) {
     if (idx < 0 || idx > _length)
       return;
-    InsertAt(idx, val);
+    InsertAt(idx - 1, val);
   }
 
   void InsertAfter(int idx, T val) {
