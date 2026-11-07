@@ -7,6 +7,7 @@ template <typename T>
 class clsMyDynamicArray
 {
 private:
+  bool _IsCleared = false;
   bool _IsIdxValid(int idx)
   {
     return ((idx < _length) && (idx >= 0));
@@ -37,7 +38,8 @@ public:
 
   ~clsMyDynamicArray()
   {
-    delete[] _Array;
+    if (!_IsCleared)
+      Clear();
   }
 
   void SetItem(int idx, int val)
@@ -80,13 +82,14 @@ public:
   void Clear() {
     delete[] _Array;
     _length = 0;
+    _IsCleared = true;
   }
 
   void Reverse() {
     _Reverse(0, _length - 1);
   }
 
-  void GetItem(int idx) {
+  T GetItem(int idx) {
     return _Array[idx];
   }
 

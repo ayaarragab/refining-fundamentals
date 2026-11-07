@@ -22,6 +22,8 @@ int main()
   cout << "After Reversing : \n";
   MyArray.PrintList();
 
-
+  cout << MyArray.GetItem(2) << endl;
+  MyArray.Clear();
+  MyArray.PrintList();
   return 0;
 }
