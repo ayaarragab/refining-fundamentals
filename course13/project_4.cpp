@@ -20,12 +20,13 @@ int main()
 
   MyArray.PrintList();
 
-  MyArray.DeleteFirstItem();
-  cout << "After Deleting first item: \n";
-  MyArray.PrintList();
+  int index = MyArray.Find(30);
+  cout << "Element 30 at index " << index << endl;
 
-  MyArray.DeleteLastItem();
-  cout << "After Deleting last item: \n";
+
+  cout << "Deleting Element 30 " << endl;;
+  
+  MyArray.DeleteItem(30);
   MyArray.PrintList();
   return 0;
 }

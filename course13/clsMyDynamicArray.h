@@ -118,4 +118,24 @@ public:
   void DeleteLastItem() {
     DeleteItemAt(_length - 1);
   }
+
+  int Find(int value) {
+    int i = 0;
+    T val;
+    while (i < _length)
+    {
+      val = GetItem(i);
+      if (val == value)
+        return i;
+      ++i;
+    }
+    return -1;
+  }
+
+  int DeleteItem(int item) {
+    int idx = Find(item);
+    if (idx != -1)
+      DeleteItemAt(idx);
+    return idx;
+  }
 };
