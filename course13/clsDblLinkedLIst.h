@@ -22,7 +22,7 @@ template <typename T>
 class clsDblLinkedList
 {
 private:
-  T _length;
+  int _length;
   void _print_header()
   {
     cout << left;
