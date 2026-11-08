@@ -1,43 +1,28 @@
 ﻿using System;
 
-namespace CourseForteenProgram
+namespace Main
 {
     internal class Program
     {
-        struct stStudent
-        {
-            public string FirstName;
-            public string LastName;
-        }
-
         static void Main(string[] args)
         {
 
-            //A struct object can be created with or without the new operator,
-            //same as primitive type variables.
+            DateTime dt1 = new DateTime(2015, 12, 20);
+            DateTime dt2 = new DateTime(2016, 12, 31, 5, 10, 20);
+            TimeSpan time = new TimeSpan(10, 5, 25, 50);
 
-            stStudent Student;
-            stStudent Student2 = new stStudent();
+            Console.WriteLine(dt2 + time); // 1/10/2017 10:36:10 AM
+            Console.WriteLine(dt2 - dt1); //377.05:10:20
+            Console.WriteLine(dt1 == dt2); //False
+            Console.WriteLine(dt1 != dt2); //True
+            Console.WriteLine(dt1 > dt2); //False
+            Console.WriteLine(dt1 < dt2); //True
+            Console.WriteLine(dt1 >= dt2); //False
+            Console.WriteLine(dt1 <= dt2);//True
 
-
-            Student.FirstName = "Aya";
-            Student.LastName = "Ragab";
-
-
-            Console.WriteLine(Student.FirstName);
-            Console.WriteLine(Student.LastName);
-
-
-            Student2.FirstName = "Ayaa";
-            Student2.LastName = "R.";
-
-
-            Console.WriteLine(Student2.FirstName);
-            Console.WriteLine(Student2.LastName);
 
             Console.ReadKey();
 
         }
-
     }
 }
