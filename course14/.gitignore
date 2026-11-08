@@ -1,1 +1,19 @@
-.vscode
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# Build files
+bin/
+obj/
+Debug/
+Release/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# OS
+Thumbs.db
+.DS_Store
