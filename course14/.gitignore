@@ -1,19 +1,56 @@
+
 # Visual Studio
 .vs/
 *.suo
 *.user
+*.userosscache
+*.sln.docstates
 
-# Build files
-bin/
-obj/
-Debug/
-Release/
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+artifacts/
+publish/
 
-# Secrets
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+coverage/
+coverage*.json
+coverage*.xml
+
+# IDEs
+.idea/
+.vscode/
+_ReSharper*/
+
+# Logs and temporary files
+*.log
+*.cache
+*.tmp
+*.bak
+*~
+
+# Windows
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Secrets and environment files
 .env
 .env.*
 !.env.example
+*.publishsettings
 
-# OS
-Thumbs.db
-.DS_Store
+# Signing certificates and private keys
+*.pfx
+*.p12

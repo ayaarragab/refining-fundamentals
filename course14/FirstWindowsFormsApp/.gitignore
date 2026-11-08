@@ -1,0 +1,59 @@
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+publish/
+
+# Visual Studio generated files
+Generated\ Files/
+*.cache
+*.log
+*.pdb
+*.ilk
+*.tmp
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+coverage/
+coverage*.json
+coverage*.xml
+
+# Windows
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+_ReSharper*/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.publishsettings
+
+# Signing certificates and private keys
+*.pfx
+*.p12
+
+# Backup files
+*~
+*.bak
