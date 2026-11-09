@@ -24,5 +24,10 @@ namespace FirstWindowsFormsApp
             this.Hide();
             frm.Show();
         }
+
+        private void view_message(object sender, EventArgs e)
+        {
+            MessageBox.Show("Helloooo!!!!");
+        }
     }
 }
