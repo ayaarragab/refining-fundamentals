@@ -8,7 +8,6 @@ namespace FirstWindowsFormsApp
         {
             InitializeComponent();
             label3.Hide();
-            textBox2.ReadOnly = true;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -17,7 +16,7 @@ namespace FirstWindowsFormsApp
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            textBox2.Text = textBox1.Text;
+            label4.Text = textBox1.Text;
         }
 
         private void preview_login_succ(object sender, EventArgs e)
