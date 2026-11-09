@@ -27,7 +27,7 @@ namespace FirstWindowsFormsApp
 
         private void view_message(object sender, EventArgs e)
         {
-            MessageBox.Show("Helloooo!!!!");
+            MessageBox.Show("Helloooo!!!!", "I'm your message", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
         }
     }
 }

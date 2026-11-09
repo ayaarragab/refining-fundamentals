@@ -37,6 +37,9 @@
             button2 = new Button();
             button3 = new Button();
             label4 = new Label();
+            checkBox1 = new CheckBox();
+            checkBox2 = new CheckBox();
+            label5 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -82,7 +85,7 @@
             button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 255, 192);
             button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 192, 192);
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(54, 226);
+            button1.Location = new Point(54, 334);
             button1.Name = "button1";
             button1.Size = new Size(105, 42);
             button1.TabIndex = 5;
@@ -93,7 +96,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(54, 282);
+            label3.Location = new Point(54, 396);
             label3.Name = "label3";
             label3.Size = new Size(50, 20);
             label3.TabIndex = 5;
@@ -105,7 +108,7 @@
             button2.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 192);
             button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 128);
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(181, 226);
+            button2.Location = new Point(181, 334);
             button2.Name = "button2";
             button2.Size = new Size(105, 42);
             button2.TabIndex = 4;
@@ -119,7 +122,7 @@
             button3.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 192, 192);
             button3.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 128);
             button3.FlatStyle = FlatStyle.Flat;
-            button3.Location = new Point(308, 226);
+            button3.Location = new Point(308, 334);
             button3.Name = "button3";
             button3.Size = new Size(105, 42);
             button3.TabIndex = 3;
@@ -139,12 +142,46 @@
             label4.TabIndex = 8;
             label4.Text = "Full Name will be here";
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(58, 242);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(49, 24);
+            checkBox1.TabIndex = 9;
+            checkBox1.Text = "C#";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(58, 272);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(60, 24);
+            checkBox2.TabIndex = 10;
+            checkBox2.Text = "C++";
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += checkBox2_CheckedChanged;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(54, 219);
+            label5.Name = "label5";
+            label5.Size = new Size(175, 20);
+            label5.TabIndex = 11;
+            label5.Text = "Programming Languages";
+            label5.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(800, 450);
+            Controls.Add(label5);
+            Controls.Add(checkBox2);
+            Controls.Add(checkBox1);
             Controls.Add(label4);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -172,5 +209,8 @@
         private Button button2;
         private Button button3;
         private Label label4;
+        private CheckBox checkBox1;
+        private CheckBox checkBox2;
+        private Label label5;
     }
 }
