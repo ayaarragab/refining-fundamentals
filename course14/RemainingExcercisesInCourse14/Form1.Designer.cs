@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             dateTimePicker1 = new DateTimePicker();
             btnLong = new Button();
             lblShow = new Label();
@@ -36,6 +37,7 @@
             btnDay = new Button();
             btnMonth = new Button();
             btnYear = new Button();
+            timer1 = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // dateTimePicker1
@@ -115,6 +117,12 @@
             btnYear.UseVisualStyleBackColor = true;
             btnYear.Click += btnYear_Click;
             // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            timer1.Tick += ActWhenTick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -144,5 +152,6 @@
         private Button btnDay;
         private Button btnMonth;
         private Button btnYear;
+        private System.Windows.Forms.Timer timer1;
     }
 }

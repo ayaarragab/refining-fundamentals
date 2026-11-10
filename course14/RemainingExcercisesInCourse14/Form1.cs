@@ -2,6 +2,7 @@ namespace RemainingExcercisesInCourse14
 {
     public partial class Form1 : Form
     {
+        private int Counter = 0;
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +36,12 @@ namespace RemainingExcercisesInCourse14
         private void btnYear_Click(object sender, EventArgs e)
         {
             lblShow.Text = dateTimePicker1.Value.Year.ToString();
+        }
+
+        private void ActWhenTick(object sender, EventArgs e)
+        {
+            ++Counter;
+            lblShow.Text = Counter.ToString();
         }
     }
 }
