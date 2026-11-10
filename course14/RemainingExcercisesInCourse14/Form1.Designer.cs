@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             dateTimePicker1 = new DateTimePicker();
             btnLong = new Button();
             lblShow = new Label();
@@ -38,6 +39,8 @@
             btnMonth = new Button();
             btnYear = new Button();
             timer1 = new System.Windows.Forms.Timer(components);
+            notifyIcon1 = new NotifyIcon(components);
+            button1 = new Button();
             SuspendLayout();
             // 
             // dateTimePicker1
@@ -123,11 +126,29 @@
             timer1.Interval = 1000;
             timer1.Tick += ActWhenTick;
             // 
+            // notifyIcon1
+            // 
+            notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon1.BalloonTipText = "Hey this is your notification from a desktop app!";
+            notifyIcon1.Icon = (Icon)resources.GetObject("notifyIcon1.Icon");
+            notifyIcon1.Visible = true;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(33, 373);
+            button1.Name = "button1";
+            button1.Size = new Size(152, 65);
+            button1.TabIndex = 8;
+            button1.Text = "Show Notification";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += show_noti;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button1);
             Controls.Add(btnYear);
             Controls.Add(btnMonth);
             Controls.Add(btnDay);
@@ -153,5 +174,7 @@
         private Button btnMonth;
         private Button btnYear;
         private System.Windows.Forms.Timer timer1;
+        private NotifyIcon notifyIcon1;
+        private Button button1;
     }
 }

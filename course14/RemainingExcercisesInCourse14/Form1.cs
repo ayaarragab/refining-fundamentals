@@ -43,5 +43,10 @@ namespace RemainingExcercisesInCourse14
             ++Counter;
             lblShow.Text = Counter.ToString();
         }
+
+        private void show_noti(object sender, EventArgs e)
+        {
+            notifyIcon1.ShowBalloonTip(1000);
+        }
     }
 }
