@@ -5,6 +5,7 @@ namespace Photos_excercise
         public Form1()
         {
             InitializeComponent();
+            comboBox1.SelectedIndex = 0;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -19,13 +20,17 @@ namespace Photos_excercise
 
         private void update_photo(object sender, EventArgs e)
         {
-            if (rbBoy.Checked)
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.Text == "Boy")
                 pictureBox1.Image = Image.FromFile("D:\\tech\\refining-my-basics\\Images\\Boy.png");
-            else if (rbGirl.Checked)
+            else if (comboBox1.Text == "Girl")
                 pictureBox1.Image = Image.FromFile("D:\\tech\\refining-my-basics\\Images\\Girl.png");
-            else if (rbPen.Checked)
+            else if (comboBox1.Text == "Pen")
                 pictureBox1.Image = Image.FromFile("D:\\tech\\refining-my-basics\\Images\\Pen.png");
-            if (rbPencil.Checked)
+            if (comboBox1.Text == "Book")
                 pictureBox1.Image = Image.FromFile("D:\\tech\\refining-my-basics\\Images\\Book.png");
         }
     }
