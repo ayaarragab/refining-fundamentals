@@ -38,6 +38,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             treeView1 = new TreeView();
             imageList1 = new ImageList(components);
+            progressBar1 = new ProgressBar();
+            label1 = new Label();
+            timer1 = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // treeView1
@@ -73,20 +76,49 @@
             imageList1.Images.SetKeyName(0, "IMG_5588.JPEG");
             imageList1.Images.SetKeyName(1, "photo_5879643257535402247_y.jpg");
             // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(447, 274);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(282, 37);
+            progressBar1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 20F);
+            label1.Location = new Point(532, 216);
+            label1.Name = "label1";
+            label1.Size = new Size(109, 46);
+            label1.TabIndex = 2;
+            label1.Text = "label1";
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Interval = 500;
+            timer1.Tick += timer1_Tick;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
+            Controls.Add(progressBar1);
             Controls.Add(treeView1);
             Name = "Form2";
             Text = "Form2";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         public TreeView treeView1;
         private ImageList imageList1;
+        private ProgressBar progressBar1;
+        private Label label1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

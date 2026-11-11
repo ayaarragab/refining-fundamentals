@@ -15,11 +15,24 @@ namespace RemainingExcercisesInCourse14
         public Form2()
         {
             InitializeComponent();
+            progressBar1.Maximum = 100;
+            progressBar1.Minimum = 10;
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (progressBar1.Value == 100)
+            {
+                return;
+            }
+            progressBar1.Value += 10;
+            Thread.Sleep(500);
+            label1.Text = (((float)progressBar1.Value / progressBar1.Maximum) * 100).ToString();
         }
     }
 }
