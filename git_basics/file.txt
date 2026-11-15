@@ -1,3 +1,4 @@
 Hi I'm the first line in the file
 Hi I'm a text in line 2 and I'll be pushed to even-number-lines branch
 Hi I'm a text in line 3 and I'll be pushed to master
+Hi I'm a text in line 4 and I'll be pushed to even-number-lines branch
